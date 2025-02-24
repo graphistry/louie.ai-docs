@@ -48,8 +48,8 @@ build:
 
 #for nav links?
 formats:
-  - pdf
-  - epub
+  # - pdf
+  # - epub
   - htmlzip
 
 python:
