@@ -27,6 +27,8 @@ build:
     #- cp -r demos docs/source/demos
     #- cp README.md docs/README.md
 
+    - apt-get install python3-sphinx
+
     # build html
     - sphinx-build -b html -d doctrees docs $READTHEDOCS_OUTPUT/html/
 
