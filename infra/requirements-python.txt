@@ -3,7 +3,6 @@ pydata-sphinx-theme==0.16.1
 myst-parser==4.0.1
 nbsphinx==0.9.6
 sphinx_copybutton==0.5.2
-inkscape
 pandoc
 texlive-latex-base
 texlive-latex-recommended
