@@ -29,21 +29,21 @@ build:
     # - cp README.md docs/README.md
 
     # build html
-    - sphinx-build -b html -d doctrees docs $READTHEDOCS_OUTPUT/html/
+    - sphinx-build -b html -d doctrees docs/source $READTHEDOCS_OUTPUT/html/
 
-    # build epub
-    - sphinx-build -b epub -d doctrees docs _build/latexpdf
-    - mkdir -p $READTHEDOCS_OUTPUT/epub
-    - ls _build/latexpdf
-    - ls $READTHEDOCS_OUTPUT/epub
-    - cp _build/latexpdf/LouieAdmin.epub $READTHEDOCS_OUTPUT/epub/LouieAdmin.epub
+    # # build epub
+    # - sphinx-build -b epub -d doctrees docs _build/latexpdf
+    # - mkdir -p $READTHEDOCS_OUTPUT/epub
+    # - ls _build/latexpdf
+    # - ls $READTHEDOCS_OUTPUT/epub
+    # - cp _build/latexpdf/LouieAdmin.epub $READTHEDOCS_OUTPUT/epub/LouieAdmin.epub
 
-    # build pdf
-    - sphinx-build -b latex -d doctrees docs _build/latexpdf
-    - ls _build/latexpdf
-    - cd _build/latexpdf && (pdflatex -file-line-error -interaction=nonstopmode LouieAdmin.tex || test -f _build/latexpdf/LouieAdmin.pdf) && (pdflatex -file-line-error  -interaction=nonstopmode LouieAdmin.tex || test -f _build/latexpdf/LouieAdmin.pdf) && echo ok || { echo fail && exit 1 ; }
-    - mkdir -p $READTHEDOCS_OUTPUT/pdf 
-    - cp _build/latexpdf/LouieAdmin.pdf $READTHEDOCS_OUTPUT/pdf/LouieAdmin.pdf
+    # # build pdf
+    # - sphinx-build -b latex -d doctrees docs _build/latexpdf
+    # - ls _build/latexpdf
+    # - cd _build/latexpdf && (pdflatex -file-line-error -interaction=nonstopmode LouieAdmin.tex || test -f _build/latexpdf/LouieAdmin.pdf) && (pdflatex -file-line-error  -interaction=nonstopmode LouieAdmin.tex || test -f _build/latexpdf/LouieAdmin.pdf) && echo ok || { echo fail && exit 1 ; }
+    # - mkdir -p $READTHEDOCS_OUTPUT/pdf 
+    # - cp _build/latexpdf/LouieAdmin.pdf $READTHEDOCS_OUTPUT/pdf/LouieAdmin.pdf
 
 
 #for nav links?
