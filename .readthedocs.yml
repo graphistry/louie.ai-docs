@@ -19,6 +19,7 @@ build:
     - texlive-latex-recommended
     - texlive-latex-extra
     - texlive-fonts-recommended
+    - sphinx-build
   commands:
 
     # setup
