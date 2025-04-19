@@ -1,21 +1,33 @@
 # Authentication Registration & TLS
 
-Configuration file: `/var/louie/data/custom.env`
+Louie authentication is a fairly standard web stack of containers:
 
-## 1. Setup Authentication
+* Reverse proxy - Caddy container: HTTP routing, TLS 
+* Backend services - Louie, API containers: JWT-based services
+* OAuth2 provider - Graphistry server: Accounts, database
+
+## Settings locations
+
+* Environment variables: `/var/louie/data/custom.env`
+* Web (Caddy reverse proxy): `/var/louie/data/Caddyfile`
+* Accounts (Graphistry): https://hub.graphistry.com or self-hosted Graphistry server
+
+## Steps
 
 **Note:** The application requires authentication to load.
 
-### If Using Graphistry Hub (Default)
+### 1. Setup Authentication
+
+#### If Using Graphistry Hub (Default)
 
 - Create a free or paid Hub account at [graphistry.com/get-started](https://graphistry.com/get-started).
 - No additional configuration is necessary for authentication.
 
-### If Using a Single Hub User (Experimental)
+#### If Using a Single Hub User (Experimental)
 
 - Set the `GRAPHISTRY_*` fields with your hub.graphistry.com credentials for a global user.
 
-## 2. Set Your Louie URL
+### 2. Set Your Louie URL 
 
 Include the protocol in the `custom.env` file:
 
@@ -23,24 +35,28 @@ Include the protocol in the `custom.env` file:
 OA2_REDIRECT_URL_BASE='https://your.louie-server.xyz'
 ```
 
-## 3. Setup DNS & TLS
+You must also set `OA2_HOST`, `OA2_CLIENT_ID`, and `OA2_CLIENT_SECRET`, which steps below will cover.
 
-Configure custom DNS and TLS in `/var/louie/data/Caddyfile`, similar to the Graphistry server configuration.
+### 3. Setup DNS & TLS
 
-## 4. Restart the Server
+Configure custom DNS and TLS in `/var/louie/data/Caddyfile`, similar to the [Graphistry server's Caddy configuration](https://graphistry-admin-docs.readthedocs.io/en/latest/app-config/configure.html#tls).
+
+### 4. Restart Caddy and Louie
 
 ```bash
 cd /var/louie
 ./dc up -d --force-recreate caddy louie
 ```
 
-## 5. Notify Graphistry Server Administrator
+### 5. Notify Graphistry Server Administrator
 
 Provide the following information:
 
 - `OA2_REDIRECT_URL_BASE` setting
 - Organization name
 - Usernames
+
+They will give you the remaining `OA2_*` pairing settings.
 
 ---
 
