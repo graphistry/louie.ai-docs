@@ -18,14 +18,17 @@ Louie authentication is a fairly standard web stack of containers:
 
 ### 1. Setup Authentication
 
-#### If Using Graphistry Hub (Default)
+Connect to a Graphistry for accounts and authentication. This can be either a Graphistry Hub or a self-hosted Graphistry server. Louie is an OAuth2 client of Graphistry, letting it inherit the security capabilities and key infrastructure of your Graphistry server such as SSO and databases.
 
-- Create a free or paid Hub account at [graphistry.com/get-started](https://graphistry.com/get-started).
-- No additional configuration is necessary for authentication.
+- If Using Graphistry Hub (Default):
 
-#### If Using a Single Hub User (Experimental)
+    Create a free or paid Hub account at [graphistry.com/get-started](https://graphistry.com/get-started).
+  
+    Contact staff for additional steps.
 
-- Set the `GRAPHISTRY_*` fields with your hub.graphistry.com credentials for a global user.
+- If self-hosting Graphistry:
+
+  - See instructions below.
 
 ### 2. Set Your Louie URL 
 
@@ -45,7 +48,7 @@ Configure custom DNS and TLS in `/var/louie/data/Caddyfile`, similar to the [Gra
 
 ```bash
 cd /var/louie
-./dc up -d --force-recreate caddy louie
+./dc up -d --force-recreate caddy louie api
 ```
 
 ### 5. Notify Graphistry Server Administrator
