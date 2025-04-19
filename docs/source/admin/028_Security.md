@@ -3,7 +3,7 @@
 
 Components
 
-L.O.U.I.E.
+Louie
 Standalone webapp
 DB Connectors; Memory; Storage
 Self-hosted or louie.ai

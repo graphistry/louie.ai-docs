@@ -1,6 +1,6 @@
 # GIS Mapping Service Configuration
 
-L.O.U.I.E. includes GIS mapping capabilities using Mapbox or alternative tile providers.
+Louie includes GIS mapping capabilities using Mapbox or alternative tile providers.
 
 ## Default Configuration
 

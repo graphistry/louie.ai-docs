@@ -1,6 +1,6 @@
 # Python Sandbox Custom Pip Packages
 
-You can add custom Python packages to the sandbox environment used by L.O.U.I.E.
+You can add custom Python packages to the sandbox environment used by Louie
 
 ## Steps
 

@@ -1,6 +1,6 @@
 # Container Architecture
 
-L.O.U.I.E. runs as a dynamic set of Docker container services orchestrated by Docker Compose:
+Louie runs as a dynamic set of Docker container services orchestrated by Docker Compose:
 
 ## Main Application (Controlled by `/var/louie/docker-compose.yml`)
 

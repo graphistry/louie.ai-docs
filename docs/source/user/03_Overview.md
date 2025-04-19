@@ -1,6 +1,6 @@
 # Overview
 
-L.O.U.I.E. is a powerful GenAI-first data analysis platform that combines the capabilities of generative AI with graph AI to help users interact with their data in a natural, conversational way.
+Louie is a powerful GenAI-first data analysis platform that combines the capabilities of generative AI with graph AI to help users interact with their data in a natural, conversational way.
 
 ## Key Features
 
@@ -10,5 +10,5 @@ L.O.U.I.E. is a powerful GenAI-first data analysis platform that combines the ca
 - **No-Code Interface**: Enables anyone to perform complex data analysis without SQL or coding knowledge
 - **Extensible Platform**: Integrates with existing tools and supports custom extensions
 
-L.O.U.I.E. transforms how organizations interact with their data by making advanced analytics accessible to everyone, regardless of technical expertise.
+Louie transforms how organizations interact with their data by making advanced analytics accessible to everyone, regardless of technical expertise.
 

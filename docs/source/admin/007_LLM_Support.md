@@ -1,6 +1,6 @@
 # Supported LLMs
 
-L.O.U.I.E. supports integration with various Large Language Models (LLMs):
+Louie supports integration with various Large Language Models (LLMs):
 
 ## Currently Supported LLMs
 

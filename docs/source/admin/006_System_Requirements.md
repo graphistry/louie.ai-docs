@@ -1,8 +1,6 @@
 # System Requirements
 
-TODO(tcook):  combine with 009_AWS_Requirements.md and also rename from AWS so we can easily add Azure/others as they come along 
-
-To self-host L.O.U.I.E., ensure the following system requirements are met:
+To self-host Louie ensure the following system requirements are met:
 
 ## Minimum Requirements
 
