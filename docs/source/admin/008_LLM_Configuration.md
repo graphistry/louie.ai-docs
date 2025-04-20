@@ -68,7 +68,7 @@ Please contact staff for assistance with AI configuration. Discussions benefit f
 
 * Model service provider, e.g., Azure OpenAI vs OpenAI vs a local serving framework
 * Available models
-* Hardware availbility
+* Hardware availa7bility
 * Target workloads, e.g., number of active analysts and whether any batch/continuous processing is needed
 
 
@@ -126,7 +126,7 @@ LLM_MODEL_SQL_CONTEXT=
 
 ### Embedding model selection
 
-Embedding models are registered just like generative models. You may also specify which embedding model to use in general, or for specific indexes. Loiue ships with out-of-the-box serving of sentence-transformers, and most model service providers also serve embdding models.
+Embedding models are registered just like generative models. You may also specify which embedding model to use in general, or for specific indexes. Louie ships with out-of-the-box serving of sentence-transformers, and most model service providers also serve embedding models.
 
 ```bash
 LLM_EMBEDDING_MODEL=sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
@@ -202,7 +202,7 @@ AZURE_DEPLOYMENT_NAME=gpt-4-latest-10Ktpm
 # You can define a shorter nickname for internal use
 AZURE_MODEL_NAME=gpt-4
 
-# When model.env models/profile123.env
+# When using model.env or model/<profile>.env, set a unique MODEL_PROVIDER_PROFILE_NAME when using multiple models or providers to prevent name conflicts
 MODEL_PROVIDER_PROFILE_NAME=azure-openai-prod-gpt-4
 ```
 

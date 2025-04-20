@@ -6,7 +6,7 @@ Adjust the security level for LLM interactions controlling what kind of data is 
   - `METADATA`: Only questions and database schemas are sent to the LLM (e.g., for query generation).
   - `DATA`: LLM can see table values.
 
-Configure each setting by specifying `LLM_PRIVACY_LEVEL=...` in `custom.env`.
+Configure each setting by specifying `LLM_PRIVACY_LEVEL=...` in `data/custom.env`.
 
 ### To Disable LLM
 

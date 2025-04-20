@@ -1,8 +1,8 @@
 # Database Server Configuration
 
-Louie database configuration is in-tool.
+Louie database connections are configured within the Louie UI.
 
-Older versions of Louie supported setting database connection information via a deprecated environment variables mode.
+Older versions of Louie supported setting database connection information via environment variables (now deprecated).
 
 ## Key concepts
 
@@ -127,7 +127,7 @@ https://${LOUIE_HOSTNAME}/plugin/oauth/callback
     - Test Splunk is reachable and the account is authorized from your Louie server:
 
 ```bash
-curl -u admin:changme  https://splunk.host.name.here:8089/services/search/jobs/export  -d search="search * | head 3" -d output_mode=csv`
+curl -u ${SPUNK_USER}:${SPLUNK_PASSWORD} https://splunk.host.name.here:8089/services/search/jobs/export  -d search="search * | head 3" -d output_mode=csv`
 ```
 
 
@@ -153,7 +153,7 @@ curl -u admin:changme  https://splunk.host.name.here:8089/services/search/jobs/e
 
 We encourage users to switch to database-managed connectors.
 
-Benefits of database-managed connectors over environment variables are features like automatic secret encryption and easier standup of new instances through automatic profile reuse.
+Benefits of database-managed connectors over environment variables are features like automatic secret encryption and easier deployment of new instances through automatic profile reuse.
 
 
 ### Edit Configuration File
@@ -210,14 +210,24 @@ cd /var/louie
 
 #### Mode 2: Shared Service Account (Not Recommended for High-Security Environments)
 
+1. **Configure Louie:**
+
+   In `/var/louie/data/custom.env`, set:
+
 ```bash
 SPARK_TOKEN="dapi...your_token..."
 SPARK_WORKSPACE_ID="your_workspace_id"
 SPARK_HOST="your_databricks_host.cloud.databricks.com"
 ```
 
-*Restart services after making changes.*
+2. **Restart Services:**
+
+   ```bash
+   cd /var/louie
+   ./dc up -d --force-recreate louie api
+   ```
+
 
 ### Other databases
 
-Contact staff. (Warning: Deprecated.)
+Contact staff. 
