@@ -4,4 +4,5 @@ Introduction
 .. toctree::
    :maxdepth: 2
 
-   001_Meet_Louie
+   ../shared/Meet_Louie
+   ../shared/Overview

@@ -13,8 +13,3 @@ Louie.a is a GenAI-first data analysis platform designed for investigations. It 
 * **Batteries included:** Growing list of native database connectors of different types (graph, log, SQL, vector),  MCP for many APIs, and standard Python/containers for custom packages
 
 Use Louie.ai from our managed cloud service, self-host from all public clouds, or run on-prem, including air-gapped.
-
-
-## Admin Guide
-
-This guide provides detailed information on deploying, configuring, and maintaining Louie
