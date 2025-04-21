@@ -1,3 +1,17 @@
-.DS_Store
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
 
+# Sphinx
 _build/
+doctrees/
+*.doctree
+*.log
+
+# VSCode / editors
+.vscode/
+*.swp
+.DS_Store
+.env
+

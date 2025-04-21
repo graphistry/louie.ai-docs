@@ -1,7 +1,7 @@
 Introduction
 ============
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 
 
    ../shared/Meet_Louie
    ../shared/Overview
