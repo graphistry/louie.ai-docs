@@ -1,6 +1,6 @@
 # AWS Requirements
 
-To deploy L.O.U.I.E. on AWS, ensure the following requirements are met.
+To deploy Louie on AWS, ensure the following requirements are met.
 
 ## Minimum Configuration
 

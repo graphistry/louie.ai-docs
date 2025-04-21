@@ -11,7 +11,7 @@ Admin Guide
    security
    maintenance
 
-This Document Covers:
+The Louie Admin Guide Documentation covers:
 
 - Purpose
 - Planned Deployment Architecture & Configuration

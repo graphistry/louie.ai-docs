@@ -1,5 +1,19 @@
 # LLM Authorization 
 
+Adjust the security level for LLM interactions controlling what kind of data is sent to the LLM during database interactions:
+
+  - `NO_LLM`: No LLM connected; nothing is sent to an LLM.
+  - `METADATA`: Only questions and database schemas are sent to the LLM (e.g., for query generation).
+  - `DATA`: LLM can see table values.
+
+Configure each setting by specifying `LLM_PRIVACY_LEVEL=...` in `data/custom.env`.
+
+### To Disable LLM
+
+```bash
+LLM_PRIVACY_LEVEL=NO_LLM
+```
+
 
 Authorization: LLM Comply with oversharing and AI-decision-making policies
 Data flow OpenAI or any LangChain-compatible (Azure OpenAI, AWS Bedrock, Llama2, Falcon, Mistral, …)

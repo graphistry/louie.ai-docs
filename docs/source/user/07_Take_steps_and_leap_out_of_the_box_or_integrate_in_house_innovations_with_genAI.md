@@ -20,9 +20,9 @@ Data science  & coding
 How your team works
 Add your own LLM, Agent, Index, API, …
 
-L.O.U.I.E. learns & uses tools 
+Louie learns & uses tools 
 
-L.O.U.I.E. LLM UI
+Louie LLM UI
 
 agents
 
