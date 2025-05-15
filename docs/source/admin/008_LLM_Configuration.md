@@ -258,6 +258,31 @@ GROQ_PROXY=...
 GROQ_CUSTOM_MODEL_NAME_OVERRIDE='cllama3-70b-8192'
 ```
 
+### Vertex AI
+
+To use Gemini chat and embedding models via Vertex AI:
+
+1. Create a Service Account with Required Roles
+
+Assign the following IAM roles to your service account:
+
+- `roles/aiplatform.user`
+- `roles/aiplatform.serviceAgent`
+- `roles/generativelanguage.user`
+- `roles/generativeaiprojects.user`
+- `roles/storage.objectViewer`
+
+
+2. Configure Louie
+
+In your `custom.env`:
+
+```bash
+VERTEX_SERVICE_ACCOUNT_JSON_PATH=/custom/path/service-account.json  # Default path /opt/host_data/vertex/service-account.json
+VERTEX_PROJECT=<YOUR_PROJECT_ID>
+VERTEX_LOCATION=us-central1
+```
+
 ### Sentence Transformers
 
 Louie comes with several popular sentence transformer embedding models preloaded. See system start or `capabilities/` API for list of available models. The default recommendation is `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`.
