@@ -19,6 +19,6 @@ Recipes are great for multi-step workflows:
 The following images demonstrate how Louie's knowledge base works:
 
 ![Knowledge Base Example 1](./images/user/055_Louie_uses_and_learns_AI_knowledge_bases_1.png)
-
-![Knowledge Base Example 2](./images/user/055_Louie_uses_and_learns_AI_knowledge_bases_2.png)
+<!-- 
+![Knowledge Base Example 2](./images/user/055_Louie_uses_and_learns_AI_knowledge_bases_2.png) -->
 

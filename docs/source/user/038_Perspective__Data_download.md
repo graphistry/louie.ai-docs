@@ -16,5 +16,5 @@ Note: When system sets all datagrids as 'editable', can also copy individual row
 
 ![Export Options](./images/user/038_Perspective__Data_download_2.png)
 
-![Clipboard Copy](./images/user/038_Perspective__Data_download_3.png)
-
+<!-- ![Clipboard Copy](./images/user/038_Perspective__Data_download_3.png)
+ -->
