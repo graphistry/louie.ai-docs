@@ -1,43 +1,45 @@
-# Security decisions
+# Security Decisions
 
-Hosting
+## Hosting
 
-Graphistry: Accounts, DB, graph visualizations
-SaaS: hub.graphistry.com
-AWS/Azure Marketplace (single-node)
-Manual: docker-compose, kubernetes
+**Graphistry:** Accounts, DB, graph visualizations
+- SaaS: hub.graphistry.com
+- AWS/Azure Marketplace (single-node)
+- Manual: docker-compose, kubernetes
 
-Louie: Application
-SaaS: louie.ai
-AWS Marketplace
-Manual: docker-compose
-Whether to enable sandboxed Python
+**Louie:** Application
+- SaaS: louie.ai
+- AWS Marketplace
+- Manual: docker-compose
+- Whether to enable sandboxed Python
 
-OpenSearch: Optional - conversational memory & text indexing
-AWS managed service
-Self-hosted
+**OpenSearch:** Optional - conversational memory & text indexing
+- AWS managed service
+- Self-hosted
 
-Off-node storage & backups
-Graphistry; aws/azure/gcp; manual restic
-Authentication
+**Off-node storage & backups**
+- Graphistry; aws/azure/gcp; manual restic
 
-Built-in (user/pass)
-SSO (OIDC)
+## Authentication
 
-Note: Configure OAuth2 between Louie<>Graphistry
+- Built-in (user/pass)
+- SSO (OIDC)
 
-Connectors
+**Note:** Configure OAuth2 between Louie<>Graphistry
 
-Ensure Louie <> API/DBs
-Decide shared read-only service account vs per-user DB connections
+## Connectors
 
-Authorization
+- Ensure Louie <> API/DBs
+- Decide shared read-only service account vs per-user DB connections
 
-Sharing units: Individuals, Organization(s)
+## Authorization
 
-Web
+**Sharing units:** Individuals, Organization(s)
+
+## Web
 
 Ensure user, admin access to each component: Graphistry, Louie, physical/cloud resources, OS, connectors
 
+## Guard Rails
 
-Guard rails - See UI Guide section on Guard Rails
+See UI Guide section on Guard Rails
