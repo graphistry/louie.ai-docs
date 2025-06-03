@@ -8,6 +8,8 @@ User Guide
    introduction
    tutorials
    data_analysis
+   connectors_overview
+   adding_connectors
    visualizations
    advanced_topics
    api_integrations
