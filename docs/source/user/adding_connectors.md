@@ -34,7 +34,6 @@ After selecting a connector type, you'll see a configuration form specific to th
 
 For Spanner, you'll need to provide:
 - **Name** - A descriptive name for your connector
-- **Project ID** - Your Google Cloud project ID
 - **Instance ID** - The Spanner instance identifier
 - **Database ID** - The specific database name
 - **Service-Account JSON** - Authentication credentials
