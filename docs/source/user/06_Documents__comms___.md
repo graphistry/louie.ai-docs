@@ -1,42 +1,34 @@
 # Documents and Communications
 
-Documents, comms, …
+## Democratizing Data Access
 
-‹#›
+Database queries and Python data science are powerful tools, but they require specialized skills:
 
-SQL
+* **SQL**: Complex joins and filtering
+* **Cypher**: Graph pattern matching
+* **Splunk**: Log analysis and search
 
-Cypher
+### DB queries & Python data science are superpowers...
 
-Splunk
+##### What if anyone could talk to their data?
 
-Picks databases
+## Louie's Capabilities
 
-Picks tables
+Louie handles the complexity so you can focus on insights:
 
-Picks columns
+| Data Selection | Data Processing |
+|----------------|-----------------|
+| Picks databases | Runs code |
+| Picks tables | Cleans data |
+| Picks columns | Shapes data |
+| Decides queries | Knows analytics |
+| Writes syntax | Generates viz |
 
-Decides queries
+## Application Areas
 
-Writes syntax
-
-Runs code
-
-Cleans data
-
-Shapes data
-
-Knows analytics
-
-Generates viz
-
-
-
-Graphistry APIs too!
-
-DB queries & Python data science are superpowers... 
-
-What if anyone could talk to their data?
+* Documents, communications, and more
+* Security, fraud, supply chain, customer analytics
+* **Graphistry APIs too!** - Extend and integrate with your existing tools
 
 ![Document Analysis](./images/user/06_Documents__comms____1.png)
 

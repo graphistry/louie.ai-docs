@@ -2,61 +2,46 @@
 
 Take steps and leap out-of-the-box or integrate in-house innovations with genAI
 
-‹#›
+## LLM-first Data UI
 
-OUTER LOOP
+### INNER LOOP
+* text2query
+* text2analytics
+* text2model
+* text2chart
 
-text2query text2analytics text2model
-text2chart
+### OUTER LOOP
+* text2notebook
+* text2dashboard
+* text2automation
+* text2strategy
 
-text2notebook
-text2dashboard text2automation text2strategy
+## Shared computational sessions
 
-INNER LOOP
+## Louie learns & uses tools
 
-Databases & APIs: SQL, Log, Graph, …
-Indexes text sources: Wikis, …
-Data science  & coding
-How your team works
-Add your own LLM, Agent, Index, API, …
+* **Databases & APIs**: SQL, Log, Graph, ...
+* **Indexes text sources**: Wikis, ...
+* **Data science & coding**
+* **How your team works**
+* **Add your own LLM, Agent, Index, API, ...**
 
-Louie learns & uses tools 
+## Integration Architecture
 
-Louie LLM UI
+| Louie LLM UI | Your existing environment |
+|--------------|---------------------------|
+| agents | agents |
+| tools | tools |
+| GPU runtimes | runtimes |
+| memory | databases |
+| sandboxing | LLM AI |
+| RBAC | GPT, ... AI |
 
-agents
+## Technology Stack
 
-tools
+GRAPHISTRY integration with NVIDIA RAPIDS, Apache Arrow, Python, and more.
 
-GPU runtimes
-
-memory
-
-GRAPHISTRY
-
-agents
-
-Your existing environment
-
-tools
-
-runtimes
-
-databases
-
-LLM-first Data UI
-
-Shared computational sessions
-
-sandboxing
-
-RBAC
-
-LLM AI
-
-GPT, … AI
-
-![Integration 1](./images/user/07_Take_steps_and_leap_out_of_the_box_or_integrate_in_house_innovations_with_genAI_1.png)
+<!-- ![Integration 1](./images/user/07_Take_steps_and_leap_out_of_the_box_or_integrate_in_house_innovations_with_genAI_1.png)
 
 ![Integration 2](./images/user/07_Take_steps_and_leap_out_of_the_box_or_integrate_in_house_innovations_with_genAI_2.png)
 
@@ -67,4 +52,4 @@ GPT, … AI
 ![Integration 5](./images/user/07_Take_steps_and_leap_out_of_the_box_or_integrate_in_house_innovations_with_genAI_5.png)
 
 ![Integration 6](./images/user/07_Take_steps_and_leap_out_of_the_box_or_integrate_in_house_innovations_with_genAI_6.png)
-
+ -->

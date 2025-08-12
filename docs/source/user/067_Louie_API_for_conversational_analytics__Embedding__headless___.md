@@ -1,25 +1,30 @@
-# Louie API for Conversational Analytics: Embedding, Headless, etc.
+# Louie API for Conversational Analytics
 
-Louie API for conversational analytics: Embedding, headless, …
+The Louie API provides comprehensive conversational analytics capabilities including embedding, headless operations, and more.
 
-https://<site>/api/docs
+## API Documentation
 
-Streaming (/api/chat) and blocking modes
+Access the full API documentation at: `https://<site>/api/docs`
 
-Start a new chat or continue an existing one
+## Chat Endpoints
 
-JWT auth: "Authorization: Bearer XYZ"
+The API supports both streaming (`/api/chat`) and blocking modes for chat interactions.
 
-Additional APIs for accessing referenced rich media
-Ex: Load data tables as JSON or Arrow
+### Features
+- Start new chat sessions or continue existing conversations
+- JWT authentication using `Authorization: Bearer <token>` header
+- Access to referenced rich media through additional endpoints
+- Load data tables in JSON or Arrow formats
+- Extensive configuration options
 
-Many documented options
+## Getting Started
 
-Contact staff for the latest
+1. **Authentication**: Obtain a JWT token for API access
+2. **Documentation**: Review the comprehensive API docs for all available options
+3. **Testing**: Use the live testing interface to experiment with endpoints
+4. **Support**: Contact staff for the latest updates and assistance
 
-Test live
-
-Set JWT token
+## API Documentation Interface
 
 ![API Documentation](./images/user/067_Louie_API_for_conversational_analytics__Embedding__headless____1.png)
 

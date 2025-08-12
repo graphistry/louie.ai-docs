@@ -1,22 +1,22 @@
 # Many Visualization Types Natively Supported
 
-Many visualization types natively supported
+Many visualization types natively supported for comprehensive data analysis and presentation.
 
-￼
+## Supported Types
 
-Graphs
-Graphistry
+**Graphs**
+- Graphistry
 
-Maps
-kepler.gl
+**Maps**
+- kepler.gl
 
-Charts
-Perspective
-w/ Plotly
+**Charts**
+- Perspective
+- w/ Plotly
 
-+ More: Code agent can generate anything 
+**+ More:** Code agent can generate anything
 
-Charts
+## Examples
 
 ![Graphistry Visualization](./images/user/034_Many_visualization_types_natively_supported_1.png)
 

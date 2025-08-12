@@ -1,18 +1,24 @@
 # Python Maps
 
-Python Maps
+Python Maps provides geo-visualization capabilities when working with GeoJSON data or dataframes containing geographic columns.
 
-Click to add Geo Visualization when GeoJSON or dataframe with geo columns is above
+## Features
 
-Df has Latitude & Longitude columns
+- Click to add Geo Visualization when GeoJSON or dataframe with geo columns is displayed
+- Support for dataframes with Latitude & Longitude columns
+- GeoPandas integration for advanced geographic data handling
+- Polygon color customization
+- Appearance editing through Kepler interface
 
-Geo Pandas Example: 
+## Examples
+
+### GeoPandas Example
 (continents json output for debug inspection)
 
-^ Setting polygon color
+### Setting polygon color
 Edit appearance in Kepler
 
-Example with two outputs
+### Example with two outputs
 
 ![Python Maps Example 1](./images/user/023_Python_Maps_1.png)
 

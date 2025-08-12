@@ -1,9 +1,9 @@
 # Perspective: Chart - Y Bar
 
-Single dimension:
+## Single Dimension
 Count by primary dimension
 
-Two dimensions:
+## Two Dimensions
 Group within a bin by secondary dimension
 Compute aggregate statistic on each group
 
