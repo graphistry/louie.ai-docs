@@ -1,0 +1,609 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Configuring Your OpenAI API Key &#8212; Louie Administration Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphistry.css?v=eb800932" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphistry.css?v=eb800932" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user/082_Louie_Desktop_OpenAI_Configuration';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Data Analysis &amp; Python Integration" href="data_analysis.html" />
+    <link rel="prev" title="Signing In to Louie Desktop" href="081_Louie_Desktop_Sign_In.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/louie-logo.png" class="logo__image only-light" alt="Louie Administration Documentation - Home"/>
+    <img src="../_static/louie-logo-dark.png" class="logo__image only-dark pst-js-only" alt="Louie Administration Documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../admin/index.html">
+    Admin Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../admin/index.html">
+    Admin Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="introduction.html">Introduction</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../shared/Meet_Louie.html">Meet Louie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shared/Overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04____.html">Talking to Your Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_Documents__comms___.html">Documents and Communications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_Take_steps_and_leap_out_of_the_box_or_integrate_in_house_innovations_with_genAI.html">Integrating In-House Innovations with GenAI</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tutorials.html">Tutorials</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="08_Main_area___threads.html">Main Area and Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="010_.html">Interface Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="011_Thread.html">Thread Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="012_Blocks.html">Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="013_Add_block.html">Adding Blocks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="louie_desktop.html">Louie Desktop</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="080_Louie_Desktop_Initial_Setup.html">Louie Desktop - Initial Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="081_Louie_Desktop_Sign_In.html">Signing In to Louie Desktop</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Configuring Your OpenAI API Key</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="data_analysis.html">Data Analysis &amp; Python Integration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="019_Python.html">Python Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="020_Python_AI.html">Python AI Assistance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="021_Run.html">Running Python Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="022_Python_data_flow.html">Python Data Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="023_Python_Maps.html">Python Maps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="024_Python_Outputs.html">Python Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="025_Python_AI.html">Python AI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="026_Dashboards.html">Dashboards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="027_Notebook_vs_Dashboard_Tabs.html">Notebook vs Dashboard Tabs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="028_Add___Edit_Panels.html">Add &amp; Edit Panels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="029_Responsive_Panel_Layouts.html">Responsive Panel Layouts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="connectors_overview.html">Data Connectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_connectors.html">Adding Data Connectors</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="visualizations.html">Visualizations &amp; Charts</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="033_Chart_authoring.html">Chart Authoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="034_Many_visualization_types_natively_supported.html">Many Visualization Types Natively Supported</a></li>
+<li class="toctree-l2"><a class="reference internal" href="035_Chart_AI.html">Chart AI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="036_Chart_passthrough.html">Chart Passthrough</a></li>
+<li class="toctree-l2"><a class="reference internal" href="037_Perspective_charts.html">Perspective Charts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="038_Perspective__Data_download.html">Perspective: Data Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="039_Perspective__Chart_switching.html">Perspective: Chart Switching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="041_Perspective__Expressions___Group_By.html">Perspective: Expressions - Group By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="042_Perspective__Expressions___Split_By.html">Perspective: Expressions - Split By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="043_Perspective__Expressions___Order_By.html">Perspective: Expressions - Order By</a></li>
+<li class="toctree-l2"><a class="reference internal" href="044_Perspective__Chart___Datagrid.html">Perspective: Chart - Datagrid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="045_Perspective__Chart___Y_Bar.html">Perspective: Chart - Y Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="046_Perspective__Chart___X_Bar.html">Perspective: Chart - X Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="047_Perspective__Chart___X_Y_Bar.html">Perspective: Chart - X Y Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="048_Perspective__Chart___Heatmap.html">Perspective: Chart - Heatmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="049_Perspective__Chart___Y_Area.html">Perspective: Chart - Y Area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="050_Perspective__Chart___Y_Line.html">Perspective: Chart - Y Line</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="advanced_topics.html">Advanced Topics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="051_Large_charts.html">Large Charts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="052_Large_charts__General.html">Large Charts: General</a></li>
+<li class="toctree-l2"><a class="reference internal" href="053_Large_charts__Specific_charts.html">Large Charts: Specific Charts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="054_Learning_Louie.html">Learning Louie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="055_Louie_uses_and_learns_AI_knowledge_bases.html">Louie Uses and Learns AI Knowledge Bases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="056_System_level__For_all_users__only_admin_editable.html">System-level: For All Users, Only Admin-editable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="057_Recipes.html">Recipes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="058_Database_tools.html">Database Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="064_Guard_rails.html">Guard Rails</a></li>
+<li class="toctree-l2"><a class="reference internal" href="065_Administrators_can_set_guard_rail_prompts_on_all_or_specific_AI_tools.html">Administrators Can Set Guard Rail Prompts on All or Specific AI Tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_integrations.html">API &amp; Integrations</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="066_API.html">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="067_Louie_API_for_conversational_analytics__Embedding__headless___.html">Louie API for Conversational Analytics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="068_Additional_features___contact_dedicated_support_staff_for_more_information_.html">Additional Features - Contact Dedicated Support Staff for More Information</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="supplementary.html">Supplementary Material</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="010_.html">Interface Navigation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="014_.html">Quick Launch Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="015_.html">Running Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="016_.html">Editing Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="017_.html">Running AI Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="018_.html">Running Non-AI Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="040_.html">Perspective: Expressions - Column Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="059_.html">Running Databricks AI Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="060_.html">Running Databricks SQL Blocks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="061_.html">Reactive Bindings: Notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="062_.html">Reactive Bindings: Dependency Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="063_.html">Reactive Bindings: Dashboard Mode</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Configuring Your OpenAI API Key</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="configuring-your-openai-api-key">
+<h1>Configuring Your OpenAI API Key<a class="headerlink" href="#configuring-your-openai-api-key" title="Link to this heading">#</a></h1>
+<p>Louie uses OpenAI’s powerful language models to provide AI-driven data analysis and conversational features. To enable these capabilities, you’ll need to configure your OpenAI API key.</p>
+<section id="step-1-get-your-openai-api-key">
+<h2>Step 1: Get Your OpenAI API Key<a class="headerlink" href="#step-1-get-your-openai-api-key" title="Link to this heading">#</a></h2>
+<p>First, you’ll need to create an API key from OpenAI:</p>
+<ol class="arabic simple">
+<li><p>Visit <a class="reference external" href="https://platform.openai.com">OpenAI’s Platform</a></p></li>
+<li><p>Sign up or sign in to your account</p></li>
+<li><p>Navigate to <strong>API Keys</strong> in your account settings</p></li>
+<li><p>Click <strong>Create new secret key</strong></p></li>
+<li><p>Give your key a descriptive name (e.g., “Louie Desktop”)</p></li>
+<li><p><strong>Copy the generated key to your clipboard</strong> - you won’t be able to see it again</p></li>
+</ol>
+<p><strong>Important:</strong> Keep your API key secure and never share it publicly.</p>
+</section>
+<section id="step-2-add-your-api-key-to-louie">
+<h2>Step 2: Add Your API Key to Louie<a class="headerlink" href="#step-2-add-your-api-key-to-louie" title="Link to this heading">#</a></h2>
+<p>Once you have your API key copied to your clipboard, configure it in Louie:</p>
+<ol class="arabic">
+<li><p>Click <strong>Agent Config</strong> in the bottom left corner of Louie</p>
+<p><img alt="Agent Config Button" src="../_images/082_step1_agent_config.png" /></p>
+</li>
+<li><p>Click <strong>OpenAI</strong> from the configuration options</p>
+<p><img alt="OpenAI Option" src="../_images/082_step2_openai.png" /></p>
+</li>
+<li><p>Click <strong>New Configuration</strong> on the modal that appears</p>
+<p><img alt="New Configuration Button" src="../_images/082_step3_new_config.png" /></p>
+</li>
+<li><p>Enter your API key in the credentials field (paste from clipboard)</p>
+<p><img alt="Enter Credentials" src="../_images/082_step4_enter_credentials.png" /></p>
+</li>
+<li><p>Click <strong>Save</strong> to complete the configuration</p></li>
+</ol>
+<p>Your OpenAI API key is now configured and ready to use!</p>
+</section>
+<section id="understanding-openai-usage-and-billing">
+<h2>Understanding OpenAI Usage and Billing<a class="headerlink" href="#understanding-openai-usage-and-billing" title="Link to this heading">#</a></h2>
+<p>OpenAI charges based on your API usage:</p>
+<ul class="simple">
+<li><p><strong>Token-based billing</strong> - Costs are calculated based on input and output tokens</p></li>
+<li><p><strong>Monitor your usage</strong> - Check your <a class="reference external" href="https://platform.openai.com/usage">OpenAI dashboard</a> regularly</p></li>
+<li><p><strong>Set up billing</strong> - Add payment information at <a class="reference external" href="https://platform.openai.com/billing">OpenAI Billing</a></p></li>
+</ul>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="invalid-api-key">
+<h3>Invalid API Key<a class="headerlink" href="#invalid-api-key" title="Link to this heading">#</a></h3>
+<p>If you receive an “Invalid API Key” error:</p>
+<ul class="simple">
+<li><p>Verify you copied the entire key</p></li>
+<li><p>Check that the key hasn’t been revoked in your OpenAI account</p></li>
+<li><p>Ensure there are no extra spaces or characters</p></li>
+<li><p>Generate a new key if needed</p></li>
+</ul>
+</section>
+<section id="rate-limit-errors">
+<h3>Rate Limit Errors<a class="headerlink" href="#rate-limit-errors" title="Link to this heading">#</a></h3>
+<p>If you encounter rate limiting:</p>
+<ul class="simple">
+<li><p>Wait a few minutes and try again</p></li>
+<li><p>Check your OpenAI usage tier</p></li>
+<li><p>Consider upgrading your OpenAI plan</p></li>
+</ul>
+</section>
+<section id="insufficient-credits">
+<h3>Insufficient Credits<a class="headerlink" href="#insufficient-credits" title="Link to this heading">#</a></h3>
+<p>If you see “Insufficient credits” errors:</p>
+<ul class="simple">
+<li><p>Add payment information to your OpenAI account</p></li>
+<li><p>Set up a billing plan</p></li>
+<li><p>Check your billing settings at <a class="reference external" href="https://platform.openai.com/billing">OpenAI Billing</a></p></li>
+</ul>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Connect Your Data Sources</p></li>
+<li><p>Start Your First Analysis</p></li>
+<li><p>Explore AI-Powered Features</p></li>
+</ul>
+</section>
+<section id="additional-resources">
+<h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://platform.openai.com/docs">OpenAI API Documentation</a></p></li>
+<li><p><a class="reference external" href="https://openai.com/pricing">OpenAI Pricing</a></p></li>
+<li><p><a class="reference external" href="https://platform.openai.com/docs/guides/safety-best-practices">Best Practices for API Key Management</a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-get-your-openai-api-key">Step 1: Get Your OpenAI API Key</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-add-your-api-key-to-louie">Step 2: Add Your API Key to Louie</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-openai-usage-and-billing">Understanding OpenAI Usage and Billing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#invalid-api-key">Invalid API Key</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rate-limit-errors">Rate Limit Errors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#insufficient-credits">Insufficient Credits</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-resources">Additional Resources</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/user/082_Louie_Desktop_OpenAI_Configuration.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Graphistry, Inc..
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

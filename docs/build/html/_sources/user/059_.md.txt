@@ -1,0 +1,20 @@
+# Running Databricks AI Blocks
+
+Databricks AI blocks allow you to generate SQL queries using natural language commands and execute them directly in your workspace.
+
+## Key Features
+
+- **Quick actions**: Streamlined workflow for common tasks
+- **AI tool**: Natural language to SQL conversion
+- **Query results**: Immediate execution and visualization
+- **Table shape analysis**: Automatic data structure insights
+- **Decision tracking**: Activity logging for audit trails
+
+## Interface Overview
+
+![Databricks AI Interface](./images/user/059__1.png)
+
+<!-- ![Databricks AI Query](./images/user/059__2.png) -->
+
+![Databricks AI Results](./images/user/059__3.png)
+

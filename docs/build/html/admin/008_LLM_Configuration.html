@@ -1,0 +1,755 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>LLM Configuration &#8212; Louie Administration Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphistry.css?v=eb800932" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphistry.css?v=eb800932" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'admin/008_LLM_Configuration';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Database Server Configuration" href="020_Database_Config.html" />
+    <link rel="prev" title="Authentication Registration &amp; TLS" href="011_Authentication_Registration.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/louie-logo.png" class="logo__image only-light" alt="Louie Administration Documentation - Home"/>
+    <img src="../_static/louie-logo-dark.png" class="logo__image only-dark pst-js-only" alt="Louie Administration Documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    Admin Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user/index.html">
+    User Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    Admin Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user/index.html">
+    User Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Admin Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="introduction.html">Introduction</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../shared/Meet_Louie.html">Meet Louie</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../shared/Overview.html">Overview</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="configuration.html">Configuration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="006_System_Requirements.html">System Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="011_Authentication_Registration.html">Authentication Registration &amp; TLS</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">LLM Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="020_Database_Config.html">Database Server Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="025_GIS_Mapping.html">GIS Mapping Service Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="026_Python_Package_Config.html">Python Sandbox Custom Pip Packages</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="security.html">Security</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="028_Security.html">Security Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="030_Security_Decisions.html">Security Decisions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="032_Security_APIs.html">Security APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="015_JWT_Refresh.html">Custom JWT Refresh (Optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="029_LLM_Authorization.html">LLM Authorization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="maintenance.html">Maintenance</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="010_Logon_and_Services.html">Launching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="027_Backups.html">Backups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="007_LLM_Support.html">Supported LLMs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="031_Sandbox_Network_Architecture.html">Sandbox network architecture: Secure execution of generated code</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Admin Guide</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="configuration.html" class="nav-link">Configuration</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">LLM Configuration</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="llm-configuration">
+<h1>LLM Configuration<a class="headerlink" href="#llm-configuration" title="Link to this heading">#</a></h1>
+<p>Louie supports a growing number of generative and embedding models. That includes using multiple models simultaneously and in air-gapped environments, and control of which model is used when.</p>
+<p>Louie supports all providers implementing the OpenAI chat protocol: follow the OpenAI instructions in that case. Additionally, it natively supports a growing number of LLMs and providers, including OpenAI, Azure OpenAI, Anthropic Claude, and Groq.</p>
+<section id="key-concepts">
+<h2>Key concepts<a class="headerlink" href="#key-concepts" title="Link to this heading">#</a></h2>
+<section id="configuration-phases">
+<h3>Configuration phases<a class="headerlink" href="#configuration-phases" title="Link to this heading">#</a></h3>
+<p>You can configure:</p>
+<ul class="simple">
+<li><p><strong>Model provider connection</strong>: Securely connect to one or more providers</p></li>
+<li><p><strong>Model registration:</strong> Automatically or manually register individual models from a provider with a model profile name</p></li>
+<li><p><strong>Model selection:</strong> Use the same model everywhere, or configure preferences on which model to use with which agent or agentic task</p></li>
+</ul>
+<p>The same system is used for both generative chat models and embedding models.</p>
+</section>
+<section id="recommended-models">
+<h3>Recommended models<a class="headerlink" href="#recommended-models" title="Link to this heading">#</a></h3>
+<p>We generally recommend using models at the OpenAI GPT-4 level or better. This includes coverage for the following tasks:</p>
+<ul class="simple">
+<li><p>Smart and fast. Ex: gpt-4o for instruction following and code generation</p></li>
+<li><p>Smart, fast, scalable, and cheap. Ex: gpt-4o-mini for processing large amounts of data</p></li>
+<li><p>Large context. Ex: gpt-4.1</p></li>
+</ul>
+</section>
+<section id="model-provider-authentication">
+<h3>Model provider authentication<a class="headerlink" href="#model-provider-authentication" title="Link to this heading">#</a></h3>
+<p>You must provide connection information for your model provider(s), including potential authentication details.</p>
+<p>Depending on the complexity of deployment, this is done in:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data/custom.env</span></code>: For a single global model provider</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/&lt;provider&gt;/auth.env</span></code>: When multiple providers, but at most one of each type</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/&lt;provider&gt;/auth/profile123.env</span></code>: When providers of the same type, such as due to differing model availabilities and new model testing</p></li>
+</ul>
+<p>When multiple authentication profiles for the same provider, set distinct <code class="docutils literal notranslate"><span class="pre">AUTH_PROFILE_NAME=...</span></code> names.</p>
+</section>
+<section id="model-registration">
+<h3>Model registration<a class="headerlink" href="#model-registration" title="Link to this heading">#</a></h3>
+<p>Louie automatically detects the models exposed by some providers, such as for OpenAI. Other providers, such as Azure OpenAI, require you to explicitly register or configure your model.</p>
+<p>Depending on the complexity of deployment, this is done in:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data/custom.env</span></code>: For registering a single model, or a provider that supports automatic multi-model registration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/&lt;provider&gt;/model.env</span></code>: When multiple providers, but at most one of each type, and registering a single model or a model provider that supports automatic multi-model registration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/&lt;provider&gt;/model/profile123.env</span></code>: When multiple models from the same provider and that provider does not support automatic multi-model registration</p></li>
+</ul>
+<p>When multiple model profiles for the same provider, set distinct <code class="docutils literal notranslate"><span class="pre">MODEL_PROVIDER_PROFILE_NAME=...</span></code> names.</p>
+</section>
+<section id="model-selection">
+<h3>Model selection<a class="headerlink" href="#model-selection" title="Link to this heading">#</a></h3>
+<p>You configure which models are used by default. Optionally, you can further configure which models are used for specific agents and their tasks.</p>
+<p>Model names are specified by the profile in the registration step.</p>
+</section>
+<section id="testing">
+<h3>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h3>
+<p>When starting Louie, you can see which model provider connections are established and which models are registered.</p>
+<p>You can dynamically inspect what configurations are used, as a system administrator, via <code class="docutils literal notranslate"><span class="pre">/api/docs</span></code> endpoints <code class="docutils literal notranslate"><span class="pre">/api/account</span></code> and <code class="docutils literal notranslate"><span class="pre">/api/capabilities</span></code>.</p>
+</section>
+<section id="contact-staff-for-planning-assistance">
+<h3>Contact staff for planning assistance<a class="headerlink" href="#contact-staff-for-planning-assistance" title="Link to this heading">#</a></h3>
+<p>Please contact staff for assistance with AI configuration. Discussions benefit from knowledge around:</p>
+<ul class="simple">
+<li><p>Model service provider, e.g., Azure OpenAI vs OpenAI vs a local serving framework</p></li>
+<li><p>Available models</p></li>
+<li><p>Hardware availa7bility</p></li>
+<li><p>Target workloads, e.g., number of active analysts and whether any batch/continuous processing is needed</p></li>
+</ul>
+</section>
+</section>
+<section id="id1">
+<h2>Model selection<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>After connecting to your model provider and registering its models (see below), you can specify which models are used by default and for specific tasks via your <code class="docutils literal notranslate"><span class="pre">data/custom.env</span></code>:</p>
+<section id="default-model-selection">
+<h3>Default model selection<a class="headerlink" href="#default-model-selection" title="Link to this heading">#</a></h3>
+<p>We recommend setting the below. Generally, stick to gpt-4o+ grade models. We encourage experimentation with new models such as o-series for reasoning, and performing real testing before committing to a model.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Required</span>
+<span class="nv">LLM_MODEL</span><span class="o">=</span>gpt-4o
+
+<span class="c1"># Optional</span>
+<span class="nv">LLM_MODEL_FAST</span><span class="o">=</span>gpt-4o-mini
+<span class="nv">LLM_MODEL_SMART</span><span class="o">=</span>gpt-4o
+<span class="nv">LLM_MODEL_REASONING</span><span class="o">=</span>gpt-4o
+<span class="nv">LLM_MODEL_LARGE_CONTEXT</span><span class="o">=</span>gpt-4o
+</pre></div>
+</div>
+</section>
+<section id="agent-model-selection">
+<h3>Agent model selection<a class="headerlink" href="#agent-model-selection" title="Link to this heading">#</a></h3>
+<p>Each agent, and key tasks in agents, may be configured to use specific models:</p>
+<section id="system-agent-selection">
+<h4>System agent selection<a class="headerlink" href="#system-agent-selection" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">LLM_MODEL_LOUIE</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_LOUIE_MEMORY</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_MAKE_EXAMPLE</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_MAKE_RECIPE</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_TABLEQA</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_TABLEQA_ASK</span><span class="o">=</span>
+</pre></div>
+</div>
+</section>
+<section id="plugin-agent-selection">
+<h4>Plugin agent selection<a class="headerlink" href="#plugin-agent-selection" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">LLM_MODEL_CHART</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_CODE</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_CYPHER</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_DATABRICKS</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_DATABRICKS_CONTEXT</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_GRAPHISTRY</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_OPENSEARCH</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_OPENSEARCH_CONTEXT</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_PANDAS</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_SPLUNK</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_SQL</span><span class="o">=</span>
+<span class="nv">LLM_MODEL_SQL_CONTEXT</span><span class="o">=</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="embedding-model-selection">
+<h3>Embedding model selection<a class="headerlink" href="#embedding-model-selection" title="Link to this heading">#</a></h3>
+<p>Embedding models are registered just like generative models. You may also specify which embedding model to use in general, or for specific indexes. Louie ships with out-of-the-box serving of sentence-transformers, and most model service providers also serve embedding models.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">LLM_EMBEDDING_MODEL</span><span class="o">=</span>sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+
+<span class="nv">OPENSEARCH_INDEX_EMBEDDING_MAPPING</span><span class="o">=</span><span class="s1">&#39;{&quot;myindex1&quot;: &quot;text-embedding-ada-002&quot;, &quot;myindex2&quot;:&quot;matryoska&quot;}&#39;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="llm-provider-connection-and-registration">
+<h2>LLM Provider connection and registration<a class="headerlink" href="#llm-provider-connection-and-registration" title="Link to this heading">#</a></h2>
+<p>Louie LLM connection configuration is currently via environment variables. Depending on deployment complexity, place your connection configuration in:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data/custom.env</span></code>: Single model provider</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/&lt;provider&gt;/auth.env</span></code>: Multiple model providers, but at most one of each type</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/&lt;provider&gt;/auth/profile123.env</span></code>: Multiple model providers of the same type, such as due to differing model availabilities and new model testing</p></li>
+</ul>
+<p>Models from providers like OpenAI are automatically registered, but for other providers, you must manually register the models:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data/custom.env</span></code>: Single model to register, or a provider that supports automatic multi-model registration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/&lt;provider&gt;/model.env</span></code>: Multiple model providers, but at most one of each type, and registering a single model or a model provider that supports automatic multi-model registration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data/&lt;provider&gt;/model/profile123.env</span></code>: Multiple models from the same provider and that provider does not support automatic multi-model registration</p></li>
+</ul>
+<p>After configuring your model provider connection and registering your models, restart the Louie server to apply the changes:</p>
+<p>Restart the Louie server:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/var/louie
+./dc<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate<span class="w"> </span>louie<span class="w"> </span>api
+</pre></div>
+</div>
+<section id="openai">
+<h3>OpenAI<a class="headerlink" href="#openai" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Get an OpenAI key</p></li>
+<li><p>Provider connection</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">data/custom.env</span></code>, <code class="docutils literal notranslate"><span class="pre">data/openai/auth.env</span></code>, or <code class="docutils literal notranslate"><span class="pre">data/openai/auth/profile123.env</span></code>:</p>
+</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>...
+
+<span class="c1"># OPTIONAL</span>
+<span class="nv">OPENAI_ORGANIZATION</span><span class="o">=</span>...
+<span class="nv">OPENAI_PROXY</span><span class="o">=</span>...
+</pre></div>
+</div>
+<ol class="arabic" start="3">
+<li><p>Model registration</p>
+<p>You may manually register models, but typically unnecessary, in <code class="docutils literal notranslate"><span class="pre">data/custom.env</span></code>, <code class="docutils literal notranslate"><span class="pre">data/openai/model.env</span></code>, or <code class="docutils literal notranslate"><span class="pre">data/openai/models/profile123.env</span></code>.</p>
+</li>
+</ol>
+</section>
+<section id="azure-openai">
+<h3>Azure OpenAI<a class="headerlink" href="#azure-openai" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Create Model Deployments</p>
+<p>Create the desired <strong>Model Deployments</strong> in <a class="reference external" href="https://portal.azure.com/">Azure OpenAI Studio</a>.</p>
+</li>
+<li><p>Provider connection</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">data/custom.env</span></code>, <code class="docutils literal notranslate"><span class="pre">data/azureopenai/auth.env</span></code>, or <code class="docutils literal notranslate"><span class="pre">data/azureopenai/auth/profile123.env</span></code>:</p>
+</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">AZURE_OPENAI_API_KEY</span><span class="o">=</span>...
+<span class="nv">AZURE_OPENAI_API_ENDPOINT</span><span class="o">=</span>...
+</pre></div>
+</div>
+<ol class="arabic" start="3">
+<li><p>Model registration</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">data/custom.env</span></code>, <code class="docutils literal notranslate"><span class="pre">data/azureopenai/model.env</span></code>, or <code class="docutils literal notranslate"><span class="pre">data/azureopenai/model/profile123.env</span></code>:</p>
+</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Azure-configured name</span>
+<span class="nv">AZURE_DEPLOYMENT_NAME</span><span class="o">=</span>gpt-4-latest-10Ktpm
+
+<span class="c1"># You can define a shorter nickname for internal use</span>
+<span class="nv">AZURE_MODEL_NAME</span><span class="o">=</span>gpt-4
+
+<span class="c1"># When using model.env or model/&lt;profile&gt;.env, set a unique MODEL_PROVIDER_PROFILE_NAME when using multiple models or providers to prevent name conflicts</span>
+<span class="nv">MODEL_PROVIDER_PROFILE_NAME</span><span class="o">=</span>azure-openai-prod-gpt-4
+</pre></div>
+</div>
+</section>
+<section id="anthropic">
+<h3>Anthropic<a class="headerlink" href="#anthropic" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Get API Key</p>
+<p>Obtain an API key from your <a class="reference external" href="https://www.anthropic.com/">Anthropic</a> account.</p>
+</li>
+<li><p>Provider connection</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">data/custom.env</span></code>, <code class="docutils literal notranslate"><span class="pre">data/anthropic/auth.env</span></code>, or <code class="docutils literal notranslate"><span class="pre">data/anthropic/auth/profile123.env</span></code>:</p>
+</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ANTHROPIC_API_KEY</span><span class="o">=</span>...
+
+<span class="c1"># OPTIONAL</span>
+<span class="nv">ANTHROPIC_API_URL</span><span class="o">=</span>...
+</pre></div>
+</div>
+<ol class="arabic" start="3">
+<li><p>Model registration</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">data/custom.env</span></code>, <code class="docutils literal notranslate"><span class="pre">data/anthropic/model.env</span></code>, or <code class="docutils literal notranslate"><span class="pre">data/anthropic/model/profile123.env</span></code>:</p>
+</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># OPTIONAL</span>
+<span class="nv">MODEL_PROVIDER_PROFILE_NAME</span><span class="o">=</span>...
+</pre></div>
+</div>
+</section>
+<section id="groq">
+<h3>Groq<a class="headerlink" href="#groq" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Get API Key</p>
+<p>Obtain an API key from your <a class="reference external" href="https://www.groq.com/">Groq</a> account.</p>
+</li>
+<li><p>Provider connection</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">data/custom.env</span></code>, <code class="docutils literal notranslate"><span class="pre">data/groq/auth.env</span></code>, or <code class="docutils literal notranslate"><span class="pre">data/groq/auth/profile123.env</span></code>:</p>
+</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">GROQ_API_KEY</span><span class="o">=</span>...
+
+<span class="c1"># OPTIONAL</span>
+<span class="nv">GROQ_API_BASE</span><span class="o">=</span>...
+<span class="nv">GROQ_PROXY</span><span class="o">=</span>...
+</pre></div>
+</div>
+<ol class="arabic" start="3">
+<li><p>Model registration</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">data/custom.env</span></code>, <code class="docutils literal notranslate"><span class="pre">data/groq/model.env</span></code>, or <code class="docutils literal notranslate"><span class="pre">data/groq/model/profile123.env</span></code>:</p>
+</li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">GROQ_CUSTOM_MODEL_NAME_OVERRIDE</span><span class="o">=</span><span class="s1">&#39;cllama3-70b-8192&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="vertex-ai">
+<h3>Vertex AI<a class="headerlink" href="#vertex-ai" title="Link to this heading">#</a></h3>
+<p>To use Gemini chat and embedding models via Vertex AI:</p>
+<ol class="arabic simple">
+<li><p>Create a Service Account with Required Roles</p></li>
+</ol>
+<p>Assign the following IAM roles to your service account:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">roles/aiplatform.user</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">roles/aiplatform.serviceAgent</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">roles/generativelanguage.user</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">roles/generativeaiprojects.user</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">roles/storage.objectViewer</span></code></p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Configure Louie</p></li>
+</ol>
+<p>In your <code class="docutils literal notranslate"><span class="pre">custom.env</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">VERTEX_SERVICE_ACCOUNT_JSON_PATH</span><span class="o">=</span>/custom/path/service-account.json<span class="w">  </span><span class="c1"># Default path /opt/host_data/vertex/service-account.json</span>
+<span class="nv">VERTEX_PROJECT</span><span class="o">=</span>&lt;YOUR_PROJECT_ID&gt;
+<span class="nv">VERTEX_LOCATION</span><span class="o">=</span>us-central1
+</pre></div>
+</div>
+</section>
+<section id="sentence-transformers">
+<h3>Sentence Transformers<a class="headerlink" href="#sentence-transformers" title="Link to this heading">#</a></h3>
+<p>Louie comes with several popular sentence transformer embedding models preloaded. See system start or <code class="docutils literal notranslate"><span class="pre">capabilities/</span></code> API for list of available models. The default recommendation is <code class="docutils literal notranslate"><span class="pre">sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2</span></code>.</p>
+<p>For larger deployments with many users, consider using a dedicated model server. Ex: Contact staff about configuring Nvidia Triton and other popular OSS options.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-concepts">Key concepts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-phases">Configuration phases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recommended-models">Recommended models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-provider-authentication">Model provider authentication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-registration">Model registration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection">Model selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contact-staff-for-planning-assistance">Contact staff for planning assistance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Model selection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-model-selection">Default model selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#agent-model-selection">Agent model selection</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#system-agent-selection">System agent selection</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#plugin-agent-selection">Plugin agent selection</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-model-selection">Embedding model selection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-provider-connection-and-registration">LLM Provider connection and registration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#openai">OpenAI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#azure-openai">Azure OpenAI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anthropic">Anthropic</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#groq">Groq</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vertex-ai">Vertex AI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sentence-transformers">Sentence Transformers</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/admin/008_LLM_Configuration.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Graphistry, Inc..
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

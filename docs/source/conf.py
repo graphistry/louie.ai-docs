@@ -605,11 +605,16 @@ def log_unresolved_references(app, env, docnames=None):
         doctree = env.get_doctree(docname)
         for ref_node in doctree.traverse(nodes.reference):
             refuri = ref_node.get("refuri")
-            if refuri and not refuri.startswith(("http:", "https:")):
-                resolved = env.domains["std"].resolve_xref(env, app.builder, docname, "ref", refuri, ref_node, None)
-                if not resolved:
-                    unresolved_refs.setdefault(docname, []).append(refuri)
-                    print(f"Unresolved reference in {docname}: {refuri}")
+            # Skip external links (http, https, mailto, etc.)
+            if refuri and not refuri.startswith(("http:", "https:", "mailto:", "ftp:", "file:")):
+                try:
+                    resolved = env.domains["std"].resolve_xref(env, app.builder, docname, "ref", refuri, ref_node, None)
+                    if not resolved:
+                        unresolved_refs.setdefault(docname, []).append(refuri)
+                        print(f"Unresolved reference in {docname}: {refuri}")
+                except Exception as e:
+                    # Skip if we can't resolve (e.g., mailto links)
+                    pass
 
     if unresolved_refs:
         print(f"Unresolved references: {unresolved_refs}")

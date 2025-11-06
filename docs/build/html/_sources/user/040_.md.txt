@@ -1,0 +1,26 @@
+# Perspective: Expressions - Column Selection
+
+Column selection determines which data columns your chart will display and how they're used in the visualization.
+
+## How Column Selection Works
+
+- **Each chart acts on one or more columns**
+- **First column**: Typically used for the X-axis
+- **Second column**: 
+  - If provided: Used for Y-axis
+  - If not provided: Shows count of records
+
+## Managing Columns
+
+- **Add** - Include additional columns in your chart
+- **Remove** - Delete columns you don't need
+- **Reorder** - Change the sequence of columns
+
+## Pro Tip
+
+Include relevant columns in **Order By** to improve chart organization and readability.
+
+## Visual Guide
+
+![Column Selection Interface](./images/user/040__1.png)
+
