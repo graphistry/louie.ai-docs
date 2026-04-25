@@ -22,21 +22,14 @@ A mismatch between any pair causes the iframe to be blocked by the browser or to
 
 ### Graphistry side (cross-origin cookies)
 
-In the Graphistry server's `custom.env`:
+The Graphistry server must issue session cookies with `SameSite=None; Secure` so the browser will send them from the Louie-embedded iframe. The relevant cookie flags are managed via Graphistry server configuration — see the [Graphistry Admin Guide → Configuration places](https://graphistry-admin-docs.readthedocs.io/en/latest/app-config/configure.html#configuration-places) for where these settings live and how to set them.
 
-```bash
-COOKIE_SECURE=true
-COOKIE_SAMESITE=None
-```
-
-These are the defaults. Confirm they are not overridden by a site-specific `custom.env`.
-
-Symptom of a wrong value: Graphistry session cookies come back as `SameSite=Lax`, so the browser drops them from the Louie-embedded iframe and auth loops indefinitely.
-
-Verify in the browser DevTools → Application → Cookies on the Graphistry host:
+Verify in browser DevTools → Application → Cookies on the Graphistry host:
 
 - Working: `SameSite=None; Secure`
-- Failing: `SameSite=Lax`
+- Failing: `SameSite=Lax` → the browser drops the cookie from the Louie iframe and auth loops indefinitely.
+
+If the cookie attributes are wrong, fix them on the Graphistry side per the [Graphistry Admin Guide](https://graphistry-admin-docs.readthedocs.io/en/latest/) and restart the Graphistry stack.
 
 ### Louie side (CSP and OA2_HOST)
 
@@ -46,7 +39,7 @@ In Louie's Caddy config, the Graphistry host must appear in **both** `frame-src`
 Content-Security-Policy "... frame-src 'self' https://your.graphistry-server.xyz; child-src 'self' https://your.graphistry-server.xyz; ..."
 ```
 
-In Louie's `custom.env`:
+In Louie's `$LOUIE_HOME/data/custom.env`:
 
 ```bash
 OA2_HOST='https://your.graphistry-server.xyz'
@@ -60,26 +53,20 @@ Run these in order. Stop at the first mismatch.
 
 1. **Confirm origins differ.** If Louie and Graphistry share a single origin, this page is not your problem.
 2. **Inspect the browser console** on the failing page. "Refused to frame … because it violates CSP `frame-src`/`child-src`" points to the Louie CSP. A cookie warning about `SameSite` points to Graphistry cookie flags.
-3. **Check Graphistry cookies** on the Graphistry host (DevTools → Application → Cookies). Require `SameSite=None; Secure` on session cookies.
+3. **Check Graphistry cookies** on the Graphistry host (DevTools → Application → Cookies). Require `SameSite=None; Secure` on session cookies. If wrong, fix on the Graphistry side per the [Graphistry Admin Guide](https://graphistry-admin-docs.readthedocs.io/en/latest/).
 4. **Check Louie's CSP response header** (DevTools → Network → the Louie HTML response). Confirm `frame-src` and `child-src` both include the Graphistry host literally.
-5. **Compare hostnames.** `OA2_HOST` value in Louie's `custom.env` should be byte-identical to the Graphistry host in CSP and to the host the browser actually loads Graphistry from (follow redirects).
-6. **Confirm Graphistry `custom.env`** does not override `COOKIE_SECURE` or `COOKIE_SAMESITE`.
+5. **Compare hostnames.** `OA2_HOST` in `$LOUIE_HOME/data/custom.env` should be byte-identical to the Graphistry host in CSP and to the host the browser actually loads Graphistry from (follow redirects).
 
 ## Fix
 
-Apply the missing piece from the checklist above, then restart the affected service:
+Apply the missing piece from the checklist above, then restart the affected service.
 
-Graphistry:
+For Graphistry-side cookie changes, restart the Graphistry stack per the [Graphistry Admin Guide](https://graphistry-admin-docs.readthedocs.io/en/latest/).
 
-```bash
-cd /var/graphistry
-./dc up -d --force-recreate caddy
-```
-
-Louie:
+For Louie-side CSP or `OA2_HOST` changes:
 
 ```bash
-cd /var/louie
+cd $LOUIE_HOME
 ./dc up -d --force-recreate caddy louie api
 ```
 
@@ -87,5 +74,5 @@ Reload the Louie page in a fresh browser context (clear the Graphistry cookies f
 
 ## Related docs
 
-- Louie authentication configuration: [Authentication Registration & TLS](011_Authentication_Registration.md) — covers `OA2_HOST`, `OA2_REDIRECT_URL_BASE`, and the Caddy TLS pattern.
-- Graphistry server administration: [graphistry/graphistry-cli](https://github.com/graphistry/graphistry-cli) — server profiles, cookie flags, and test steps for cross-origin vs single-origin embedding.
+- Louie authentication configuration: [Authentication Registration & TLS](https://louieai-documentation.readthedocs.io/en/latest/admin/011_Authentication_Registration.html) — covers `OA2_HOST`, `OA2_REDIRECT_URL_BASE`, and the Caddy TLS pattern.
+- [Graphistry Admin Guide](https://graphistry-admin-docs.readthedocs.io/en/latest/) — server configuration, cookie flags, and TLS setup for the Graphistry server.
