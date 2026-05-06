@@ -22,14 +22,17 @@ A mismatch between any pair causes the iframe to be blocked by the browser or to
 
 ### Graphistry side (cross-origin cookies)
 
-The Graphistry server must issue session cookies with `SameSite=None; Secure` so the browser will send them from the Louie-embedded iframe. The relevant cookie flags are managed via Graphistry server configuration — see the [Graphistry Admin Guide → Configuration places](https://graphistry-admin-docs.readthedocs.io/en/latest/app-config/configure.html#configuration-places) for where these settings live and how to set them.
+The Graphistry server must issue session cookies with `SameSite=None; Secure` so the browser will send them from the Louie-embedded iframe. The relevant cookie flags are managed via Graphistry server configuration:
+
+- [Graphistry Admin Guide → TLS hardening](https://graphistry-admin-docs.readthedocs.io/en/latest/app-config/configure.html#tls-hardening) — the cross-origin embedding section that names the cookie flags and the iframe-related Caddy headers.
+- [Graphistry Admin Guide → Configuration places](https://graphistry-admin-docs.readthedocs.io/en/latest/app-config/configure.html#configuration-places) — where these settings live on disk (`custom.env`, `Caddyfile`, etc.).
 
 Verify in browser DevTools → Application → Cookies on the Graphistry host:
 
 - Working: `SameSite=None; Secure`
 - Failing: `SameSite=Lax` → the browser drops the cookie from the Louie iframe and auth loops indefinitely.
 
-If the cookie attributes are wrong, fix them on the Graphistry side per the [Graphistry Admin Guide](https://graphistry-admin-docs.readthedocs.io/en/latest/) and restart the Graphistry stack.
+If the cookie attributes are wrong, fix them on the Graphistry side per the [Graphistry Admin Guide → TLS hardening](https://graphistry-admin-docs.readthedocs.io/en/latest/app-config/configure.html#tls-hardening) and restart the Graphistry stack.
 
 ### Louie side (CSP and OA2_HOST)
 
@@ -53,7 +56,7 @@ Run these in order. Stop at the first mismatch.
 
 1. **Confirm origins differ.** If Louie and Graphistry share a single origin, this page is not your problem.
 2. **Inspect the browser console** on the failing page. "Refused to frame … because it violates CSP `frame-src`/`child-src`" points to the Louie CSP. A cookie warning about `SameSite` points to Graphistry cookie flags.
-3. **Check Graphistry cookies** on the Graphistry host (DevTools → Application → Cookies). Require `SameSite=None; Secure` on session cookies. If wrong, fix on the Graphistry side per the [Graphistry Admin Guide](https://graphistry-admin-docs.readthedocs.io/en/latest/).
+3. **Check Graphistry cookies** on the Graphistry host (DevTools → Application → Cookies). Require `SameSite=None; Secure` on session cookies. If wrong, fix on the Graphistry side per the [Graphistry Admin Guide → TLS hardening](https://graphistry-admin-docs.readthedocs.io/en/latest/app-config/configure.html#tls-hardening).
 4. **Check Louie's CSP response header** (DevTools → Network → the Louie HTML response). Confirm `frame-src` and `child-src` both include the Graphistry host literally.
 5. **Compare hostnames.** `OA2_HOST` in `$LOUIE_HOME/data/custom.env` should be byte-identical to the Graphistry host in CSP and to the host the browser actually loads Graphistry from (follow redirects).
 
@@ -61,7 +64,7 @@ Run these in order. Stop at the first mismatch.
 
 Apply the missing piece from the checklist above, then restart the affected service.
 
-For Graphistry-side cookie changes, restart the Graphistry stack per the [Graphistry Admin Guide](https://graphistry-admin-docs.readthedocs.io/en/latest/).
+For Graphistry-side cookie changes, restart the Graphistry stack per the [Graphistry Admin Guide → TLS hardening](https://graphistry-admin-docs.readthedocs.io/en/latest/app-config/configure.html#tls-hardening).
 
 For Louie-side CSP or `OA2_HOST` changes:
 
@@ -75,4 +78,4 @@ Reload the Louie page in a fresh browser context (clear the Graphistry cookies f
 ## Related docs
 
 - Louie authentication configuration: [Authentication Registration & TLS](https://louieai-documentation.readthedocs.io/en/latest/admin/011_Authentication_Registration.html) — covers `OA2_HOST`, `OA2_REDIRECT_URL_BASE`, and the Caddy TLS pattern.
-- [Graphistry Admin Guide](https://graphistry-admin-docs.readthedocs.io/en/latest/) — server configuration, cookie flags, and TLS setup for the Graphistry server.
+- [Graphistry Admin Guide → TLS hardening](https://graphistry-admin-docs.readthedocs.io/en/latest/app-config/configure.html#tls-hardening) — `COOKIE_SECURE`, `COOKIE_SAMESITE`, and the iframe-related Caddy headers on the Graphistry server.
