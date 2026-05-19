@@ -10,6 +10,7 @@ Admin Guide
    configuration
    security
    maintenance
+   help
 
 The Louie Admin Guide Documentation covers:
 
