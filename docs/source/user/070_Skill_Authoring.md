@@ -8,7 +8,7 @@ See [Skills](069_Skills) for skill management and limits.
 
 Every skill starts with a `SKILL.md`. This is what the agent reads when it activates your skill. It must follow this structure:
 
-```markdown
+`````markdown
 ---
 name: my-skill-name
 description: One-line description used for discovery and triggering
@@ -33,7 +33,7 @@ example here
 
 ## Troubleshooting
 ...
-```
+`````
 
 ### Frontmatter
 
@@ -137,7 +137,7 @@ Scripts receive arguments via `sys.argv[1:]`.
 
 ## Example: Minimal Valid SKILL.md
 
-```markdown
+`````markdown
 ---
 name: splunk-query-helper
 description: Helps write and optimize Splunk SPL queries. Use when asked to search
@@ -173,4 +173,4 @@ index=main source=/var/log/app.log level=ERROR earliest=-24h@h
 ## Troubleshooting
 - **No results:** Check index name and time range; confirm field names with `| fieldsummary`
 - **Slow search:** Add `index=` filter; avoid leading wildcards in field values
-```
+`````
