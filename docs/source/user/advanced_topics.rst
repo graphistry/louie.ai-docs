@@ -12,4 +12,6 @@ Advanced Topics
    057_Recipes
    058_Database_tools
    064_Guard_rails
-   065_Administrators_can_set_guard_rail_prompts_on_all_or_specific_AI_tools 
+   065_Administrators_can_set_guard_rail_prompts_on_all_or_specific_AI_tools
+   069_Skills
+   070_Skill_Authoring 
