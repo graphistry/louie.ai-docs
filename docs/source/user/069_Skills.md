@@ -31,16 +31,11 @@ Each skill requires a `SKILL.md` file as its entry point. You can create a skill
 
 ## How Skills Load into the Agent
 
-Once a skill is activated for a conversation, its content is included in the agent's context. There are limits on how much skill content fits:
+Once a skill is activated for a conversation, its content is included in the agent's context. There is a limit to how much skill content fits at once.
 
-| Budget | Value |
-|--------|-------|
-| Total across all active skills | ~10,000 tokens (40,000 characters) |
-| Per skill | ~5,000 tokens (20,000 characters) |
+When active skills exceed the budget, the least-recently-used skill content is trimmed first (resource file listings are removed but the main document stays), then entire skills are evicted if needed. The most recently activated skill is never evicted. The agent is notified when content is trimmed so it can request specific sections on demand.
 
-When active skills exceed the total budget, the least-recently-used skill content is trimmed first (resource file listings are removed but the main document stays), then entire skills are evicted if needed. The most recently activated skill is never evicted. The agent is notified when content is trimmed so it can request specific sections on demand.
-
-**Practical guidance:** Keep your main `SKILL.md` focused and concise. Put large reference content in separate resource files - the agent can fetch those on demand when it needs them.
+**Practical guidance:** Keep each skill focused and concise - aim for ~500 lines or fewer. Put large reference content in separate resource files and split broad topics across multiple focused skills; the agent can fetch what it needs on demand.
 
 ## Activation Scopes
 
@@ -56,7 +51,7 @@ Use `session` for domain knowledge relevant to a whole work session. Use `explic
 
 ## Using Multiple Skills
 
-An organization can have up to 100 skills. The agent reads all their descriptions in every conversation, so write descriptions that clearly distinguish when each skill applies. Skills with vague or overlapping descriptions lead to the agent activating the wrong one.
+Organizations can have multiple skills. The agent reads all their descriptions in every conversation, so write descriptions that clearly distinguish when each skill applies. Skills with vague or overlapping descriptions lead to the agent activating the wrong one.
 
 ## Importing and Exporting
 

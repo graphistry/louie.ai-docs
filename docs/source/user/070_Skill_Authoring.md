@@ -6,14 +6,35 @@ See [Skills](069_Skills) for skill management and limits.
 
 ## SKILL.md Structure
 
-Every skill starts with a `SKILL.md`. This is what the agent reads when it activates your skill. It must follow this structure:
+Every skill starts with a `SKILL.md`. The only strictly required part is the YAML frontmatter at the top - everything else is recommended structure that helps the agent understand and use the skill effectively.
+
+### Required: Frontmatter
+
+The `---` block must appear at the very top. Both fields are required:
 
 `````markdown
 ---
 name: my-skill-name
 description: One-line description used for discovery and triggering
 ---
+`````
 
+| Field | Rules |
+|-------|-------|
+| `name` | Lowercase letters, numbers, and hyphens only; 1-64 characters; e.g. `splunk-query-helper` |
+| `description` | Written for the agent to read during discovery; be specific about when this skill applies |
+
+**Write the description for triggering.** The agent reads only the name and description before deciding whether to activate a skill. Be specific about what situations warrant this skill. Vague descriptions cause missed activations or false positives.
+
+Good: `"Helps write and optimize Splunk SPL queries. Use when asked to search Splunk, write a SPL query, or debug a search returning unexpected results."`
+
+Too vague: `"Helps with log analysis."`
+
+### Recommended Structure
+
+A well-structured `SKILL.md` begins with an H1 title and includes at least 3 of these sections (the validator checks for them and will ask you to add more if fewer than 3 are present):
+
+`````markdown
 # My Skill Name
 
 ## When to Use
@@ -27,7 +48,7 @@ description: One-line description used for discovery and triggering
 
 ## Patterns
 ```bash
-# At least one code example is required
+# Include at least one code example
 example here
 ```
 
@@ -35,50 +56,25 @@ example here
 ...
 `````
 
-### Frontmatter
-
-The `---` block at the top is required. Both fields are mandatory:
-
-| Field | Rules |
-|-------|-------|
-| `name` | Lowercase letters, numbers, and hyphens only; 1-64 characters; e.g. `splunk-query-helper` |
-| `description` | At least 10 characters; up to 1,024 characters; written for the agent to read during discovery |
-
-**Write the description for triggering.** The agent reads only the name and description before deciding whether to activate a skill. Be specific about what situations warrant this skill. Vague descriptions cause missed activations or false positives.
-
-Good: `"Helps write and optimize Splunk SPL queries. Use when asked to search Splunk, write a SPL query, or debug a search returning unexpected results."`
-
-Too vague: `"Helps with log analysis."`
-
-### Required Sections
-
-The validator requires **at least 3 of these 5 section headers** (the `##` headings, case-insensitive):
-
-- `## When to Use`
-- `## Capabilities`
-- `## Workflow`
-- `## Patterns`
-- `## Troubleshooting`
-
-At least one fenced code block (` ``` `) must appear somewhere in the document.
-
-The document must begin with an H1 title (`# Skill Name`).
+Including at least one code example is also encouraged - the validator will prompt you to add one if none are present.
 
 ## Single-file vs Multifile Skills
 
-**Single-file:** Everything in `SKILL.md`. Right for focused, self-contained skills that fit within about 5,000 tokens of content.
+**Single-file:** Everything in `SKILL.md`. Right for focused, self-contained skills - aim to keep it under ~500 lines.
 
 **Multifile:** `SKILL.md` is a lean table of contents. The detail lives in resource files that the agent fetches on demand. Good for large reference docs, template libraries, or anything that would bloat the main document.
 
 Conventional folder layout for multifile skills:
 
 ```
-SKILL.md                    # Lean index - when/how to use + list of resources
-references/                 # Reference docs, specs, API descriptions
-templates/                  # Reusable output templates
-examples/                   # Example inputs and outputs
-scripts/                    # Executable Python scripts
+SKILL.md          # Lean index - when/how to use + list of resources
+references/       # Reference docs, specs, API descriptions (conventional)
+templates/        # Reusable output templates (conventional)
+examples/         # Example inputs and outputs (conventional)
+scripts/          # Executable Python scripts (enforced - agent can run these)
 ```
+
+The `scripts/` folder is the only one with special behavior - the agent can discover and run `.py` files placed there. The other folders are naming conventions only; you can organize files however you like.
 
 In multifile mode, the validator relaxes its section requirements (only 1 required instead of 3, no code block required) because the detail lives elsewhere.
 
@@ -86,13 +82,11 @@ The agent sees a listing of available resource files at the bottom of the activa
 
 ## Writing for Context Budget
 
-Active skill content is budget-capped. Each skill gets up to ~5,000 tokens (~20,000 characters), and all active skills share a total of ~10,000 tokens (~40,000 characters).
-
-When the budget is exceeded, the least-recently-used skill content is trimmed. The agent is told what was cut so it can request sections on demand.
+There is a limit to how much skill content the agent can hold in context at once. When that limit is reached, the least-recently-used skills are trimmed - first their resource listings, then the skills themselves. The agent is told what was cut so it can request specific sections on demand.
 
 **What this means for authoring:**
-- Keep `SKILL.md` under ~15,000 characters to stay well within the per-skill cap
-- Move large command references, example outputs, and lengthy specs into resource files under `references/`
+- Keep `SKILL.md` under ~500 lines to stay comfortably within the per-skill limit
+- Move large command references, example outputs, and lengthy specs into resource files
 - Prefer concise, scannable sections over exhaustive prose
 - Use tables and bullet lists rather than paragraphs where possible
 
