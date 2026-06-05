@@ -80,7 +80,9 @@ Notify Graphistry staff with your:
 
 Configure your self-hosted Graphistry to be an OAuth2 provider for Louie
 
-TODO(tcook): add screenshots
+![OAuth2 Setup Step 1](../static/oauth-setup-01.png)
+
+![OAuth2 Setup Step 2](../static/oauth-setup-02.png)
 
 ### Steps:
 
