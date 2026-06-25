@@ -78,23 +78,23 @@ The `scripts/` folder is the only one with special behavior - the agent can disc
 
 In multifile mode, the validator relaxes its section requirements (only 1 required instead of 3, no code block required) because the detail lives elsewhere.
 
-The agent sees a listing of available resource files at the bottom of the activated skill block. It requests specific files using the `read_skill_resource` tool, so only what it actually needs lands in context.
+The agent sees a listing of the available resource files in the activated skill and pulls in specific ones on demand, so only what it actually needs lands in context.
 
-## Writing for Context Budget
+## Keeping Skills Lean
 
-There is a limit to how much skill content the agent can hold in context at once. When that limit is reached, the least-recently-used skills are trimmed - first their resource listings, then the skills themselves. The agent is told what was cut so it can request specific sections on demand.
+The agent holds only so much skill content in context at once, so a lean `SKILL.md` loads reliably and leaves room for other active skills. Treat the main document as an index and push depth into resource files the agent fetches when needed.
 
 **What this means for authoring:**
-- Keep `SKILL.md` under ~500 lines to stay comfortably within the per-skill limit
+- Keep `SKILL.md` short - a good rule of thumb is ~500 lines or fewer
 - Move large command references, example outputs, and lengthy specs into resource files
 - Prefer concise, scannable sections over exhaustive prose
 - Use tables and bullet lists rather than paragraphs where possible
 
 ## Python Scripts
 
-Skills can include executable Python scripts in a `scripts/` subfolder. The agent can run these via the `run_skill_script` tool.
+Skills can include executable Python scripts in a `scripts/` subfolder, and the agent can run them when a skill calls for real computation rather than just instructions.
 
-Declare dependencies inline using PEP 723 metadata (preferred):
+Declare each script's dependencies inline using PEP 723 metadata (preferred):
 
 ```python
 # /// script
@@ -110,12 +110,7 @@ main()
 
 Or list them in `scripts/requirements.txt`, one package per line.
 
-Two extra functions are available to scripts at runtime:
-
-- `save_artifact(name, content, content_type)` - attach a file or output to the cell
-- `emit_event(event_type, data)` - send an event to the frontend
-
-Scripts receive arguments via `sys.argv[1:]`.
+Scripts run in the same Python environment as Louie's Python cells and return results the same way - for example, `save_artifact(...)` to surface a DataFrame, figure, or other output. See [Python Integration](019_Python) and [Python Outputs](024_Python_Outputs) for the available helpers and supported output types.
 
 ## Practical Tips
 

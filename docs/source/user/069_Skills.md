@@ -4,6 +4,14 @@ Skills are packages of specialized knowledge that you give to your agent. Each s
 
 You manage skills through the Skills panel in the UI or via the `/api/skills` endpoints.
 
+## At a Glance
+
+- A skill is a folder with a `SKILL.md` entry point, plus optional resource files and Python scripts.
+- Skills are organization-scoped: everyone in your org shares the same catalog.
+- In every conversation the agent sees the catalog - just each skill's **name** and **description** - and uses it to decide which skills are relevant.
+- Activating a skill loads its full content into the agent's context; until then it costs almost nothing.
+- Keep each skill focused and concise (a good rule of thumb is ~500 lines or fewer), and split large topics across multiple skills or resource files.
+
 ## What Skills Do
 
 When you start a conversation, the agent sees a catalog of all available skills for your organization. It reads the name and description of each skill to decide which ones are relevant, then loads the full content of those it needs.
@@ -19,39 +27,26 @@ Each skill requires a `SKILL.md` file as its entry point. You can create a skill
 - **By importing an archive** - `POST /api/skills/import` with a `.zip` or `.tar.gz` containing a `SKILL.md`
 - **By asking the agent** - the agent can create skills for you when asked
 
-### Skill Limits
-
-| Limit | Value |
-|-------|-------|
-| Skills per organization | 100 |
-| Files per skill | 20 |
-| Size per file | 100 KB |
-| Total size per skill | 500 KB |
-| Allowed file types | `.md`, `.txt`, `.json`, `.yaml`, `.yml`, `.py`, `.xml` |
+Skills have limits on file count, file size, total size, allowed file types, and how many skills an organization can hold. The UI and API enforce these and report the current values, so you don't need to track exact numbers - if you exceed a limit, the system tells you which one.
 
 ## How Skills Load into the Agent
 
-Once a skill is activated for a conversation, its content is included in the agent's context. There is a limit to how much skill content fits at once.
-
-When active skills exceed the budget, the least-recently-used skill content is trimmed first (resource file listings are removed but the main document stays), then entire skills are evicted if needed. The most recently activated skill is never evicted. The agent is notified when content is trimmed so it can request specific sections on demand.
+The catalog the agent reads every conversation is lightweight - just names and descriptions. Only when a skill is activated does its full content enter the agent's context, and there is a bound on how much skill content the agent holds at once. Large skills are loaded progressively: the agent pulls in the resource files it actually needs rather than everything up front.
 
 **Practical guidance:** Keep each skill focused and concise - aim for ~500 lines or fewer. Put large reference content in separate resource files and split broad topics across multiple focused skills; the agent can fetch what it needs on demand.
 
-## Activation Scopes
+## Activating Skills
 
-When a skill is activated for a conversation, it can have one of three scopes:
+A skill only takes effect once it is activated for your conversation. Activation can happen two ways:
 
-| Scope | Lifetime |
-|-------|---------|
-| `run` | Active for one agent response only |
-| `session` | Active for the entire conversation |
-| `explicit` | Active until manually deactivated |
+- **You activate it** - from the Skills panel or by asking for it directly.
+- **The agent activates it** - when the catalog tells it a skill fits the task.
 
-Use `session` for domain knowledge relevant to a whole work session. Use `explicit` for skills that should always be available, like company-specific standards or recurring workflows.
+Once active, a skill stays available in your conversation until it is deactivated. You can deactivate a skill the same ways you activate one, and the agent can drop a skill it no longer needs.
 
 ## Using Multiple Skills
 
-Organizations can have multiple skills. The agent reads all their descriptions in every conversation, so write descriptions that clearly distinguish when each skill applies. Skills with vague or overlapping descriptions lead to the agent activating the wrong one.
+Organizations can hold many skills. The agent reads all their descriptions in every conversation, so write descriptions that clearly distinguish when each skill applies. Skills with vague or overlapping descriptions lead to the agent activating the wrong one.
 
 ## Importing and Exporting
 
