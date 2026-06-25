@@ -32,7 +32,7 @@ Too vague: `"Helps with log analysis."`
 
 ### Recommended Structure
 
-A well-structured `SKILL.md` begins with an H1 title and includes at least 3 of these sections (the validator checks for them and will ask you to add more if fewer than 3 are present):
+A well-structured `SKILL.md` begins with an H1 title and uses clear sections so the agent can navigate it. These are a good starting set - adapt the names to your skill:
 
 `````markdown
 # My Skill Name
@@ -56,7 +56,7 @@ example here
 ...
 `````
 
-Including at least one code example is also encouraged - the validator will prompt you to add one if none are present.
+Including at least one concrete code example is also encouraged - examples are often what the agent leans on most.
 
 ## Single-file vs Multifile Skills
 
