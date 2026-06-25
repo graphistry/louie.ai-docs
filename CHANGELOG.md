@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Development]
 
+### Added
+
+* User guide: Skills overview (`069_Skills`) and Skill Authoring guide (`070_Skill_Authoring`), under Advanced Topics
+
 ### Infra
 
 * Sphinx port
