@@ -44,9 +44,11 @@ A skill only takes effect once it is activated for your conversation. Activation
 
 Once active, a skill stays available in your conversation until it is deactivated. You can deactivate a skill the same ways you activate one, and the agent can drop a skill it no longer needs.
 
+**Multiple skills can be active at the same time.** The agent combines all active skills' knowledge for the task at hand, so you can stack complementary skills (for example, a database skill alongside a reporting-style skill) rather than picking just one.
+
 ## Using Multiple Skills
 
-Organizations can hold many skills. The agent reads all their descriptions in every conversation, so write descriptions that clearly distinguish when each skill applies. Skills with vague or overlapping descriptions lead to the agent activating the wrong one.
+Organizations can hold many skills, and several can be active in a single conversation at once. The agent reads all their descriptions in every conversation, so write descriptions that clearly distinguish when each skill applies. Skills with vague or overlapping descriptions lead to the agent activating the wrong one, or several that conflict.
 
 ## Importing and Exporting
 
