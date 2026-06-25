@@ -22,10 +22,10 @@ This two-step approach keeps the agent's context lean: the catalog is lightweigh
 
 Each skill requires a `SKILL.md` file as its entry point. You can create a skill:
 
+- **By asking the agent (recommended)** - just describe what you want and the agent writes the skill for you. This is the typical path: the agent knows the expected structure and can draft, refine, and test the skill in conversation.
 - **In the UI** - through the Skills management panel
 - **Via the API** - `POST /api/skills` with a name and description, then write files via the files endpoints
 - **By importing an archive** - `POST /api/skills/import` with a `.zip` or `.tar.gz` containing a `SKILL.md`
-- **By asking the agent** - the agent can create skills for you when asked
 
 Skills have limits on file count, file size, total size, allowed file types, and how many skills an organization can hold. The UI and API enforce these and report the current values, so you don't need to track exact numbers - if you exceed a limit, the system tells you which one.
 
