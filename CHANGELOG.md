@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Added
 
 * User guide: Skills overview (`069_Skills`) and Skill Authoring guide (`070_Skill_Authoring`), under Advanced Topics
+* Integration guide: launch a templated Louie investigation from Splunk dashboards and alerts (`071_Splunk_Alert_Deep_Linking`)
 
 ### Infra
 
