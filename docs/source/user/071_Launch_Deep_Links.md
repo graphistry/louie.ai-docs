@@ -10,13 +10,10 @@ using and carries those details with it. Louie opens with them filled in and
 the investigation already running, or staged and waiting if you would rather a
 person press Run.
 
-Reach for one when the same investigation keeps starting the same way and you
-would rather click than retype. Anything that can build a URL can hand off to
-Louie, and there is nothing to install on that side.
-
-It works like this: you write a URL that says what to ask, which values to ask
-about, and optionally which saved playbook to follow. Louie opens a thread,
-starts the run, and lands the reader on results as they stream in.
+Any tool that can build a URL can do this, and there is nothing to install on
+that side. You write a URL that says what to ask, which values to ask about,
+and optionally which saved playbook to run. Louie opens a thread, starts it,
+and shows results as they stream in.
 
 ## How it works
 
