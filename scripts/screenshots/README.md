@@ -1,12 +1,34 @@
-# Documentation tooling
+# Screenshot capture
 
-Maintainer scripts for this repository. Nothing here is published to the docs
-site — these are run by hand when a guide's assets need refreshing.
+Maintainer scripts that regenerate the screenshots embedded in the guides.
+Nothing here is published to the docs site — these are run by hand when a
+page's images need refreshing.
 
-## `capture_launch_deep_links.py`
+## Layout
+
+One directory per documented page, mirroring the guide's own path and slug:
+
+```
+scripts/screenshots/<section>/<page-slug>/capture.py
+docs/source/<section>/<Page_Name>.md
+docs/source/<section>/images/<section>/<page-slug>/
+```
+
+So the deep-link capture lives at
+`scripts/screenshots/user/071_launch_deep_links/capture.py`, next to nothing
+else, and its page and image directory share the same `071_launch_deep_links`
+slug. Add a sibling directory when a new page needs screenshots.
+
+Each capture is a self-contained [PEP 723](https://peps.python.org/pep-0723/)
+script with its own pinned dependencies, so it runs under `uv run` with no
+project install. Shared helpers are deliberately not factored out yet — there
+is one script, and the second one will show what is genuinely common. Extract
+then, not now.
+
+## `user/071_launch_deep_links/capture.py`
 
 Regenerates the two screenshots in
-[Launch Deep Links](../docs/source/user/071_Launch_Deep_Links.md):
+[Launch Deep Links](../../docs/source/user/071_Launch_Deep_Links.md):
 
 1. the external-launch confirmation gate, showing the typed named parameters
    and the not-yet-available Run action, and
@@ -33,7 +55,7 @@ LOUIE_SCREENSHOT_BASE_URL='https://your-louie-host' \
 LOUIE_SCREENSHOT_USERNAME='test-account' \
 LOUIE_SCREENSHOT_PASSWORD="$LOUIE_CAPTURE_PASSWORD" \
 LOUIE_SCREENSHOT_REDACT_TEXT='organization-name,account-email' \
-  uv run scripts/capture_launch_deep_links.py
+  uv run scripts/screenshots/user/071_launch_deep_links/capture.py
 unset LOUIE_CAPTURE_PASSWORD
 ```
 
@@ -77,8 +99,13 @@ docs/source/user/images/user/071_launch_deep_links/
 
 The guide references the images through `current/`, so the two documented paths
 can never come from different runs. Stale generations are removed on success,
-and a failed run leaves nothing behind. Identical content republishes to the
-same hash, so a no-op regeneration produces no diff.
+and a failed run leaves nothing behind.
+
+The hash is over pixels, so a rerun that renders identically republishes to the
+same directory and produces no diff. Reruns usually do match, but not always:
+background chrome behind the modal — a dropdown caret, a hover state — can
+differ by a few dozen pixels and mint a new generation. If a rerun changes only
+that kind of incidental region, prefer `git checkout` over committing the churn.
 
 ### Before committing
 
