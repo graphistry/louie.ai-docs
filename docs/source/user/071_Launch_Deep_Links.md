@@ -1,13 +1,22 @@
 # Launch Deep Links
 
-Use a URL to turn context from another application into a live Louie
-investigation. A launch deep link can come from a dashboard, alert, ticket,
-email, chat message, internal portal, or any other system that can render a
-link.
+An alert fires. Before anyone can dig in, they open Louie, retype the host and
+the time window, and ask the same questions they asked the last time this
+happened.
 
-The link can provide a prompt, select an agent or saved skill, and add named
-values from the source system. Louie creates a DataThread, optionally starts
-the run, and opens the investigation in the browser.
+A launch deep link skips that. Put a link in whatever raised the alert — a
+dashboard panel, an alert email, a ticket, a chat message — and let the link
+carry the details. Clicking it opens Louie with the case already loaded and the
+investigation already running, or staged and waiting if you would rather a
+person press Run.
+
+Reach for one when the same investigation keeps starting the same way and you
+would rather click than retype. Anything that can build a URL can hand off to
+Louie, and there is nothing to install on that side.
+
+It works like this: you write a URL that says what to ask, which values to ask
+about, and optionally which saved playbook to follow. Louie opens a thread,
+starts the run, and lands the reader on results as they stream in.
 
 ## How it works
 
