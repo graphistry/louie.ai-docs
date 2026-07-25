@@ -1,13 +1,14 @@
 # Launch Deep Links
 
-**Without a launch deep link**, looking into an alert starts with retyping. You
-open Louie, re-enter the host and the time window, and ask the same questions
-you asked the last time this happened.
+**Without a launch deep link**, investigating something starts with retyping
+whatever you were just looking at. You leave the dashboard, the alert, the
+ticket, or the chat thread, open Louie, copy the details across by hand, and
+ask the same questions you asked last time.
 
-**With one**, you click instead. The link sits in whatever raised the alert — a
-dashboard panel, an alert email, a ticket, a chat message — and carries those
-details with it. Louie opens with the case already loaded and the investigation
-already running, or staged and waiting if you would rather a person press Run.
+**With one**, you click instead. The link lives in the tool you were already
+using and carries those details with it. Louie opens with them filled in and
+the investigation already running, or staged and waiting if you would rather a
+person press Run.
 
 Reach for one when the same investigation keeps starting the same way and you
 would rather click than retype. Anything that can build a URL can hand off to
