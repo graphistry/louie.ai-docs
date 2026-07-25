@@ -25,21 +25,21 @@ values to the launched investigation's named-value context.
 
 | Parameter | Purpose |
 | --- | --- |
-| `query` | Required natural-language request. URL-encode it. |
-| `agent` | Reasoning agent; defaults to `LouieAgent`. |
-| `skills` | Comma-separated saved-skill keys, such as `incident-triage`. |
-| `execute` | `true` (default) starts the run; `false` prepares a new thread without running it. |
-| `name` | DataThread title, for example an alert or ticket name. |
-| `share_mode` | `Private` or `Organization`; defaults to `Private`. |
-| `org` | Organization id, slug, or name; defaults to the account's active organization. Naming a different organization is rejected with `403` rather than switching, even when the account is a member. |
-| `space` | `personal` or `shared`. An alternative way to set sharing when `share_mode` is omitted; supplying both with conflicting values is rejected with `400`. |
-| `dthread_id` | Target an existing DataThread. With `execute=true`, append and run a new cell. |
-| `folder` | Target folder path. |
-| `create_folders` | `true` creates missing folders in the `folder` path; `false` (default) fails when the folder does not exist. |
-| `param.<key>` | Named value added to the agent context. Keys must be valid identifiers. |
-| `param_type.<key>` | Optional value type: `str`, `int`, `float`, `bool`, `relative_time`, or `json`. Defaults to `str`. |
-| `timezone` | Time zone used to resolve `relative_time` values; defaults to UTC. |
-| `options` | JSON object of per-request model and behavior overrides. |
+| `query` | Required natural-language request. URL-encode it. Example: `query=Triage%20alert%20A-1042` |
+| `agent` | Reasoning agent; defaults to `LouieAgent`. Example: `agent=LouieAgent` |
+| `skills` | Comma-separated saved-skill keys. Example: `skills=incident-triage,host-enrichment` |
+| `execute` | `true` (default) starts the run; `false` prepares a new thread without running it. Example: `execute=false` |
+| `name` | DataThread title, such as the alert or ticket name. Example: `name=Notable%3A%20brute%20force` |
+| `share_mode` | `Private` or `Organization`; defaults to `Private`. Example: `share_mode=Organization` |
+| `org` | Organization id, slug, or name; defaults to the account's active organization. Naming a different organization is rejected with `403` rather than switching, even when the account is a member. Example: `org=soc-team` |
+| `space` | `personal` or `shared`. An alternative way to set sharing when `share_mode` is omitted; supplying both with conflicting values is rejected with `400`. Example: `space=shared` |
+| `dthread_id` | Target an existing DataThread. With `execute=true`, append and run a new cell. Example: `dthread_id=<existing-thread-id>` |
+| `folder` | Target folder path. Example: `folder=Investigations/SOC` |
+| `create_folders` | `true` creates missing folders in the `folder` path; `false` (default) fails when the folder does not exist. Example: `create_folders=true` |
+| `param.<key>` | Named value added to the agent context. Keys must be valid identifiers. Example: `param.host=web-01` |
+| `param_type.<key>` | Optional value type: `str`, `int`, `float`, `bool`, `relative_time`, or `json`. Defaults to `str`. Example: `param_type.host=str` |
+| `timezone` | Time zone used to resolve `relative_time` values; defaults to UTC. Example: `timezone=America/New_York` |
+| `options` | JSON object of per-request model and behavior overrides, URL-encoded. Example: `options=%7B...%7D` |
 
 `dthread_id` and `execute=false` do not stage a follow-up: Louie opens the
 existing thread without appending the query or runnable named values. Requested
@@ -120,6 +120,17 @@ Louie directly, use the authenticated `POST /api/chat/` streaming API or
 `POST /api/chat_singleshot/` batch API.
 
 ## Visual walkthrough
+
+Both images below come from this exact link, opened from a site Louie does not
+trust:
+
+```text
+https://louie.example/web-api/launch/?query=Return+a+compact+markdown+table+with+columns+Field+and+Value.+Use+these+rows%3A+Delivery+%3D+Launch+deep+link%3B+Status+%3D+Completed.&agent=LouieAgent&execute=true&share_mode=Private&name=Launch+parameters+in+a+live+investigation&param.case_id=CASE-DEMO-1042&param_type.case_id=str&param.severity=high&param_type.severity=str
+```
+
+Decoded, it asks for a two-row `Field`/`Value` table, names the thread
+`Launch parameters in a live investigation`, and carries `case_id` and
+`severity` as typed named values — each of which you can spot in the images.
 
 The first image verifies the security boundary for a browser launch whose
 origin Louie could not verify: it pauses before auto-run, previews the prompt,
