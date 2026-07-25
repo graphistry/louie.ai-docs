@@ -21,9 +21,6 @@ Louie redirects the browser to `/n/<thread-id>` while results stream. Use
 `skills` to activate a saved playbook and `param.<key>` to add source-system
 values to the launched investigation's named-value context.
 
-The previous browser launcher at `web/chat_singleshot` is obsolete; use
-`/web-api/launch/` for browser deep links.
-
 ## Launch parameters
 
 | Parameter | Purpose |
@@ -120,10 +117,7 @@ other credential in a deep-link URL.
 
 Launch deep links are browser handoffs. For a source system that should invoke
 Louie directly, use the authenticated `POST /api/chat/` streaming API or
-`POST /api/chat_singleshot/` batch API. Despite the similar name,
-`/api/chat_singleshot/` is current and unrelated to the obsolete
-`web/chat_singleshot` browser launcher; browser deep links always go through
-`/web-api/launch/`.
+`POST /api/chat_singleshot/` batch API.
 
 ## Visual walkthrough
 
