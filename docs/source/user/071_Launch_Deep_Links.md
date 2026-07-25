@@ -148,64 +148,13 @@ the agent or a connector consumed the named values shown in the first image.
 
 ![Completed deep-link investigation showing the launched prompt and its result table](images/user/071_launch_deep_links/current/071_launch_deep_link_result.png)
 
-### Regenerate the screenshots
-
-The [capture script](../../../scripts/capture_launch_deep_links.py) fixes the
-browser version, viewport, color scheme, locale, time zone, demo inputs, stable
-UI text, and output filenames. It simulates a real cross-site click, completes
-login, asserts the paused approval state and exact named-value rows, approves
-the run, and asserts the completed prompt-result table. These are deliberately
-separate proof targets. After the full workflow succeeds, the script publishes
-an immutable generation and atomically switches the `current` pointer, so the
-two documented paths never mix runs.
-
-From the repository root:
-
-```bash
-read -rsp 'Disposable test-account password: ' LOUIE_CAPTURE_PASSWORD
-echo
-LOUIE_SCREENSHOT_BASE_URL='https://your-louie-host' \
-LOUIE_SCREENSHOT_USERNAME='test-account' \
-LOUIE_SCREENSHOT_PASSWORD="$LOUIE_CAPTURE_PASSWORD" \
-LOUIE_SCREENSHOT_REDACT_TEXT='organization-name,account-email' \
-  uv run scripts/capture_launch_deep_links.py
-unset LOUIE_CAPTURE_PASSWORD
-```
-
-The password is read without echo and is not written into shell history. The
-script also rejects non-HTTPS base URLs.
-
-TLS certificate verification remains enabled. If a non-production test host
-uses a certificate chain that Chromium cannot validate, obtain that host's
-base64 SHA-256 SPKI pin through a trusted administrator channel and set it only
-for this capture:
-
-```bash
-export LOUIE_SCREENSHOT_CERT_SPKI='base64-sha256-spki-pin'
-```
-
-The pin grants a narrowly scoped certificate exception for that exact public
-key; it does not disable validation while credentials are sent to the identity
-provider.
-
-The script uses an exact inline Playwright version and its matching bundled
-Chromium. Install that browser once:
-
-```bash
-uv run --with playwright==1.61.0 playwright install chromium
-```
-
-Use a disposable test account. Never put a real hostname, credentials, browser
-state, cookies, tokens, certificate pins, or sensitive source data in the
-repository. Regeneration creates a private test DataThread.
-
 ## Splunk integration recipe
 
 Splunk makes launch links especially useful because dashboard and alert tokens
 can populate Louie's named-value context. This uses Louie's generic launcher;
 dashboard and email links require no Splunk-side Louie app.
 
-Save repeatable triage guidance as a skill such as `dcso-notable-triage`. Have
+Save repeatable triage guidance as a skill such as `notable-triage`. Have
 the skill read named values such as `host`, `src_ip`, and `earliest`, validate
 them as data, and use the configured Splunk connector to investigate and
 summarize the alert. Do not put raw `:host` placeholders inside SPL unless the
@@ -219,7 +168,7 @@ and time tokens when the analyst clicks it:
 ```xml
 <drilldown>
   <link target="_blank">
-    https://louie.dcso.example/web-api/launch/?query=Triage%20the%20notable%20alert%20using%20the%20launch%20values%20host%2C%20src_ip%2C%20and%20earliest%3B%20correlate%20and%20summarize&amp;agent=LouieAgent&amp;skills=dcso-notable-triage&amp;execute=true&amp;share_mode=Organization&amp;name=Notable%3A%20$row.signature|u$&amp;param.host=$row.host|u$&amp;param_type.host=str&amp;param.src_ip=$row.src_ip|u$&amp;param_type.src_ip=str&amp;param.earliest=$earliest|u$&amp;param_type.earliest=str
+    https://louie.example/web-api/launch/?query=Triage%20the%20notable%20alert%20using%20the%20launch%20values%20host%2C%20src_ip%2C%20and%20earliest%3B%20correlate%20and%20summarize&amp;agent=LouieAgent&amp;skills=notable-triage&amp;execute=true&amp;share_mode=Organization&amp;name=Notable%3A%20$row.signature|u$&amp;param.host=$row.host|u$&amp;param_type.host=str&amp;param.src_ip=$row.src_ip|u$&amp;param_type.src_ip=str&amp;param.earliest=$earliest|u$&amp;param_type.earliest=str
   </link>
 </drilldown>
 ```
@@ -240,7 +189,7 @@ The same pattern works in a saved-search alert. Use literal Splunk token
 delimiters and result tokens in the email body:
 
 ```text
-https://louie.dcso.example/web-api/launch/?query=Investigate%20alert%20$name$%20using%20the%20launch%20values&agent=LouieAgent&skills=dcso-notable-triage&execute=true&param.host=$result.host$&param_type.host=str&param.src_ip=$result.src_ip$&param_type.src_ip=str
+https://louie.example/web-api/launch/?query=Investigate%20alert%20$name$%20using%20the%20launch%20values&agent=LouieAgent&skills=notable-triage&execute=true&param.host=$result.host$&param_type.host=str&param.src_ip=$result.src_ip$&param_type.src_ip=str
 ```
 
 Splunk recognizes `$name$` and `$result.<field>$` before the generated link is
