@@ -145,15 +145,9 @@ Louie LLM connection configuration is currently via environment variables. Depen
 * `data/<provider>/auth.env`: Multiple model providers, but at most one of each type
 * `data/<provider>/auth/profile123.env`: Multiple model providers of the same type, such as due to differing model availabilities and new model testing
 
-Models from providers like OpenAI are automatically registered, but for other providers, you must manually register the models:
+Configure model profiles as described in [Model registration](#model-registration).
 
-* `data/custom.env`: Single model to register, or a provider that supports automatic multi-model registration
-* `data/<provider>/model.env`: Multiple model providers, but at most one of each type, and registering a single model or a model provider that supports automatic multi-model registration
-* `data/<provider>/model/profile123.env`: Multiple models from the same provider and that provider does not support automatic multi-model registration
-
-After configuring your model provider connection and registering your models, restart the Louie server to apply the changes:
-
-Restart the Louie server:
+After changing provider connections or model profiles, restart Louie:
 
 ```bash
 cd /var/louie
