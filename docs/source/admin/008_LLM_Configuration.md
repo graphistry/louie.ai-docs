@@ -39,7 +39,7 @@ When multiple authentication profiles for the same provider, set distinct `AUTH_
 
 ### Model registration
 
-Louie automatically detects the models exposed by some providers, such as for OpenAI. Other providers, such as Azure OpenAI, require you to explicitly register or configure your model.
+Louie supplies model suggestions; Azure OpenAI uses your configured deployments.
 
 Depending on the complexity of deployment, this is done in:
 
@@ -53,7 +53,10 @@ When multiple model profiles for the same provider, set distinct `MODEL_PROVIDER
 
 You configure which models are used by default. Optionally, you can further configure which models are used for specific agents and their tasks.
 
-Model names are specified by the profile in the registration step.
+Use `provider:model` for models outside Louie's catalogue, for example
+`LLM_MODEL_DEFAULT=external:licensed-model`. Configure that provider's credentials and endpoint.
+The catalogue is advisory; retirement at OpenAI does not disable licensed Azure/external models.
+Unknown defaults warn at startup; the selected provider validates access when used.
 
 
 ### Testing
@@ -142,15 +145,9 @@ Louie LLM connection configuration is currently via environment variables. Depen
 * `data/<provider>/auth.env`: Multiple model providers, but at most one of each type
 * `data/<provider>/auth/profile123.env`: Multiple model providers of the same type, such as due to differing model availabilities and new model testing
 
-Models from providers like OpenAI are automatically registered, but for other providers, you must manually register the models:
+Configure model profiles as described in [Model registration](#model-registration).
 
-* `data/custom.env`: Single model to register, or a provider that supports automatic multi-model registration
-* `data/<provider>/model.env`: Multiple model providers, but at most one of each type, and registering a single model or a model provider that supports automatic multi-model registration
-* `data/<provider>/model/profile123.env`: Multiple models from the same provider and that provider does not support automatic multi-model registration
-
-After configuring your model provider connection and registering your models, restart the Louie server to apply the changes:
-
-Restart the Louie server:
+After changing provider connections or model profiles, restart Louie:
 
 ```bash
 cd /var/louie
