@@ -39,7 +39,7 @@ When multiple authentication profiles for the same provider, set distinct `AUTH_
 
 ### Model registration
 
-Louie automatically detects the models exposed by some providers, such as for OpenAI. Other providers, such as Azure OpenAI, require you to explicitly register or configure your model.
+Louie supplies model suggestions for providers such as OpenAI. Providers such as Azure OpenAI use the deployments you configure.
 
 Depending on the complexity of deployment, this is done in:
 
@@ -53,7 +53,33 @@ When multiple model profiles for the same provider, set distinct `MODEL_PROVIDER
 
 You configure which models are used by default. Optionally, you can further configure which models are used for specific agents and their tasks.
 
-Model names are specified by the profile in the registration step.
+Use `provider:model` to identify the provider and model, such as `openai:gpt-4o`,
+`azure:deployment-name`, or `external:licensed-model`. Existing bare model aliases remain
+supported when their configured provider is known.
+
+### Models outside the catalogue
+
+Model lists are suggestions. A configured provider can serve models Louie does not list.
+Configure that provider's credentials and endpoint, then set the exact model ID:
+
+```bash
+LLM_MODEL_DEFAULT=external:licensed-model
+```
+
+For Azure, configure the endpoint, API version, and deployment. Azure and external model
+pickers include configured deployments even when Louie has no matching model metadata.
+Metadata for unknown models, including token counts, context limits, and costs, can be
+approximate or unavailable.
+
+Release and retirement schedules apply to each provider independently. Retirement at OpenAI
+does not disable a licensed deployment at Azure or another provider. Louie preserves explicit
+configured selections; the provider determines whether your account can use the model.
+
+Unknown default models produce a startup warning. Missing credentials, unavailable models,
+or incompatible APIs fail the selected request. Louie does not automatically replace the
+selected model or route it to another provider. Check that provider's model access and API
+requirements when a request fails. OpenAI-compatible external endpoints use the Chat
+Completions API.
 
 
 ### Testing
