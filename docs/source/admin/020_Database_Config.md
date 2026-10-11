@@ -35,6 +35,49 @@ Restart services after making changes.
 
 Contact Graphistry staff for assistance with managed connectors and Databricks configuration.
 
+## Louie's application database
+
+This database stores Louie data such as data threads, skills, and locally
+managed connector or LLM settings. It is separate from the databases and
+Splunk instances that users add as connectors. Choose its backend with
+`DATABASE_TYPE` and the matching database settings for your deployment.
+PostgreSQL can be shared by API workers and replicas. A configured SQLite
+database persists across worker restarts when its file is on durable storage;
+in Kubernetes, the default `host-data` volume is an `emptyDir`, so enable a
+PVC with `persistence.enabled` or `persistence.existingClaim` before relying
+on persistence across Pod replacement.
+
+An API image containing [#4077](https://github.com/graphistry/graphistrygpt/pull/4077)
+uses the configured application database even when
+`USE_LOCAL_CONNECTOR_STORAGE`, `USER_CONFIGURE_LLM_MODELS`, and
+`ENABLE_ORG_LLM_SETTINGS` are **all false**. Older API images in that exact
+configuration used a separate temporary SQLite database in each worker.
+Upgrading does not transfer those temporary rows. While old workers are
+still running, block and drain writes, inventory and back up each worker's
+temporary database, and reconcile any needed rows into the configured
+database before replacing the workers. Rows belonging to workers that
+already stopped may be unrecoverable. See the
+[Helm worker-local recovery gate](https://github.com/graphistry/graphistrygpt/blob/6ab7afdf65480acd229ee3ee9d8803ab7271766c/helm/louie/README.md#worker-local-row-recovery-gate)
+for the full procedure.
+
+Prepare and migrate the configured database before serving API traffic.
+The API waits for its schema to reach the Alembic head and fails startup if
+it does not become ready within the configured window; API workers do not
+run migrations concurrently. `API_DB_SCHEMA_WAIT_SECONDS` defaults to 240
+seconds, with a minimum of two seconds for PostgreSQL or one for SQLite.
+If a migration needs longer, increase the wait and the serving process's
+startup timeout together. For PostgreSQL, connection and statement probes
+use `API_DB_SCHEMA_PROBE_TIMEOUT_SECONDS` (five seconds by default), with
+`API_DB_SCHEMA_PROBE_WALL_SECONDS` (30 seconds by default) bounding each
+probe process. These settings do not replace the overall schema wait.
+
+Check the **app image** before rollout: chart `0.1.21` still defaults to
+Louie image `0.18.15`, which does not contain #4077. Set `image.tag` to a
+released image containing the change; installing the chart alone does not
+change old API behavior. Follow the
+[Helm database upgrade procedure](https://github.com/graphistry/graphistrygpt/blob/6ab7afdf65480acd229ee3ee9d8803ab7271766c/helm/louie/README.md#api-storage-selection-when-upgrading-the-app-image)
+for backup, restore, and validation steps.
+
 ## Indexing
 
 Louie builds a semantic layer to understand what is in the database by gathering database schemas and samples. When a connector is per-user, meaning different users may have different data available, Loiue will index on a per-connecting-user basis. 
@@ -230,4 +273,4 @@ SPARK_HOST="your_databricks_host.cloud.databricks.com"
 
 ### Other databases
 
-Contact staff. 
+Contact staff.
