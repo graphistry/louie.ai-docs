@@ -28,7 +28,7 @@ Authorization: Bearer <token>
 | `/chat_singleshot/` | One request, one answer, no conversation kept |
 | `/chat_upload/` | Send a file along with the request |
 
-`/chat_singleshot/` is usually what automation wants: no thread to manage and no
+`/chat_singleshot/` is usually what automation wants: no conversation to manage and no
 state to clean up.
 
 ## Retrieving output

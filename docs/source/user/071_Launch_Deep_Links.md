@@ -12,7 +12,7 @@ person press Run.
 
 Any tool that can build a URL can do this, and there is nothing to install on
 that side. You write a URL that says what to ask, which values to ask about,
-and optionally which saved playbook to run. Louie opens a thread, starts it,
+and optionally which saved playbook to run. Louie opens a notebook, starts it,
 and shows results as they stream in.
 
 ## How it works
@@ -23,7 +23,7 @@ The browser launcher is:
 GET https://<louie-host>/web-api/launch/?query=<prompt>&agent=LouieAgent&execute=true
 ```
 
-Louie redirects the browser to `/n/<thread-id>` while results stream. Use
+Louie redirects the browser to `/n/<notebook-id>` while results stream. Use
 `skills` to activate a saved playbook and `param.<key>` to add source-system
 values to the launched investigation's named-value context.
 
@@ -34,7 +34,7 @@ values to the launched investigation's named-value context.
 | `query` | Required natural-language request. URL-encode it. Example: `query=Triage%20alert%20A-1042` |
 | `agent` | Reasoning agent; defaults to `LouieAgent`. Example: `agent=LouieAgent` |
 | `skills` | Comma-separated saved-skill keys. Example: `skills=incident-triage,host-enrichment` |
-| `execute` | `true` (default) starts the run; `false` prepares a new thread without running it. Example: `execute=false` |
+| `execute` | `true` (default) starts the run; `false` prepares a new notebook without running it. Example: `execute=false` |
 | `name` | DataThread title, such as the alert or ticket name. Example: `name=Notable%3A%20brute%20force` |
 | `share_mode` | `Private` or `Organization`; defaults to `Private`. Example: `share_mode=Organization` |
 | `org` | Organization id, slug, or name; defaults to the account's active organization. Naming a different organization is rejected with `403` rather than switching, even when the account is a member. Example: `org=soc-team` |
@@ -48,9 +48,9 @@ values to the launched investigation's named-value context.
 | `options` | JSON object of per-request model and behavior overrides, URL-encoded. Example: `options=%7B...%7D` |
 
 `dthread_id` and `execute=false` do not stage a follow-up: Louie opens the
-existing thread without appending the query or runnable named values. Requested
+existing notebook without appending the query or runnable named values. Requested
 skills can still be activated. Use `execute=true` to append to an existing
-thread, or omit `dthread_id` to create a prepared new thread.
+notebook, or omit `dthread_id` to create a prepared new notebook.
 
 `relative_time` accepts `now` or a negative integer followed by `s`, `m`, `h`,
 `d`, or `w`, such as `-4h`. Use `str` for source-system time expressions outside
@@ -68,7 +68,7 @@ This link creates and immediately runs a private investigation:
 https://louie.example/web-api/launch/?query=Investigate%20case%20CASE-1042&agent=LouieAgent&execute=true&share_mode=Private&name=CASE-1042
 ```
 
-When creating a new thread, set `execute=false` when the user should review or
+When creating a new notebook, set `execute=false` when the user should review or
 extend the prepared investigation before running it.
 
 ## Templated flows with skills and named values
@@ -134,7 +134,7 @@ trust:
 https://louie.example/web-api/launch/?query=Return+a+compact+markdown+table+with+columns+Field+and+Value.+Use+these+rows%3A+Delivery+%3D+Launch+deep+link%3B+Status+%3D+Completed.&agent=LouieAgent&execute=true&share_mode=Private&name=Launch+parameters+in+a+live+investigation&param.case_id=CASE-DEMO-1042&param_type.case_id=str&param.severity=high&param_type.severity=str
 ```
 
-Decoded, it asks for a two-row `Field`/`Value` table, names the thread
+Decoded, it asks for a two-row `Field`/`Value` table, names the notebook
 `Launch parameters in a live investigation`, and carries `case_id` and
 `severity` as typed named values — each of which you can spot in the images.
 
@@ -179,7 +179,7 @@ and time tokens when the analyst clicks it:
 </drilldown>
 ```
 
-On click, the link opens a thread named for the alert signature, activates the
+On click, the link opens a notebook named for the alert signature, activates the
 skill, and adds the host, source IP, and time window to the investigation.
 Splunk's `|u` token filter URL-encodes dynamic values. The time token is a
 `str`, because Splunk can emit snapped expressions such as `-24h@h` or absolute
