@@ -8,9 +8,8 @@ Database queries and Python data science are powerful tools, but they require sp
 * **Cypher**: Graph pattern matching
 * **Splunk**: Log analysis and search
 
-### DB queries & Python data science are superpowers...
-
-##### What if anyone could talk to their data?
+Database queries and Python data science are superpowers. What if anyone
+could talk to their data?
 
 ## Louie's Capabilities
 

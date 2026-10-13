@@ -26,7 +26,6 @@ Take steps and leap out-of-the-box or integrate in-house innovations with genAI
 * **How your team works**
 * **Add your own LLM, Agent, Index, API, ...**
 
-## Integration Architecture
 
 | Louie LLM UI | Your existing environment |
 |--------------|---------------------------|
