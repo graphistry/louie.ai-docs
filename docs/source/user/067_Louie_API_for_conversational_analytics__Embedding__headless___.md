@@ -1,30 +1,54 @@
 # Louie API for Conversational Analytics
 
-The Louie API provides comprehensive conversational analytics capabilities including embedding, headless operations, and more.
+The API runs the same agents and notebooks as the UI, for automation, embedding
+and headless use.
 
-## API Documentation
+## Reference
 
-Access the full API documentation at: `https://<site>/api/docs`
+Your deployment serves its own reference, matching the version you are running:
 
-## Chat Endpoints
+```
+https://<your-louie-host>/api/docs
+```
 
-The API supports both streaming (`/api/chat`) and blocking modes for chat interactions.
+It includes live request testing. Read it there rather than relying on a static
+list — endpoints change between versions.
 
-### Features
-- Start new chat sessions or continue existing conversations
-- JWT authentication using `Authorization: Bearer <token>` header
-- Access to referenced rich media through additional endpoints
-- Load data tables in JSON or Arrow formats
-- Extensive configuration options
+## Authentication
 
-## Getting Started
+```
+Authorization: Bearer <token>
+```
 
-1. **Authentication**: Obtain a JWT token for API access
-2. **Documentation**: Review the comprehensive API docs for all available options
-3. **Testing**: Use the live testing interface to experiment with endpoints
-4. **Support**: Contact staff for the latest updates and assistance
+## Conversation endpoints
 
-## API Documentation Interface
+| Endpoint | Use |
+|---|---|
+| `/chat/` | Start or continue a conversation. Streaming or blocking |
+| `/chat_singleshot/` | One request, one answer, no conversation kept |
+| `/chat_upload/` | Send a file along with the request |
 
-![API Documentation](./images/user/067_Louie_API_for_conversational_analytics__Embedding__headless____1.png)
+`/chat_singleshot/` is usually what automation wants: no thread to manage and no
+state to clean up.
 
+## Retrieving output
+
+A response refers to the elements it produced rather than inlining them. Fetch
+each by its id:
+
+| Endpoint | Returns |
+|---|---|
+| `/chat/{dthread_id}/binary/{element_id}` | The element itself |
+| `/chat/{dthread_id}/binary/{element_id}/info` | Its metadata, without the payload |
+| `/chat/{dthread_id}/binary/{element_id}/download` | The same as a file download |
+
+Request `/info` first when you need an element's size or type before deciding
+whether to pull it — useful when a response refers to a large dataframe.
+
+Tables can be returned as JSON or Arrow; Arrow is substantially cheaper for
+anything large.
+
+## Opening the UI from elsewhere
+
+To hand a user a pre-loaded Louie session from another tool, use a deep link
+rather than the API — see [Launch Deep Links](071_Launch_Deep_Links.md).
