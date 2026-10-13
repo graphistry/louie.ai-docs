@@ -42,4 +42,4 @@ organization has configured.
 
 ## Getting help
 
-If something goes wrong during installation, contact <support@louie.ai>.
+If something goes wrong during installation, contact `support@louie.ai`.

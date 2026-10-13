@@ -37,4 +37,4 @@ Twelve types, including MCP for any MCP-compatible server. See
 - Sharing within and across organizations
 - Administration: setup, hardening, backups
 
-For anything not covered here, contact <support@louie.ai>.
+For anything not covered here, contact `support@louie.ai`.
