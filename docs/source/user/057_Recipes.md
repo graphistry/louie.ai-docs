@@ -25,6 +25,10 @@ To create new recipes:
    - `SaveOrgRecipeAgent` - for organization-level recipes
    - `SaveSystemRecipeAgent` - for system-level recipes
 
+`MakeRecipeAgent` drafts a recipe from work already in a notebook.
+
+There are no delete agents for recipes; removing one is an admin operation.
+
 ## Recipe Use Cases
 
 Recipes are ideal for:

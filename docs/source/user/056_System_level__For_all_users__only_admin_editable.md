@@ -25,3 +25,9 @@ Examples are ideal for simple scenarios and facts that can be quickly referenced
 
 ![System Level Examples](./images/user/056_System_level__For_all_users__only_admin_editable_1.png)
 
+### Removing examples
+
+- `DeleteOrgExamplesAgent` — organization-level
+- `DeleteSystemExamplesAgent` — system-level
+
+`MakeExamplesAgent` drafts examples from work already in a notebook.
