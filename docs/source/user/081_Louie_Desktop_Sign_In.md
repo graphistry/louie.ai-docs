@@ -64,4 +64,4 @@ If you encounter account-related problems:
 
 - [Configure Your OpenAI API Key](082_Louie_Desktop_OpenAI_Configuration)
 - Connect Data Sources
-- Create Your First Thread
+- Create Your First Notebook

@@ -4,7 +4,7 @@ At the top of each Notebook you'll find a set of tabs that allow you to switch b
 
 ## Dashboard Tab
 
-"Dashboard" will open the respective Dashboard view of that thread and allow you to create panels with dependencies from the thread.
+"Dashboard" will open the respective Dashboard view of that notebook and allow you to create panels with dependencies from the notebook.
 
 ## Interface Views
 

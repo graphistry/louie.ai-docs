@@ -5,7 +5,7 @@ Dashboards in Louie.AI allow you to create interactive visual representations of
 ## Dashboard Features
 
 - Create customizable layouts with multiple panels
-- Display charts, tables, and visualizations from your threads
+- Display charts, tables, and visualizations from your notebooks
 - Add interactive controls for filtering and exploring data
 - Arrange panels in responsive grid layouts
 - Share dashboards with team members

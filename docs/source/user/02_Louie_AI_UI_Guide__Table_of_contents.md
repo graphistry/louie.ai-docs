@@ -3,8 +3,8 @@
 ## Contents
 
 - Overview
-- Main area & threads
-- Blocks
+- Main area & notebooks
+- Cells
 - Python
 - Dashboards
 - Chart authoring

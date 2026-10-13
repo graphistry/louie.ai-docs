@@ -1,6 +1,6 @@
 # Louie Uses and Learns AI Knowledge Bases
 
-Louie matches your text to Examples and Recipes, allowing you to teach Louie from data threads using both types of knowledge.
+Louie matches your text to Examples and Recipes, allowing you to teach Louie from data notebooks using both types of knowledge.
 
 ## Examples
 

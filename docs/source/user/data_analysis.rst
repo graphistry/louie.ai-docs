@@ -14,3 +14,6 @@ Data Analysis & Python Integration
    027_Notebook_vs_Dashboard_Tabs
    028_Add___Edit_Panels
    029_Responsive_Panel_Layouts 
+   030_Cross_Filtering
+   031_Input_Groups
+   032_Refresh_Data

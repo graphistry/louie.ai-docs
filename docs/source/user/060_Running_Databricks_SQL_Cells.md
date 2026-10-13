@@ -1,6 +1,6 @@
-# Running Databricks SQL Blocks
+# Running Databricks SQL Cells
 
-Databricks SQL blocks allow you to write and execute SQL queries directly in your workspace with enhanced tooling and visualization capabilities.
+Databricks SQL cells allow you to write and execute SQL queries directly in your workspace with enhanced tooling and visualization capabilities.
 
 ## Key Features
 

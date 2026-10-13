@@ -1,6 +1,6 @@
-# Running Databricks AI Blocks
+# Running Databricks AI Cells
 
-Databricks AI blocks allow you to generate SQL queries using natural language commands and execute them directly in your workspace.
+Databricks AI cells allow you to generate SQL queries using natural language commands and execute them directly in your workspace.
 
 ## Key Features
 
