@@ -1,26 +1,23 @@
 # Chart Passthrough
 
-Chart passthrough provides point-and-click chart creation.
+The **Chart** agent takes a chart specification and renders it, with no AI step.
+Use it when you know exactly what you want, or when you are reproducing a chart
+and want no interpretation in the way.
 
-Every cell with a dataframe provides visualization buttons.
+It is selected like any other agent, from **Select agent** on the cell — see
+[Running Non-AI Cells](018_Running_Non_AI_Cells.md).
 
-## Chart Types
-Pick an icon corresponding to:
-- Charts: Standard - X, Y, Scatter, …
-- Graph: Network diagram
-- UMAP
-- Map (GIS)
+## The other visual agents
 
-## Variants
-Each has 2 variants:
-- AI - configure via natural language
-- Passthrough - point-and-click
+The same passthrough/AI split applies across the visual agents:
 
-Available options:
-- AI chart, graph, UMAP
-- Passthrough chart, map
+| Visualization | Passthrough | AI |
+|---|---|---|
+| Charts | **Chart** | **Chart AI** |
+| Network graphs | **Graph** | **Graph+UMAP AI** |
+| Clustering | **UMAP** | **Graph+UMAP AI** |
+| Maps | — | **Map** |
+| Diagrams | **Mermaid** | **Mermaid AI** |
 
-![Chart Passthrough Interface](./images/user/036_Chart_passthrough_1.png)
-
-![Chart Passthrough Options](./images/user/036_Chart_passthrough_2.png)
-
+Graphs and maps are not Perspective charts — they render in their own viewers
+and do not appear in the Perspective chart type picker.

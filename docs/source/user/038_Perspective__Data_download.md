@@ -1,20 +1,23 @@
-# Perspective: Data Download
+# Downloading Chart Data
 
-## Features
-- Configure export options
-- Export (download) data
-- Either download file, or copy into clipboard 
-- Multiple export formats: CSV, JSON, Arrow, HTML
+The data behind a chart can be exported without re-running anything.
 
-Note: When system sets all datagrids as 'editable', can also copy individual rows/cells
+## From the notebook
 
-## Options
-- Clipboard copy
-- File download
+**Download table** beside a dataframe or chart downloads its data directly.
 
-![Configure Download](./images/user/038_Perspective__Data_download_1.png)
+## From the chart
 
-![Export Options](./images/user/038_Perspective__Data_download_2.png)
+The chart's own toolbar has an **export** control, which offers:
 
-<!-- ![Clipboard Copy](./images/user/038_Perspective__Data_download_3.png)
- -->
+- **CSV**
+- **JSON**
+- **Arrow**
+- **HTML**
+
+and can either save a file or copy to the clipboard.
+
+What is exported is the data **as the chart is currently configured** — grouped,
+filtered and sorted as you see it, not the original table. To export the
+underlying data instead, switch the chart to **Datagrid** first, or use
+**Download table** on the source dataframe.
