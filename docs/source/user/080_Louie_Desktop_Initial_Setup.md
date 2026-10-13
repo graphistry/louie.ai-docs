@@ -1,65 +1,45 @@
-# Louie Desktop - Initial Setup
+# Louie Desktop — Initial Setup
 
-Louie Desktop brings the power of Louie.AI directly to your desktop environment, providing a native application experience for data analysis and visualization.
+Louie Desktop runs Louie as a native application, with the same notebooks,
+agents and connectors as the browser.
 
-## Download Louie Desktop
+## Download
 
-Get started by downloading Louie Desktop for your operating system:
+All builds are at **[download.louie.ai](https://download.louie.ai)**, which
+always offers the current release.
 
-### macOS
-[Download Louie Desktop for Mac](#)
+| Platform | Build | Requirements |
+|---|---|---|
+| **macOS** | `Louie-<version>-arm64.dmg` | Apple Silicon (M-series). macOS 11 Big Sur or later |
+| **Windows** | `Louie-<version>-win.exe` | x64 |
+| **Linux** | `Louie-<version>-amd64.deb` | x86_64, Debian-based: Debian, Ubuntu, Pop!_OS, Mint |
 
-**System Requirements:**
-- macOS 11.0 (Big Sur) or later
-- Apple Silicon (M1/M2/M3) or Intel processor
-- 4GB RAM minimum, 8GB recommended
+8 GB RAM is recommended.
 
-**Installation:**
-1. Download the `.dmg` file
-2. Open the downloaded file
-3. Drag Louie Desktop to your Applications folder
-4. Launch from Applications or Spotlight
+There is no Intel (x86_64) macOS build — the mac release is Apple Silicon only.
 
-### Linux
-[Download Louie Desktop for Linux](#)
+## Install
 
-**System Requirements:**
-- Ubuntu 20.04 or later, Fedora 34 or later, or equivalent
-- x64 processor
-- 4GB RAM minimum, 8GB recommended
+**macOS** — open the `.dmg` and drag Louie to Applications. The build is signed
+and notarized, so Gatekeeper will open it without a security prompt.
 
-**Installation:**
-1. Download the `.AppImage` or `.deb` file
-2. Make the file executable: `chmod +x Louie-Desktop-*.AppImage`
-3. Run the application: `./Louie-Desktop-*.AppImage`
+**Windows** — run the `.exe` installer.
 
-For `.deb` packages:
+**Linux** — install the `.deb`:
+
 ```bash
-sudo dpkg -i Louie-Desktop-*.deb
+sudo dpkg -i Louie-<version>-amd64.deb
 sudo apt-get install -f
 ```
 
-### Windows
-**Coming Soon**
+## First launch
 
-Windows support is currently in development and will be available soon. Check back for updates or contact support for early access information.
+On first launch Louie asks you to sign in with your Graphistry account. See
+[Signing In to Louie Desktop](081_Louie_Desktop_Sign_In.md).
 
-## First Launch
+Once signed in you have your notebooks, folders and any connectors your
+organization has configured.
 
-When you first launch Louie Desktop, you'll be greeted with a welcome screen that guides you through the initial setup process:
+## Getting help
 
-1. **Sign In** - Connect to your Louie.AI account
-2. **Configure API Keys** - Set up your OpenAI API key for AI features
-3. **Connect Data Sources** - Link to your existing connectors or create new ones
-
-## Next Steps
-
-- [Sign In to Louie Desktop](081_Louie_Desktop_Sign_In)
-- [Configure Your OpenAI API Key](082_Louie_Desktop_OpenAI_Configuration)
-
-## Getting Help
-
-If you encounter any issues during installation or setup:
-- Check our Troubleshooting Guide
-- Contact support at support@louie.ai
-- Visit our community forum for help from other users
+If something goes wrong during installation, contact support@louie.ai.
