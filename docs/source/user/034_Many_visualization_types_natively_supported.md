@@ -1,6 +1,6 @@
 # Many Visualization Types Natively Supported
 
-Many visualization types natively supported for comprehensive data analysis and presentation.
+Louie renders several kinds of visualization natively. Which renderer is used determines what you can do with the result afterwards.
 
 ## Supported Types
 
@@ -14,7 +14,7 @@ Many visualization types natively supported for comprehensive data analysis and 
 - Perspective
 - w/ Plotly
 
-**+ More:** Code agent can generate anything
+Anything else can be produced in Python and saved as an output — see [Python Outputs](024_Python_Outputs.md).
 
 ## Examples
 

@@ -1,5 +1,9 @@
 # Python Outputs
 
+Outputs are saved with `save_artifact(value, "name")`. Each saved value becomes
+a named value in the notebook, usable by later cells and listed in the
+**Variables** panel.
+
 ## Supported Outputs
 Use `save_artifact(x, "name")` with the following data types:
 
@@ -17,7 +21,7 @@ Use `save_artifact(x, "name")` with the following data types:
 - Matplotlib (seaborn)
 - Plotly w/ Interactivity (Our default charts use Plotly also)
 
-## EXAMPLES
+## Examples
 
 ![Python Output Example 1](./images/user/024_Python_Outputs_1.png)
 

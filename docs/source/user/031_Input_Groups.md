@@ -1,8 +1,6 @@
 # Input Groups
 
-Input Groups
-
-Creating an Input Group can be done by clicking on the [icon] within the notebook. Examples of each input type will be added by default. (Toggle, Text, and Slider)
+Create one with **Add input group cell** on the cell toolbar. Examples of each input type will be added by default. (Toggle, Text, and Slider)
 
 Configure the input group by modifying the JSON, and then use the parameters within your queries by prefacing the name with a colon (i.e. :country, :date, :count, etc).
 

@@ -1,6 +1,6 @@
 # Python Data Flow
 
-Python data flow enables re-execution of notebook cells with new inputs, creating dynamic and interactive workflows between cells.
+Python data flow enables re-execution of cells with new inputs, creating dynamic and interactive workflows between cells.
 
 ## Current Limitations
 
