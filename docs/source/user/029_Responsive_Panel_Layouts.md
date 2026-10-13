@@ -1,20 +1,21 @@
 # Responsive Panel Layouts
 
-Responsive Panel Layouts allow you to create adaptive dashboard designs that work across different screen sizes and devices.
+A dashboard can carry a different layout per screen size, so it stays readable
+on a laptop and a wall display alike.
 
-## How to Edit Layouts
+## Editing a layout
 
-Start editing panels by clicking "Edit Layout" in the top right.
+**Save Layout** in the top right enters layout editing. The button shows which
+**breakpoint** you are editing — `MD`, for example.
 
-To support responsive layouts each breakpoint can be assigned a specific layout based on your changes. They will cascade down from the largest, so changes to smaller breakpoints will override the larger layouts.
+Each panel has a drag handle in its top left and a resize handle in its bottom
+right.
 
-The label inside of the button will inform you of which breakpoint you are currently editing.
+## How breakpoints cascade
 
-Drag each panel using the drag handler in the top left, and resize them by using the resize handler in the top right.
+Layouts cascade **down** from the largest. A change at a large breakpoint
+applies to the smaller ones that have no layout of their own; a change made at a
+smaller breakpoint overrides what it inherited.
 
-## Interface
-
-![Edit Layout Button](./images/user/029_Responsive_Panel_Layouts_1.png)
-
-![Responsive Layout Editor](./images/user/029_Responsive_Panel_Layouts_2.png)
-
+Lay out the largest size first and work down, otherwise later edits at a large
+breakpoint will not reach the smaller ones you have already customised.
