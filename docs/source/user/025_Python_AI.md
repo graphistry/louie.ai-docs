@@ -14,5 +14,4 @@ Select **Python AI** from **Select agent** on the cell, or ask Louie to write th
 
 ## Interface
 
-![Python AI Agent](./images/user/025_Python_AI_1.png)
-
+![A Python AI cell](./images/user/python_cell.png)

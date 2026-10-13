@@ -23,8 +23,6 @@ To create new examples:
 
 Examples are ideal for simple scenarios and facts that can be quickly referenced and applied.
 
-![System Level Examples](./images/user/056_System_level__For_all_users__only_admin_editable_1.png)
-
 ### Removing examples
 
 - `DeleteOrgExamplesAgent` — organization-level

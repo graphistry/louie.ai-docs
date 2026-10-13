@@ -1,16 +1,19 @@
-# Refresh Data
+# Refreshing Data
 
-Refresh Data
+**Refresh**, at the top of a dashboard, re-runs the notebook behind it so every
+panel picks up current data.
 
-Clicking "Refresh" at the top of the page will effectively re-run all cells within the notebook to:
+![The dashboard toolbar: Refresh, Add Panel and Save Layout](./images/user/dashboard_toolbar.png)
 
-Recalculate and retrieve fresh dataframes
-Regenerate and display new charts and visualizations
-Apply any changes made to cells within the notebook
+Refreshing re-runs **all** cells in the notebook, in order. It therefore:
 
-All updates and changes that result from this refresh will be applied to the panel contents automatically, without the need to manage any panel configurations.
+- Re-queries every connector the notebook touches
+- Re-applies any changes made to cells since the last run
+- Costs whatever the full notebook costs to run
 
-This will not affect the layout of the page and only applies to the underlying dataframes and visualizations that the panels are reading from.
+On a notebook with slow queries this is not instant, and it is not a cheap
+operation to leave on a timer.
 
-![Refresh Button](./images/user/032_Refresh_Data_1.png)
-
+Input group parameters are read at refresh time, so changing a parameter and
+refreshing is how a dashboard is re-pointed at different data — see
+[Input Groups](031_Input_Groups.md).

@@ -10,10 +10,3 @@ Dependency mode provides a visual representation of reactive binding relationshi
 - **Workflow optimization**: Understand data flow and optimize execution
 
 ## Interface Overview
-
-<!-- ![Dependency View Button](./images/user/062__1.png) -->
-
-![Rerun Subgraph](./images/user/062__2.png)
-
-![Dependency Subgraph UI](./images/user/062__3.png)
-

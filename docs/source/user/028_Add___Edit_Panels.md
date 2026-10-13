@@ -5,6 +5,8 @@ it with the **Dashboard** tab at the top of a notebook.
 
 ![A dashboard in edit mode](./images/user/dashboard_panels.png)
 
+![The dashboard toolbar](./images/user/dashboard_toolbar.png)
+
 ## Adding a panel
 
 **Add New Panel**, at the bottom of the dashboard, asks which cell element you

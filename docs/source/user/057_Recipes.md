@@ -35,6 +35,3 @@ Recipes are ideal for:
 - Multi-step workflows that need to be repeated
 - Complex processes that require consistent execution
 - Procedures that involve multiple tools or agents
-
-![Recipes Example](./images/user/057_Recipes_1.png)
-

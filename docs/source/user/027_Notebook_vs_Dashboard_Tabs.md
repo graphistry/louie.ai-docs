@@ -1,14 +1,18 @@
-# Notebook vs Dashboard Tabs
+# Notebook and Dashboard Tabs
 
-At the top of each Notebook you'll find a set of tabs that allow you to switch between "Notebook" and "Dashboard".
+Every notebook has two views, switched from the tabs at the top.
 
-## Dashboard Tab
+![The Notebook and Dashboard tabs, with the View/Edit toggle](./images/user/notebook_dashboard_tabs.png)
 
-"Dashboard" will open the respective Dashboard view of that notebook and allow you to create panels with dependencies from the notebook.
+**Notebook** is where you work: cells, their prompts and their outputs in order.
 
-## Interface Views
+**Dashboard** presents chosen outputs as panels, without the prompts that
+produced them. Panels read from the same cells, so refreshing the dashboard
+re-runs the notebook behind it.
 
-![Notebook Tab View](./images/user/027_Notebook_vs_Dashboard_Tabs_1.png)
+The **View / Edit** toggle applies to whichever tab you are on. In View mode the
+prompts and editing controls are hidden, which is what you want when sharing a
+notebook with someone who only needs the result.
 
-![Dashboard Tab View](./images/user/027_Notebook_vs_Dashboard_Tabs_2.png)
-
+See [Add and Edit Panels](028_Add___Edit_Panels.md) and
+[Responsive Panel Layouts](029_Responsive_Panel_Layouts.md).

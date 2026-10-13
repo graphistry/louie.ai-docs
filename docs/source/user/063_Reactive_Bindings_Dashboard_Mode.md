@@ -11,8 +11,3 @@ Dashboard mode provides an interactive interface for managing reactive bindings 
 - **Interactive controls**: Real-time input modification and execution
 
 ## Interface Overview
-
-<!-- ![Dashboard Bound Input](./images/user/063__1.png) -->
-
-![Dashboard Bound Output](./images/user/063__2.png)
-

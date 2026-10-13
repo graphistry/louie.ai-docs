@@ -10,8 +10,6 @@ A dataframe with geographic columns, or a GeoJSON value, can be rendered on a ma
 - Polygon color customization
 - Appearance editing through Kepler interface
 
-## Examples
-
 ### GeoPandas Example
 (continents json output for debug inspection)
 
@@ -19,12 +17,3 @@ A dataframe with geographic columns, or a GeoJSON value, can be rendered on a ma
 Edit appearance in Kepler
 
 ### Example with two outputs
-
-![Python Maps Example 1](./images/user/023_Python_Maps_1.png)
-
-![Python Maps Example 2](./images/user/023_Python_Maps_2.png)
-
-![Python Maps Example 3](./images/user/023_Python_Maps_3.png)
-
-![Python Maps Example 4](./images/user/023_Python_Maps_4.png)
-

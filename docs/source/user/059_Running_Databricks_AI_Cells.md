@@ -11,10 +11,3 @@ Databricks AI cells allow you to generate SQL queries using natural language com
 - **Decision tracking**: Activity logging for audit trails
 
 ## Interface Overview
-
-![Databricks AI Interface](./images/user/059__1.png)
-
-<!-- ![Databricks AI Query](./images/user/059__2.png) -->
-
-![Databricks AI Results](./images/user/059__3.png)
-

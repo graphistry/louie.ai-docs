@@ -11,10 +11,3 @@ Databricks SQL cells allow you to write and execute SQL queries directly in your
 - **Query results**: Immediate execution with rich visualizations
 
 ## Interface Overview
-
-![Databricks SQL Interface](./images/user/060__1.png)
-
-![Databricks SQL Query](./images/user/060__2.png)
-
-<!-- ![Databricks SQL Results](./images/user/060__3.png) -->
-

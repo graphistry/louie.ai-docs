@@ -8,6 +8,8 @@ on a laptop and a wall display alike.
 **Save Layout** in the top right enters layout editing. The button shows which
 **breakpoint** you are editing — `MD`, for example.
 
+![Save Layout showing the MD breakpoint](./images/user/dashboard_toolbar.png)
+
 Each panel has a drag handle in its top left and a resize handle in its bottom
 right.
 

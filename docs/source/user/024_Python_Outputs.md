@@ -23,7 +23,4 @@ Use `save_artifact(x, "name")` with the following data types:
 
 ## Examples
 
-![Python Output Example 1](./images/user/024_Python_Outputs_1.png)
-
-![Python Output Example 2](./images/user/024_Python_Outputs_2.png)
-
+![A saved output appears as a named value with its shape](./images/user/python_cell.png)

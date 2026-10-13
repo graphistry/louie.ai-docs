@@ -28,6 +28,3 @@ Louie handles the complexity so you can focus on insights:
 * Documents, communications, and more
 * Security, fraud, supply chain, customer analytics
 * **Graphistry APIs too!** - Extend and integrate with your existing tools
-
-![Document Analysis](./images/user/06_Documents__comms____1.png)
-
