@@ -1,13 +1,16 @@
 # Large Charts
 
-Large charts in Louie.AI are designed to handle significant amounts of data while maintaining performance and usability. This section covers best practices and considerations when working with large datasets in visualizations.
+Charts render in the browser, so the limit is not how much data Louie can query
+but how much the browser can hold and draw. A query that returns 100K+ rows can
+be 100MB+ over the wire, and a chart configuration that looks harmless can
+multiply that again.
 
-## Key Considerations
+Two pages cover this:
 
-- Performance optimization techniques
-- Memory management for large datasets
-- Rendering strategies for complex visualizations
-- Browser and hardware limitations
+- [General](052_Large_charts__General.md) — what to do about query size and
+  chart configuration
+- [Specific charts](053_Large_charts__Specific_charts.md) — the limits that
+  apply to UMAP, bar charts and Graphistry graphs
 
-Understanding these considerations will help you create effective visualizations even when working with substantial amounts of data.
-
+The short version: pull only the columns you need, start small and grow, and
+switch chart types through Datagrid rather than directly.

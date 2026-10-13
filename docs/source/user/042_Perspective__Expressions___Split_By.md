@@ -1,12 +1,14 @@
-# Perspective: Expressions - Split By
+# Split By
 
-Split By
+**Split By** turns one series into several — one per distinct value of the
+chosen column. Grouping by `Month` and splitting by `Region` gives, for each
+month, a separate mark per region.
 
-A split by splits the dataset by the unique values of each column used as a split by. 
+Where Group By decides the categories along the axis, Split By decides how many
+series are drawn at each category.
 
-The underlying dataset is not aggregated, and a new column is created for each unique value of the split by. 
+Split columns are named `<split value>|<column>` internally — `North|Sales`,
+`South|Sales` — which is why axis labels and legends show that form.
 
-Each newly created column contains the parts of the dataset that correspond to the column header, i.e. a View that has ["State"] as its split by will have a new column for each state.
-
-![Split By Example](./images/user/042_Perspective__Expressions___Split_By_1.png)
-
+Splitting on a high-cardinality column produces a series per distinct value, so
+filter with **Where** first if the column has many.

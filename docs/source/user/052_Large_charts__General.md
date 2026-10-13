@@ -12,8 +12,8 @@ Server fetches, such as database queries and Python outputs, can be 100MB+ when 
 ## Chart Interactions: Perspective
 
 As most edits autosave, experiment in non-saving areas:
-- Initial query output cell
-- Dashboard view (vs edit)
+- The initial query output cell
+- Dashboard view (rather than Edit)
 
 Before switching chart types, remove hazards that are listed below.
 

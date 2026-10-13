@@ -1,22 +1,27 @@
-# Add & Edit Panels
+# Add and Edit Panels
 
-Add & Edit Panels allow you to create and customize dashboard components from your notebook cells.
+A **dashboard** presents selected outputs from a notebook as panels. Switch to
+it with the **Dashboard** tab at the top of a notebook.
 
-## How to Add Panels
+![A dashboard in edit mode](./images/user/dashboard_panels.png)
 
-Start by clicking on the "Add New Panel" button which will always be at the bottom of the page.
+![The dashboard toolbar](./images/user/dashboard_toolbar.png)
 
-Select the Cell Element that you want to appear in the panel, then click "Save".
+## Adding a panel
 
-## How to Edit Panels
+**Add New Panel**, at the bottom of the dashboard, asks which cell element you
+want to show. Choose one and select **Save**.
 
-Editing an individual panel can be done by clicking the Wrench + Screwdriver icon in the top left.
+Any output a cell produced can become a panel — a table, a chart, a graph, a
+map, or an input group.
 
-## Interface
+## Editing a panel
 
-![Add Panel Button](./images/user/028_Add___Edit_Panels_1.png)
+**Panel settings** on a panel opens its configuration. **Remove** takes it off
+the dashboard; the cell that produced it is untouched, so removing a panel never
+destroys any work.
 
-![Select Cell Element](./images/user/028_Add___Edit_Panels_2.png)
+## Keeping it current
 
-![Edit Panel Icon](./images/user/028_Add___Edit_Panels_3.png)
-
+**Refresh** re-runs the notebook behind the dashboard, so panels pick up new
+data. See [Refresh Data](032_Refresh_Data.md).

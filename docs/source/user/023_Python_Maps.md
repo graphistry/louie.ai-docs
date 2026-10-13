@@ -1,6 +1,6 @@
 # Python Maps
 
-Python Maps provides geo-visualization capabilities when working with GeoJSON data or dataframes containing geographic columns.
+A dataframe with geographic columns, or a GeoJSON value, can be rendered on a map. Maps are drawn by kepler.gl, not by Perspective, so they do not appear in the chart type picker.
 
 ## Features
 
@@ -10,8 +10,6 @@ Python Maps provides geo-visualization capabilities when working with GeoJSON da
 - Polygon color customization
 - Appearance editing through Kepler interface
 
-## Examples
-
 ### GeoPandas Example
 (continents json output for debug inspection)
 
@@ -19,12 +17,3 @@ Python Maps provides geo-visualization capabilities when working with GeoJSON da
 Edit appearance in Kepler
 
 ### Example with two outputs
-
-![Python Maps Example 1](./images/user/023_Python_Maps_1.png)
-
-![Python Maps Example 2](./images/user/023_Python_Maps_2.png)
-
-![Python Maps Example 3](./images/user/023_Python_Maps_3.png)
-
-![Python Maps Example 4](./images/user/023_Python_Maps_4.png)
-

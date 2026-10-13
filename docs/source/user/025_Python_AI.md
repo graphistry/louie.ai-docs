@@ -1,10 +1,10 @@
 # Python AI
 
-The Python AI agent simplifies creating and editing Python code using natural language. It automates what you would manually do with the Python Passthrough agent.
+The Python AI agent simplifies creating and editing Python code using natural language. It automates what you would manually do with the **Python** passthrough agent.
 
 ## How to Use
 
-Select the "Python AI" agent or ask Louie to use the code agent for you.
+Select **Python AI** from **Select agent** on the cell, or ask Louie to write the code for you.
 
 ## Features
 
@@ -14,5 +14,4 @@ Select the "Python AI" agent or ask Louie to use the code agent for you.
 
 ## Interface
 
-![Python AI Agent](./images/user/025_Python_AI_1.png)
-
+![A Python AI cell](./images/user/python_cell.png)

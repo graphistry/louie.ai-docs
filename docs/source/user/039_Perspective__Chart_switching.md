@@ -1,21 +1,31 @@
-# Perspective: Chart Switching
+# Switching Chart Type
 
-## Features
-- Configure
-- Chart type picker panel
-- Point-and-click chart switcher
-- Supports standard charts (Perspective), but not maps & graphs
+A chart's type can be changed at any time without re-running the cell. Open the
+configuration panel and select the chart type named at the top.
 
-Tip: Datagrid is also a standard chart type!
+![The chart type picker](./images/user/perspective_chart_types.png)
 
-## Components
-- Chart type item selector
+## Available types
 
-![Configure Chart](./images/user/039_Perspective__Chart_switching_1.png)
+| Type | Shape |
+|---|---|
+| **Datagrid** | The data as a table |
+| **X Bar** | Horizontal bars |
+| **Y Bar** | Vertical bars |
+| **Y Line** | Line |
+| **Y Area** | Filled area |
+| **Y Scatter** | Points against the category axis |
+| **X/Y Scatter** | Points against two value axes |
+| **Heatmap** | Grid shaded by value |
+| **Sunburst** | Nested proportions |
+| **Candlestick** | Open/high/low/close |
+| **OHLC** | Open/high/low/close, bar form |
 
-<!-- ![Chart Type Panel](./images/user/039_Perspective__Chart_switching_2.png)
+Datagrid is a chart type like any other, so a chart can be turned back into a
+table and then into a different chart without losing its grouping or filters.
 
-![Chart Switcher](./images/user/039_Perspective__Chart_switching_3.png) -->
+Switching type keeps **Group By**, **Split By**, **Order By** and **Where**.
+Types that need more columns than you have configured will render empty until
+you supply them.
 
-![Chart Type Selector](./images/user/039_Perspective__Chart_switching_4.png)
-
+Maps and graphs are not Perspective charts and are not in this list.

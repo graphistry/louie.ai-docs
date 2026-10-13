@@ -8,7 +8,7 @@ User Guide
    introduction
    tutorials
    louie_desktop
-   082_Louie_Desktop_OpenAI_Configuration
+   082_Providers_and_Models
    data_analysis
    connectors_overview
    adding_connectors
@@ -16,4 +16,3 @@ User Guide
    advanced_topics
    api_integrations
    supplementary
-   other_resources

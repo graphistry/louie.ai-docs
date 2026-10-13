@@ -4,7 +4,7 @@ Data Analysis & Python Integration
    :maxdepth: 1
 
    019_Python
-   020_Python_AI
+   020_Python_Sandbox
    021_Run
    022_Python_data_flow
    023_Python_Maps
@@ -14,3 +14,6 @@ Data Analysis & Python Integration
    027_Notebook_vs_Dashboard_Tabs
    028_Add___Edit_Panels
    029_Responsive_Panel_Layouts 
+   030_Cross_Filtering
+   031_Input_Groups
+   032_Refresh_Data
