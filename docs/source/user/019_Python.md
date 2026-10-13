@@ -1,14 +1,22 @@
-# Python Integration
+# Python
 
-Louie.AI provides powerful Python integration capabilities that allow you to execute custom Python code within your analysis workflows.
+Louie runs Python for you in a sandbox, with the usual data-science stack
+(pandas, numpy, matplotlib) already installed. Results come back as named
+values you can chart, table or feed into later cells.
 
-## Python Features
+There is no dedicated "Python cell". You choose a **Python agent** on any
+cell — see [The Cell Toolbar](014_Cell_Toolbar.md):
 
-- Run Python code in a secure sandbox environment
-- Access pre-installed data science libraries (pandas, numpy, matplotlib, etc.)
-- Create custom visualizations and data transformations
-- Integrate with other Louie.AI tools and data sources
-- Use AI assistance to generate and debug Python code
+- **Python AI** — describe what you want in plain language and the agent
+  writes, runs and debugs the code
+- **Python** (passthrough) — you supply the code and it runs as given
 
-Python blocks can be used for advanced data manipulation, custom visualizations, and complex analytical tasks that go beyond the built-in capabilities of Louie.AI.
+## Example
 
+Asking **Python AI** for
+
+> Use Python with pandas to build a dataframe of monthly sales for 3 regions
+> over 12 months, then show the dataframe.
+
+runs the code and returns a named dataframe, listed under its name with its
+shape, ready to use in later cells.

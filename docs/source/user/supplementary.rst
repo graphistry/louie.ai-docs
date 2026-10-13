@@ -2,9 +2,7 @@ Supplementary Material
 ======================
 .. toctree::
    :maxdepth: 1
-
-   010_
-   014_
+   014_Cell_Toolbar
    015_
    016_
    017_

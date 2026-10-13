@@ -16,4 +16,3 @@ User Guide
    advanced_topics
    api_integrations
    supplementary
-   other_resources
