@@ -1,84 +1,82 @@
 # Adding Data Connectors
 
-This guide walks you through the process of adding new data connectors to your Louie.AI organization.
+## 1. Open the connector list
 
-## Step 1: Access Connector Management
+In the sidebar, select **Configuration**. The **CONNECTORS** section lists the
+connectors your organization already has.
 
-1. Navigate to your organization's main interface
-2. Look for the connector status panel (usually on the left side)
-3. Click the **"+ ADD CONNECTOR"** button
+## 2. Start a new connector
 
-## Step 2: Select Connector Type
+Select the **+** beside the CONNECTORS heading. The **Select a connector type**
+screen lists all twelve types.
 
-The "Select a Connector Type" dialog will display all available connectors:
+![Select a connector type](./images/user/connectors_type_picker.png)
 
+## 3. Fill in the configuration
 
-Choose from the available options:
-- **Databricks** - Lakehouse-scale analytics
-- **Neptune** - Amazon's graph database
-- **OpenSearch** - Vector search engine
-- **Splunk** - Real-time observability & security
-- **Spanner** - Google Cloud distributed database
-- **PostgreSQL** - Open-source relational database
-- **MySQL** - Popular relational database
-- **MSSQL** - Microsoft SQL Server
-- **BigQuery** - Google's analytics data warehouse
-- **CockroachDB** - Distributed SQL database
+Each type asks for what it needs. Fields marked with an asterisk are required.
+Every type takes a **Name** and an optional **Description**; the rest differ.
 
-## Step 3: Configure Connection Settings
+### Example: MCP
 
-After selecting a connector type, you'll see a configuration form specific to that connector. 
+An MCP connector reaches any MCP-compatible server over Streamable HTTP:
 
-### Example: Google Cloud Spanner Configuration
+| Field | Purpose |
+|---|---|
+| **MCP Streamable HTTP endpoint** | Full URL of the endpoint. Required |
+| **Authentication** | Bearer Token, Basic Auth, or Graphistry Viewer |
+| **Token** | The credential — for example a GitHub PAT |
+| **Scheme** | Word placed before the token. Leave as `Bearer` unless the server expects something else |
+| **Request Timeout** | For `session.initialize()` and tool calls |
+| **Connection Timeout** | For establishing the TCP connection. Keep it short so a dead URL fails fast |
 
+![Configuring an MCP connector](./images/user/connectors_form_mcp.png)
 
-For Spanner, you'll need to provide:
-- **Name** - A descriptive name for your connector
-- **Instance ID** - The Spanner instance identifier
-- **Database ID** - The specific database name
-- **Service-Account JSON** - Authentication credentials
+### Custom and secret headers
 
-### Common Configuration Fields
+Some servers key off a header other than `Authorization` — `X-Scope-OrgID`,
+`anthropic-version`, a gateway's own key. MCP connectors take up to 20 headers,
+split by sensitivity:
 
-Most connectors require similar information:
-- **Connection Name** - A friendly name for identification
-- **Host/Server** - The database server address
-- **Port** - Connection port (if applicable)
-- **Database Name** - The specific database to connect to
-- **Authentication** - Username/password or service account credentials
+- **Custom Headers** — ordinary configuration. Values stay readable and are
+  stored in clear.
+- **Secret Headers** — credentials such as `X-API-Key`. Values are stored as
+  secrets and shown masked once saved.
 
-## Step 4: Test and Save
+Put anything secret in Secret Headers. `Authorization` itself is set by the
+**Authentication** option, not here.
 
-1. Fill in all required fields (marked with red asterisks)
-2. Use the **"View"** button to preview JSON configurations if available
-3. Click **"Dry Run Changes"** to test the connection
-4. If the test is successful, click **"Save"** to create the connector
+### Example: Spanner
 
-## Step 5: Verify Connection
+Spanner asks for an **Instance ID**, a **Database ID** and a
+**Service-Account JSON**.
 
-After saving:
-1. The new connector should appear in your connector list
-2. Check that the status indicator shows as healthy (green)
-3. If there are issues, you can edit the connector settings, check the logs for error details, or ask Louie to re-index
+## 4. Test, then save
 
-## Managing Existing Connectors
+Three buttons sit at the bottom of the form:
 
-- **Edit** - Click the settings icon next to a connector to modify its configuration
-- **Re-index** - Ask Louie to refresh the connector if data seems outdated
-- **Status Monitoring** - Keep an eye on connector health indicators
+- **Test** — tries the connection without saving
+- **Discard** — abandons the form
+- **Save** — creates the connector
 
-## Troubleshooting
+Test before saving. A connector that saves cleanly can still fail to connect.
 
-If you encounter issues:
-- Verify all required fields are filled correctly
-- Check network connectivity to your data source
-- Ensure authentication credentials are valid and have proper permissions
-- Contact your administrator if you need help with service account setup
+## 5. Check it came up
 
-## Best Practices
+The new connector appears under CONNECTORS. Open it and confirm it reports
+**Connected** and has listed its **Assets**. If it has not, the activity log
+below the assets gives the reason.
 
-- Use descriptive names for your connectors
-- Test connections before saving
-- Regularly monitor connector health
-- Keep authentication credentials secure and up to date
-- Document any special configuration requirements for your team 
+## Editing and removing
+
+Open a connector to edit its configuration. If **Restart**, **Re-index** and
+**Test Connection** are greyed out, its **Source** is **Environment** — it is
+configured by whoever runs the server and is read-only here. See
+[Data Connectors](connectors_overview.md).
+
+## When something goes wrong
+
+- Read the connector's activity log first; it usually names the failure
+- Check that the host is reachable from the Louie server, not just from your machine
+- Confirm the credentials have permission to read what you are asking for
+- For an environment connector, the fix is on the server, not in the UI
