@@ -1,12 +1,17 @@
-# Perspective: Expressions - Group By
+# Group By
 
-Group By
+**Group By** sets the category axis. Rows sharing the same value in the chosen
+column collapse into one group, and the chart plots one mark per group.
 
-A group by groups the dataset by the unique values of each column used as a group by - a close analogue in SQL to the GROUP BY statement. 
+Grouping by `Month` on a table of daily rows gives one bar per month.
 
-The underlying dataset is aggregated to show the values belonging to each group, and a total row is calculated for each group, showing the currently selected aggregated value (e.g. sum) of the column. 
+Several columns can be grouped at once, producing a hierarchy — `Region` then
+`Month` nests months inside regions. In a Datagrid the hierarchy appears as
+expandable rows.
 
-Group by are useful for hierarchies, categorizing data and attributing values, i.e. showing the number of units sold based on State and City.
+The aggregate applied to each group is chosen per column: **sum**, **avg**,
+**count**, **distinct count**, **min**, **max**, **median**, **stddev** and
+others are available from the column's own menu.
 
-![Group By Example](./images/user/041_Perspective__Expressions___Group_By_1.png)
-
+To break each group into series instead of nesting, use
+[Split By](042_Perspective__Expressions___Split_By.md).

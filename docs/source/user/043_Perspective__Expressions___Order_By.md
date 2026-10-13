@@ -1,10 +1,10 @@
-# Perspective: Expressions - Order By
+# Order By
 
-Order By
+**Order By** sorts the rows behind the chart. Sorting by a value column ranks
+the categories — months by total visits rather than by date, for example.
 
-The order property specifies columns on which the query should be sorted, analogous to ORDER BY in SQL. 
+Sort direction is set on the entry itself, and several sorts can be stacked:
+the first decides the order, later ones break ties.
 
-A column can be sorted regardless of its data type, and sorts can be applied in ascending or descending order. 
-
-![Order By Example](./images/user/043_Perspective__Expressions___Order_By_1.png)
-
+Order By affects presentation only. It does not change grouping, filtering or
+the values plotted.
