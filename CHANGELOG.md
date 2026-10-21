@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 * Admin guide: OAuth2 redirect URI is `<OA2_REDIRECT_URL_BASE>/oauth/callback`, not the bare Louie URL (`011_Authentication_Registration`)
 * Admin guide: empty Deployment section now lists its pages, including Network Architecture, Container Architecture and AWS Requirements, which were not linked from any menu
 * Admin guide: broken image path for the network architecture diagram (`004_Network_Architecture`)
+* Admin guide: OAuth2 setup screenshots referenced files that were never committed (`static/oauth-setup-01.png`, `-02.png`); now uses the existing `admin/images/OAUTH_Setup.png` navigation screenshot (`011_Authentication_Registration`)
 
 ### Infra
 

@@ -80,9 +80,9 @@ Notify Graphistry staff with your:
 
 Configure your self-hosted Graphistry to be an OAuth2 provider for Louie
 
-![OAuth2 Setup Step 1](../static/oauth-setup-01.png)
+In the Graphistry web UI, open **Admin portal** from the account menu, select **DJANGO OAUTH TOOLKIT**, and click **+** next to **Applications**:
 
-![OAuth2 Setup Step 2](../static/oauth-setup-02.png)
+![Graphistry admin portal: Django OAuth Toolkit, add an Application](images/OAUTH_Setup.png)
 
 ### Steps:
 
