@@ -17,7 +17,7 @@ Louie works with the LLM providers below. You need at least one. Set provider ke
 
 ## Choosing models
 
-Use your provider's most capable current models for Louie's main agents. You can assign smaller, cheaper models to lighter tasks. See [Recommended models](008_LLM_Configuration.md#recommended-models) and [Model selection](008_LLM_Configuration.md#model-selection). The models you can use depend on your provider account and region.
+With an OpenAI key and no model settings, Louie 0.18.x uses `gpt-5.6-sol` for its main agents, `gpt-5.6-luna` for fast tasks, and `gpt-5.6-terra` for large context. With other providers, pick models of similar capability for each role. See [Recommended models](008_LLM_Configuration.md#recommended-models) and [Model selection](008_LLM_Configuration.md#model-selection). The models you can use depend on your provider account and region.
 
 For help choosing models, or sizing a self-hosted model, contact Graphistry.
 

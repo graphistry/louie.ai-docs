@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 * Admin guide: Backup and Restore (`027_Backups`) rewritten with tested restic commands for Docker Compose installs, including what to back up, scheduling, retention, and full and single-file restore; replaces outdated paths (`/var/louie/.env`, `/var/louie/Caddyfile`)
 * Admin guide: Supported LLMs (`007_LLM_Support`) rewritten for current providers (adds Bedrock, Vertex AI, Fireworks, OpenAI-compatible self-hosted); removes GPT-3.5, Google BARD, cost estimate, and stale "upcoming" list
+* Admin guide: LLM Configuration (`008`) recommended and default models updated to the 0.18.x GPT-5.6 defaults (`gpt-5.6-sol`, `-luna`, `-terra`); replaces gpt-4o examples and the undefined `LLM_MODEL` / `LLM_MODEL_SMART` settings with `LLM_MODEL_DEFAULT` and per-role overrides
 * Admin guide: consistent paths and restart commands (`011`, `015`, `100` no longer use undefined `$LOUIE_HOME`; restarts after `custom.env` changes include `api`); current sandbox container names (`010`); sandbox ports corrected to 8081 and 9000-9999 (`012`)
 * Admin guide: OAuth2 redirect URI is `<OA2_REDIRECT_URL_BASE>/oauth/callback`, not the bare Louie URL (`011_Authentication_Registration`)
 * Admin guide: empty Deployment section now lists its pages, including Network Architecture, Container Architecture and AWS Requirements, which were not linked from any menu
