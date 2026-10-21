@@ -6,8 +6,8 @@ Back up a Docker Compose Louie server with [restic](https://restic.net/). Restic
 
 | Data | Location | Notes |
 |------|----------|-------|
-| Accounts, organizations, sign-in, and database connectors | Graphistry server | Back up with the Graphistry server's own procedure. Graphistry Hub backs up automatically. |
-| Data threads, uploaded files, logs, and the Louie database | `/var/louie/data/data/` | Louie's local database is `connectors.db` (SQLite). It holds LLM and organization settings, skills, and conversation history saved on this server. |
+| Accounts, organizations, and sign-in | Graphistry server | Back up with the Graphistry server's own procedure. Graphistry Hub backs up automatically. |
+| Data threads, uploaded files, logs, and the Louie database | `/var/louie/data/data/` | Louie's local database is `connectors.db` (SQLite). It holds connectors saved on this server, LLM and organization settings, skills, and conversation history. |
 | Louie settings | `/var/louie/system.env`, `/var/louie/data/custom.env`, `/var/louie/data/Caddyfile` | `custom.env` holds `JWT_SECRET_LOUIE`, which is needed to read saved credentials after a restore |
 | Sandbox settings | `/var/dj/.env`, `/var/dj/sandbox.json`, `/var/dj/sandbox.caddy.json` | |
 | Port overrides, if used | `/var/louie/docker-compose.override.yml`, `/var/dj/docker-compose.override.yml` | See [Change the default ports](012_Docker_Compose_Install.md#change-the-default-ports) |
