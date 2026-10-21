@@ -36,7 +36,7 @@ The bulwarks file holds two nested tarballs:
 - Disk: at least 30 GB free in the Docker data folder (usually `/var/lib/docker`) for the images, plus 3 GB for the downloaded files.
 - RAM: 8 GB minimum, 16 GB recommended. Each concurrent code run uses up to 2 GB more. See [System Requirements](006_System_Requirements.md).
 - Ports 80 and 443 for Louie users.
-- Ports 8081 and 8082 for the sandbox service. Users do not need to reach these, so keep them blocked from other networks.
+- Port 8081 for the sandbox service, plus one port from 9000-9999 for each code run while it runs. Users do not need to reach these and they have no authentication, so block them from other networks. See [Sandbox: ports and firewall](031_Sandbox_Network_Architecture.md#ports-and-firewall).
 - If another program already uses any of these ports, see [Change the default ports](#change-the-default-ports) before you start Louie.
 - A Graphistry server for sign-in: Graphistry Hub or your own Graphistry deployment.
 - An LLM provider. See [LLM Configuration](008_LLM_Configuration.md).
@@ -194,7 +194,7 @@ By default, Louie publishes these ports on the host:
 | 80 | `caddy` | `/var/louie` | Users (HTTP) |
 | 443 | `caddy` | `/var/louie` | Users (HTTPS) |
 | 8081 | `maestro-caddy` | `/var/dj` | Local admin checks only |
-| 8082 | `louie-maestro` | `/var/dj` | Local admin checks only |
+| 9000-9999 | One sandbox proxy per running code run | `/var/dj` | Not needed outside the host |
 
 To use other ports, create a file named `docker-compose.override.yml` next to `docker-compose.yml`. Docker Compose reads it automatically, and `./dc` uses it too. Do not edit `docker-compose.yml` itself, because every upgrade replaces it. Release tarballs never contain an override file, so your changes survive upgrades.
 
@@ -235,21 +235,22 @@ With non-standard ports, Caddy cannot obtain certificates automatically, because
 - Use your own certificate files in the Caddyfile.
 - Put Louie behind your existing load balancer or reverse proxy, which handles TLS on 443 and forwards to Louie's HTTP port.
 
-### Sandbox ports (8081 and 8082)
+### Sandbox port (8081)
 
-Louie talks to the sandbox service over an internal Docker network, not through these host ports. You can therefore move them to any free ports without changing Louie's settings. Create `/var/dj/docker-compose.override.yml`:
+Louie talks to the sandbox service over an internal Docker network, not through this host port. You can therefore move it to any free port without changing Louie's settings. Create `/var/dj/docker-compose.override.yml`:
 
 ```yaml
 services:
   maestro-caddy:
     ports: !override
       - 127.0.0.1:18081:80
-  louie-maestro:
-    ports: !override
-      - 127.0.0.1:18082:80
 ```
 
-The `127.0.0.1:` prefix keeps these ports reachable from the host only. It is a good choice even if you keep the default port numbers.
+The `127.0.0.1:` prefix keeps the port reachable from the host only. It is a good choice even if you keep port 8081.
+
+The compose file also lists port 8082 for `louie-maestro`. Docker does not publish it, because that service is attached only to an internal network, so it needs no override.
+
+The per-run ports 9000-9999 are chosen by the sandbox service and cannot be changed with an override file. Block that range at your network firewall. See [Sandbox: ports and firewall](031_Sandbox_Network_Architecture.md#ports-and-firewall).
 
 Apply the change:
 
@@ -267,22 +268,7 @@ Only your new ports should be listed. Include both `docker-compose.override.yml`
 
 ## Upgrade
 
-1. Back up your configuration and data:
-
-   ```bash
-   sudo tar -czf /root/louie-backup-$(date +%Y%m%d).tar.gz \
-     /var/louie/system.env /var/louie/data /var/dj/.env /var/dj/sandbox.json /var/dj/sandbox.caddy.json \
-     $(ls /var/louie/docker-compose.override.yml /var/dj/docker-compose.override.yml 2>/dev/null)
-   ```
-
-   `/var/louie/data` holds the user data, including the connector database (`/var/louie/data/data/connectors.db`). See also [Backups](027_Backups.md).
-
-2. Load the new images, and unpack the new bulwarks tarball over the existing folders (steps 1 and 2). Your configuration files are kept.
-3. Compare `/var/louie/system.env.example` and `/var/dj/env.example` with your files, and add any new settings you want. Check that the two sandbox paths from step 3 are still set.
-4. Restart both services in order (step 6). `up -d` recreates the containers on the new images. Database migrations run automatically when Louie starts.
-5. Verify (step 7).
-
-To roll back, load the previous release's images, unpack its bulwarks tarball, restore the backup, and restart.
+To move to a newer release, follow [Upgrade (Docker Compose)](013_Upgrade.md). Back up first, as described in [Backup and Restore](027_Backups.md).
 
 ## Start, stop, and restart
 
@@ -313,7 +299,7 @@ For more service commands, see [Launching](010_Logon_and_Services.md).
 | Sign-in hangs or times out | The Louie host cannot reach `OA2_HOST` over HTTPS. Check firewalls and proxies. |
 | Code runs fail, and `docker logs dj-louie-maestro-1` shows `None/sandbox/... includes invalid characters` | `DATA_ROOT_PATH` is not set in `/var/dj/.env`. Set both sandbox paths (step 3), then run `cd /var/dj && sudo ./dc up -d --no-build --pull never`. |
 | Docker tries to pull or build images | Add `--no-build --pull never` to `./dc up`. |
-| `port is already allocated` or `address already in use` on start | Another program uses port 80, 443, 8081, or 8082. Stop it, or move Louie's ports with an override file. See [Change the default ports](#change-the-default-ports). |
+| `port is already allocated` or `address already in use` on start | Another program uses port 80, 443, or 8081. Stop it, or move Louie's ports with an override file. See [Change the default ports](#change-the-default-ports). |
 | A container is not healthy | Run `docker logs <container name>` and send the output to your Graphistry contact. |
 
 Some releases log `No account context available ... USER_CONFIGURE_LLM_MODELS is enabled` at startup even when that setting is off. This message does not indicate a problem.

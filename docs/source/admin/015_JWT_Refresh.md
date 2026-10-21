@@ -16,7 +16,7 @@ You can configure the JWT token refresh interval to ensure tokens are refreshed 
 
    ```bash
    cd /var/louie
-   ./dc up -d --force-recreate caddy louie
+   ./dc up -d --force-recreate caddy louie api
    ```
 
 *This setting helps maintain continuous authentication without interruption.*

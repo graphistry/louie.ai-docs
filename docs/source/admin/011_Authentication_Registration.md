@@ -114,7 +114,7 @@ In the Graphistry web UI, open **Admin portal** from the account menu, select **
 
    ```bash
    cd /var/louie
-   ./dc up -d --force-recreate caddy louie
+   ./dc up -d --force-recreate caddy louie api
    ```
 
 *Ensure the redirect URI configured in the OAuth2 client is exactly `OA2_REDIRECT_URL_BASE` followed by `/oauth/callback`.*

@@ -28,9 +28,11 @@ Containers automatically starts on boot
 - **DJ Services** (`/var/dj`):
   - `louie-maestro`
   - `maestro-caddy`
+  - `sandbox-reaper`
 - **Sandbox Instances**:
-  - `louie-sandbox-<id>`
-  - `louie-caddy-sandbox-<id>`
+  - `louie-sandbox_<id>`
+  - `louie-sandbox_caddy_<id>`
+  - See [Sandbox (Code Execution)](031_Sandbox_Network_Architecture.md)
 
 
 ## Managing Services with Docker Compose
@@ -72,6 +74,7 @@ cd /var/louie/
 ### Upcoming - Contact for more information
 
 GPU instances
-LLM self-hosting
 Cloud-native storage
+
+Self-hosted LLMs are supported through an OpenAI-compatible endpoint. See [Supported LLMs](007_LLM_Support.md).
 

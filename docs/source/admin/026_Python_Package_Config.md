@@ -18,6 +18,7 @@ You can add custom Python packages to the sandbox environment used by Louie
    ```
 
    - Replace `your_package_name` with the name of the package you wish to install.
+   - This folder is the sandbox's `PYENV_PATH`. See [Sandbox (Code Execution)](031_Sandbox_Network_Architecture.md).
 
 2. **Use the Package in Python Cells**
 
@@ -32,7 +33,7 @@ You can add custom Python packages to the sandbox environment used by Louie
 
 3. **Optional: Restart Services**
 
-   To ensure the AI is aware of the new package's availability, you may restart DJ and Louie:
+   To make sure the AI knows the new package is available, restart Louie:
 
    ```bash
    cd /var/louie
