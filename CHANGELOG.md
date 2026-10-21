@@ -9,8 +9,14 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Added
 
+* Admin guide: Docker Compose install from release tarballs, including air-gapped hosts, upgrade, and troubleshooting (`012_Docker_Compose_Install`), listed under Deployment with Distributions
 * User guide: Skills overview (`069_Skills`) and Skill Authoring guide (`070_Skill_Authoring`), under Advanced Topics
 * Integration guide: launch templated Louie investigations from external applications, with a Splunk recipe (`071_Launch_Deep_Links`)
+
+### Fixed
+
+* Admin guide: OAuth2 redirect URI is `<OA2_REDIRECT_URL_BASE>/oauth/callback`, not the bare Louie URL (`011_Authentication_Registration`)
+* Admin guide: empty Deployment section now lists its pages
 
 ### Infra
 

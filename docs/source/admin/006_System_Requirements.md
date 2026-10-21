@@ -26,6 +26,10 @@ Ex: AWS t3 instance
   - 3GB for the system
   - 1GB for usage
 
+## Docker Compose Installs
+
+The container images need about 30GB of free disk in the Docker data folder, in addition to data. Docker Engine 24+ with the Compose v2 plugin is required. See [Docker Compose Install (Tarball)](012_Docker_Compose_Install.md).
+
 ## Additional Notes
 
 - **Graphistry Instance**: Requires a Graphistry Hub account or self-hosting a Graphistry GPU server (cloud, on-prem)
@@ -33,6 +37,7 @@ Ex: AWS t3 instance
 - **Security Ports**:
   - **Web Users**: HTTP/HTTPS (Ports 80/443)
   - **Admin Access**: SSH (Port 22)
+  - **Sandbox service (Docker Compose installs)**: Ports 8081 and 8082 must be free on the host; users do not need to reach them
   - **Connectors**: Necessary ingress/egress for database connections.
 - **Future Options**:
   - GPU instances and LLM self-hosting support are upcoming features.
