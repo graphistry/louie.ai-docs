@@ -1,0 +1,305 @@
+# Docker Compose Install (Tarball)
+
+Install or upgrade a self-hosted Louie server on a single Linux host from the release tarballs. This works on air-gapped hosts: only the download needs internet access, and it can happen on a different machine.
+
+If Graphistry sent you an installer kit (`01_download.sh`, `02_install.sh`, and a README), you can use it to run these same steps for you. This page documents what the kit does, so you can install by hand, check the kit's work, or troubleshoot.
+
+## Release files
+
+Each release is two files with the same version and build timestamp. You need both.
+
+| File | Size (approx.) | Contents |
+|------|------|----------|
+| `louie-bulwarks-<version>-<timestamp>.tar.gz` | 160 KB | Compose files, configuration templates, helper scripts |
+| `containers-<version>-<timestamp>.tar.gz` | 2.6 GB | Container images for Louie and the sandbox (code execution) service |
+
+Graphistry provides them in one of two ways:
+
+- **Download links.** These links work without an AWS account and expire on the date Graphistry gives you. Anyone who has a link can download the release until then, so keep the links out of tickets, chat channels, and shared drives.
+- **Offline bundle.** Both files on physical media or through your secure file transfer, for hosts with no internet access.
+
+Ask your Graphistry contact for the SHA-256 checksums of both files, and check them before installing:
+
+```bash
+sha256sum louie-bulwarks-*.tar.gz containers-*.tar.gz
+```
+
+The bulwarks file holds two nested tarballs:
+
+- `bulwarks-louie.tar.gz` contains the Louie app, API, and web proxy, and installs into `/var/louie`.
+- `bulwarks-dj.tar.gz` contains the sandbox service that runs Python code for Louie, and installs into `/var/dj`. Its version can differ from Louie's. The `VERSION_DJ` file in the Louie folder names the sandbox version each release needs.
+
+## Requirements
+
+- Linux x86_64 host with root or sudo access.
+- Docker Engine 24 or later with the Docker Compose v2 plugin, version 2.24.4 or later. Check with `docker compose version`.
+- Disk: at least 30 GB free in the Docker data folder (usually `/var/lib/docker`) for the images, plus 3 GB for the downloaded files.
+- RAM: 8 GB minimum, 16 GB recommended. Each concurrent code run uses up to 2 GB more. See [System Requirements](006_System_Requirements.md).
+- Ports 80 and 443 for Louie users.
+- Port 8081 for the sandbox service, plus one port from 9000-9999 for each code run while it runs. Users do not need to reach these and they have no authentication, so block them from other networks. See [Sandbox: ports and firewall](031_Sandbox_Network_Architecture.md#ports-and-firewall).
+- If another program already uses any of these ports, see [Change the default ports](#change-the-default-ports) before you start Louie.
+- A Graphistry server for sign-in: Graphistry Hub or your own Graphistry deployment.
+- An LLM provider. See [LLM Configuration](008_LLM_Configuration.md).
+
+A GPU is not required.
+
+## 1. Load the container images
+
+```bash
+sudo docker load -i containers-<version>-<timestamp>.tar.gz
+```
+
+This takes several minutes. It loads version-tagged images, such as `graphistry/louie:<version>`, plus `latest` aliases that the Compose files use. It also loads third-party images: `caddy`, `alpine:latest`, and the OpenTelemetry collector. If the host already has its own `alpine:latest`, this load replaces it.
+
+## 2. Unpack
+
+```bash
+mkdir -p /tmp/louie-release
+tar -xzf louie-bulwarks-<version>-<timestamp>.tar.gz -C /tmp/louie-release
+
+sudo mkdir -p /var/louie /var/dj
+sudo tar -xzf /tmp/louie-release/bulwarks-louie.tar.gz -C /var/louie
+sudo tar -xzf /tmp/louie-release/bulwarks-dj.tar.gz -C /var/dj
+
+cat /var/louie/VERSION /var/louie/VERSION_DJ /var/dj/VERSION
+```
+
+`VERSION` should show the Louie version you are installing. The `VERSION_DJ` file and `/var/dj/VERSION` should show the same sandbox version.
+
+The tarballs ship configuration templates (`*.example`) only, never live configuration files. Unpacking a newer release over an existing install does not overwrite your settings.
+
+## 3. Create the configuration files
+
+Copy each template only where the file does not exist yet:
+
+```bash
+cd /var/louie
+sudo cp -n system.env.example system.env
+sudo cp -n data/custom.env.example data/custom.env
+sudo cp -n data/Caddyfile.example data/Caddyfile
+sudo chmod 600 system.env data/custom.env
+
+cd /var/dj
+sudo cp -n env.example .env
+sudo cp -n sandbox.json.example sandbox.json
+sudo cp -n sandbox.caddy.json.example sandbox.caddy.json
+```
+
+| File | Purpose |
+|------|---------|
+| `/var/louie/system.env` | Defaults, and documentation for every setting. Usually left unchanged. |
+| `/var/louie/data/custom.env` | Your settings. Values here override `system.env`. Readable by root only. |
+| `/var/louie/data/Caddyfile` | Web proxy: ports, hostname, TLS |
+| `/var/dj/.env` | Sandbox service settings |
+| `/var/dj/sandbox.json` | Resource limits for each code run (memory, CPU, processes) |
+
+### Louie settings
+
+Put these in `/var/louie/data/custom.env`:
+
+```bash
+# Graphistry sign-in. See "Authentication Registration & TLS".
+OA2_HOST='https://hub.graphistry.com'               # or your own Graphistry server URL
+OA2_REDIRECT_URL_BASE='https://louie.example.com'   # the address users open Louie at, no trailing slash
+OA2_CLIENT_ID='<client id>'
+OA2_CLIENT_SECRET='<client secret>'
+
+# LLM provider: set at least one. See system.env for every provider.
+OPENAI_API_KEY='<your OpenAI API key>'
+```
+
+Generate a key for encrypting stored credentials, once:
+
+```bash
+echo "JWT_SECRET_LOUIE='$(openssl rand -hex 32)'" | sudo tee -a /var/louie/data/custom.env > /dev/null
+```
+
+Keep `JWT_SECRET_LOUIE` unchanged after first start. Changing it makes credentials that users have already saved, such as database connector passwords, unreadable.
+
+### Sandbox settings
+
+The sandbox service starts a short-lived container for each code run. It asks the host's Docker to mount folders into that container, so these two settings must be **host** paths. The template leaves them commented out. Without them every code run fails, even though all containers report healthy.
+
+```bash
+echo 'DATA_ROOT_PATH="/var/louie/data/data/datathreads"'                   | sudo tee -a /var/dj/.env > /dev/null
+echo 'SANDBOX_CADDYFILE_PATH="/var/dj/infra/sandbox_caddy/Caddyfile"'     | sudo tee -a /var/dj/.env > /dev/null
+```
+
+If you installed into folders other than `/var/louie` and `/var/dj`, use those paths instead.
+
+## 4. Register Louie with Graphistry
+
+Louie signs users in through Graphistry using OAuth2. Register an OAuth application on the Graphistry server named in `OA2_HOST`, with exactly this redirect URI:
+
+```
+<OA2_REDIRECT_URL_BASE>/oauth/callback
+```
+
+For example, `https://louie.example.com/oauth/callback`. The scheme (`http` or `https`), the host, any port, and the path must match exactly. A mismatch shows as `Mismatching redirect URI` on the Graphistry sign-in page.
+
+- **Graphistry Hub:** send your Graphistry contact the redirect URI, your Hub organization name, and the usernames to enable. They return the client ID and secret.
+- **Self-hosted Graphistry:** follow [Authentication Registration & TLS](011_Authentication_Registration.md).
+
+Put the client ID and secret in `custom.env`.
+
+## 5. Set data permissions
+
+```bash
+cd /var/louie && sudo bash bin/data_permissions.sh
+```
+
+This gives the Louie containers' user (UID 1000) ownership of `/var/louie/data/data`.
+
+## 6. Start Louie, then the sandbox service
+
+Start Louie first. It creates the `louie_public` Docker network that the sandbox service joins.
+
+```bash
+cd /var/louie && sudo ./dc up -d --no-build --pull never
+cd /var/dj    && sudo ./dc up -d --no-build --pull never
+```
+
+`--no-build --pull never` makes Docker use only the images you loaded, which matters on air-gapped hosts.
+
+The containers restart automatically when Docker starts, so Louie comes back after a reboot.
+
+## 7. Verify
+
+1. All containers report `(healthy)` within a few minutes:
+
+   ```bash
+   docker ps --format 'table {{.Names}}\t{{.Status}}'
+   ```
+
+   You should see `louie-louie-1`, `louie-api-1`, `louie-caddy-1`, `dj-louie-maestro-1`, `dj-maestro-caddy-1`, and `dj-sandbox-reaper-1`.
+
+2. The web server answers:
+
+   ```bash
+   curl -s -o /dev/null -w '%{http_code}\n' http://localhost/web-api/statuses/   # expect 200
+   ```
+
+3. Open `OA2_REDIRECT_URL_BASE` in a browser. You are sent to the Graphistry sign-in page and back to Louie.
+4. Start a new thread and ask a simple question, which confirms the LLM connection.
+5. Ask Louie to *"use Python to list the first 20 prime numbers"*, which confirms the sandbox service. A `louie-sandbox-<id>` container appears in `docker ps` while the code runs.
+
+For HTTPS, set your hostname and certificates in `/var/louie/data/Caddyfile` (see [Authentication Registration & TLS](011_Authentication_Registration.md)), then restart with `cd /var/louie && sudo ./dc up -d --no-build --pull never caddy`.
+
+## Change the default ports
+
+By default, Louie publishes these ports on the host:
+
+| Host port | Service | Compose folder | Used by |
+|-----------|---------|----------------|---------|
+| 80 | `caddy` | `/var/louie` | Users (HTTP) |
+| 443 | `caddy` | `/var/louie` | Users (HTTPS) |
+| 8081 | `maestro-caddy` | `/var/dj` | Local admin checks only |
+| 9000-9999 | One sandbox proxy per running code run | `/var/dj` | Not needed outside the host |
+
+To use other ports, create a file named `docker-compose.override.yml` next to `docker-compose.yml`. Docker Compose reads it automatically, and `./dc` uses it too. Do not edit `docker-compose.yml` itself, because every upgrade replaces it. Release tarballs never contain an override file, so your changes survive upgrades.
+
+The `!override` tag replaces the default port list instead of adding to it. It requires Docker Compose 2.24.4 or later.
+
+### Louie web ports (80 and 443)
+
+For example, to serve Louie on host ports 8080 and 8443, create `/var/louie/docker-compose.override.yml`:
+
+```yaml
+services:
+  caddy:
+    ports: !override
+      - 8080:80
+      - 8443:443
+```
+
+The left number is the port on the host, and the right number is the port inside the container. Change only the left number.
+
+Then update the settings that contain Louie's address:
+
+1. In `/var/louie/data/custom.env`, include the port in `OA2_REDIRECT_URL_BASE`, for example `OA2_REDIRECT_URL_BASE='http://louie.example.com:8080'`.
+2. Update the OAuth redirect URI registered on Graphistry to match, for example `http://louie.example.com:8080/oauth/callback`. See [step 4](#register-louie-with-graphistry).
+3. Apply the change:
+
+   ```bash
+   cd /var/louie && sudo ./dc up -d --no-build --pull never --force-recreate caddy louie api
+   ```
+
+4. Check it, using the new port:
+
+   ```bash
+   curl -s -o /dev/null -w '%{http_code}\n' http://localhost:8080/web-api/statuses/   # expect 200
+   ```
+
+With non-standard ports, Caddy cannot obtain certificates automatically, because certificate authorities only check ports 80 and 443. Choose one of these:
+
+- Use your own certificate files in the Caddyfile.
+- Put Louie behind your existing load balancer or reverse proxy, which handles TLS on 443 and forwards to Louie's HTTP port.
+
+### Sandbox port (8081)
+
+Louie talks to the sandbox service over an internal Docker network, not through this host port. You can therefore move it to any free port without changing Louie's settings. Create `/var/dj/docker-compose.override.yml`:
+
+```yaml
+services:
+  maestro-caddy:
+    ports: !override
+      - 127.0.0.1:18081:80
+```
+
+The `127.0.0.1:` prefix keeps the port reachable from the host only. It is a good choice even if you keep port 8081.
+
+The compose file also lists port 8082 for `louie-maestro`. Docker does not publish it, because that service is attached only to an internal network, so it needs no override.
+
+The per-run ports 9000-9999 are chosen by the sandbox service and cannot be changed with an override file. Block that range at your network firewall. See [Sandbox: ports and firewall](031_Sandbox_Network_Architecture.md#ports-and-firewall).
+
+Apply the change:
+
+```bash
+cd /var/dj && sudo ./dc up -d --no-build --pull never
+```
+
+### Check the result
+
+```bash
+docker ps --format 'table {{.Names}}\t{{.Ports}}'
+```
+
+Only your new ports should be listed. Include both `docker-compose.override.yml` files in your backups.
+
+## Upgrade
+
+To move to a newer release, follow [Upgrade (Docker Compose)](013_Upgrade.md). Back up first, as described in [Backup and Restore](027_Backups.md).
+
+## Start, stop, and restart
+
+```bash
+cd /var/dj    && sudo ./dc down                                  # stop the sandbox service
+cd /var/louie && sudo ./dc down                                  # stop Louie
+cd /var/louie && sudo ./dc up -d --no-build --pull never         # start Louie first
+cd /var/dj    && sudo ./dc up -d --no-build --pull never         # then the sandbox service
+```
+
+After changing `custom.env`, apply it with:
+
+```bash
+cd /var/louie && sudo ./dc up -d --no-build --pull never --force-recreate louie api
+```
+
+For more service commands, see [Launching](010_Logon_and_Services.md).
+
+## Troubleshooting
+
+| Symptom | Cause and fix |
+|---------|---------------|
+| Download returns HTTP 403 | The download links expired. Ask your Graphistry contact for new links. |
+| Checksum does not match | The download is corrupted or incomplete. Download the file again. |
+| `network louie_public declared as external, but could not be found` | The sandbox service was started before Louie. Start `/var/louie` first. |
+| `Mismatching redirect URI` at sign-in | The URI registered on Graphistry is not exactly `<OA2_REDIRECT_URL_BASE>/oauth/callback`. |
+| `invalid_client` at sign-in | `OA2_CLIENT_ID` or `OA2_CLIENT_SECRET` does not match the registered application. |
+| Sign-in hangs or times out | The Louie host cannot reach `OA2_HOST` over HTTPS. Check firewalls and proxies. |
+| Code runs fail, and `docker logs dj-louie-maestro-1` shows `None/sandbox/... includes invalid characters` | `DATA_ROOT_PATH` is not set in `/var/dj/.env`. Set both sandbox paths (step 3), then run `cd /var/dj && sudo ./dc up -d --no-build --pull never`. |
+| Docker tries to pull or build images | Add `--no-build --pull never` to `./dc up`. |
+| `port is already allocated` or `address already in use` on start | Another program uses port 80, 443, or 8081. Stop it, or move Louie's ports with an override file. See [Change the default ports](#change-the-default-ports). |
+| A container is not healthy | Run `docker logs <container name>` and send the output to your Graphistry contact. |
+
+Some releases log `No account context available ... USER_CONFIGURE_LLM_MODELS is enabled` at startup even when that setting is off. This message does not indicate a problem.

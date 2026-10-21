@@ -10,7 +10,8 @@ A cloud service hosted and managed by Louie.AI. Contact us for options.
 
 ## Self-Hosted
 
-Contact us for the status of Docker Compose and Kubernetes deployments.
+- **Docker Compose (single host, air-gap capable):** see [Docker Compose Install (Tarball)](012_Docker_Compose_Install.md).
+- **Kubernetes (Helm):** contact us.
 
 ## Alternative LLM Providers
 

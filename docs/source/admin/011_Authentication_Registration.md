@@ -55,7 +55,7 @@ cd /var/louie
 
 Provide the following information:
 
-- `OA2_REDIRECT_URL_BASE` setting
+- `OA2_REDIRECT_URL_BASE` setting (the OAuth redirect URI is this value followed by `/oauth/callback`)
 - Organization name
 - Usernames
 
@@ -80,9 +80,9 @@ Notify Graphistry staff with your:
 
 Configure your self-hosted Graphistry to be an OAuth2 provider for Louie
 
-![OAuth2 Setup Step 1](../static/oauth-setup-01.png)
+In the Graphistry web UI, open **Admin portal** from the account menu, select **DJANGO OAUTH TOOLKIT**, and click **+** next to **Applications**:
 
-![OAuth2 Setup Step 2](../static/oauth-setup-02.png)
+![Graphistry admin portal: Django OAuth Toolkit, add an Application](images/OAUTH_Setup.png)
 
 ### Steps:
 
@@ -91,7 +91,7 @@ Configure your self-hosted Graphistry to be an OAuth2 provider for Louie
 2. **Create a New OAuth2 Client:**
 
    - Set **User** to admin ID (typically `1`).
-   - Set **Redirect URIs** to your Louie server URL.
+   - Set **Redirect URIs** to your Louie URL followed by `/oauth/callback`, for example `https://your.louie-server.xyz/oauth/callback`. It must equal `OA2_REDIRECT_URL_BASE` + `/oauth/callback` exactly, or sign-in fails with `Mismatching redirect URI`.
    - Set **Confidential** and **Authorization Code** grant type.
    - Provide a name (e.g., "Louie OAuth2 Client").
    - Set **Algorithm** to `HS256` (HMAC with SHA-256).
@@ -114,7 +114,7 @@ Configure your self-hosted Graphistry to be an OAuth2 provider for Louie
 
    ```bash
    cd /var/louie
-   ./dc up -d --force-recreate caddy louie
+   ./dc up -d --force-recreate caddy louie api
    ```
 
-*Ensure that the Louie server URL is correctly set and that it matches the redirect URIs configured in the OAuth2 client.*
+*Ensure the redirect URI configured in the OAuth2 client is exactly `OA2_REDIRECT_URL_BASE` followed by `/oauth/callback`.*

@@ -18,11 +18,16 @@ The same system is used for both generative chat models and embedding models.
 
 ### Recommended models
 
-We generally recommend using models at the OpenAI GPT-4 level or better. This includes coverage for the following tasks:
+With an OpenAI key and no model settings, Louie 0.18.x uses the GPT-5.6 family, one model per role:
 
-* Smart and fast. Ex: gpt-4o for instruction following and code generation
-* Smart, fast, scalable, and cheap. Ex: gpt-4o-mini for processing large amounts of data
-* Large context. Ex: gpt-4.1
+| Role | Setting | Default with OpenAI |
+|------|---------|---------------------|
+| Default (main agents) | `LLM_MODEL_DEFAULT` | `gpt-5.6-sol` |
+| Fast (naming, mapping large amounts of data) | `LLM_MODEL_FAST` | `gpt-5.6-luna` |
+| Large context | `LLM_MODEL_LARGE_CONTEXT` | `gpt-5.6-terra` |
+| Reasoning | `LLM_MODEL_REASONING` | `gpt-5.6-sol` (recommended) |
+
+With other providers, choose models of similar capability for each role and set them with the settings above. `/var/louie/system.env` also documents reasoning-effort settings for each role (`LLM_EFFORT_*`).
 
 ### Model provider authentication
 
@@ -68,7 +73,7 @@ Please contact staff for assistance with AI configuration. Discussions benefit f
 
 * Model service provider, e.g., Azure OpenAI vs OpenAI vs a local serving framework
 * Available models
-* Hardware availa7bility
+* Hardware availability
 * Target workloads, e.g., number of active analysts and whether any batch/continuous processing is needed
 
 
@@ -79,17 +84,15 @@ After connecting to your model provider and registering its models (see below), 
 
 ### Default model selection
 
-We recommend setting the below. Generally, stick to gpt-4o+ grade models. We encourage experimentation with new models such as o-series for reasoning, and performing real testing before committing to a model.
+With OpenAI, the defaults in [Recommended models](#recommended-models) apply when these are unset. Set them to pin specific models, or when using another provider. Test new models on real workloads before switching.
 
 ```bash
-# Required
-LLM_MODEL=gpt-4o
+LLM_MODEL_DEFAULT=openai:gpt-5.6-sol
 
-# Optional
-LLM_MODEL_FAST=gpt-4o-mini
-LLM_MODEL_SMART=gpt-4o
-LLM_MODEL_REASONING=gpt-4o
-LLM_MODEL_LARGE_CONTEXT=gpt-4o
+# Optional per-role overrides
+LLM_MODEL_FAST=openai:gpt-5.6-luna
+LLM_MODEL_REASONING=openai:gpt-5.6-sol
+LLM_MODEL_LARGE_CONTEXT=openai:gpt-5.6-terra
 ```
 
 ### Agent model selection

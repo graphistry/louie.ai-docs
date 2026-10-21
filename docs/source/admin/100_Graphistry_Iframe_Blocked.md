@@ -42,7 +42,7 @@ In Louie's Caddy config, the Graphistry host must appear in **both** `frame-src`
 Content-Security-Policy "... frame-src 'self' https://your.graphistry-server.xyz; child-src 'self' https://your.graphistry-server.xyz; ..."
 ```
 
-In Louie's `$LOUIE_HOME/data/custom.env`:
+In Louie's `/var/louie/data/custom.env`:
 
 ```bash
 OA2_HOST='https://your.graphistry-server.xyz'
@@ -58,7 +58,7 @@ Run these in order. Stop at the first mismatch.
 2. **Inspect the browser console** on the failing page. "Refused to frame … because it violates CSP `frame-src`/`child-src`" points to the Louie CSP. A cookie warning about `SameSite` points to Graphistry cookie flags.
 3. **Check Graphistry cookies** on the Graphistry host (DevTools → Application → Cookies). Require `SameSite=None; Secure` on session cookies. If wrong, fix on the Graphistry side per the [Graphistry Admin Guide → TLS hardening](https://graphistry-admin-docs.readthedocs.io/en/latest/app-config/configure.html#tls-hardening).
 4. **Check Louie's CSP response header** (DevTools → Network → the Louie HTML response). Confirm `frame-src` and `child-src` both include the Graphistry host literally.
-5. **Compare hostnames.** `OA2_HOST` in `$LOUIE_HOME/data/custom.env` should be byte-identical to the Graphistry host in CSP and to the host the browser actually loads Graphistry from (follow redirects).
+5. **Compare hostnames.** `OA2_HOST` in `/var/louie/data/custom.env` should be byte-identical to the Graphistry host in CSP and to the host the browser actually loads Graphistry from (follow redirects).
 
 ## Fix
 
@@ -69,7 +69,7 @@ For Graphistry-side cookie changes, restart the Graphistry stack per the [Graphi
 For Louie-side CSP or `OA2_HOST` changes:
 
 ```bash
-cd $LOUIE_HOME
+cd /var/louie
 ./dc up -d --force-recreate caddy louie api
 ```
 

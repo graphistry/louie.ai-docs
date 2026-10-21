@@ -13,6 +13,6 @@ Louie deployment in AWS involves several components configured within an AWS Ten
 
 **Data Flow Diagram:**
 
-![Network Architecture](../images/Louie_Network_Architecture.png)
+![Network Architecture](images/Louie_Network_Architecture.png)
 
 
