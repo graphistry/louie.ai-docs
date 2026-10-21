@@ -31,12 +31,13 @@ The bulwarks file holds two nested tarballs:
 
 ## Requirements
 
-- Linux x86_64 host with root or sudo access. Ubuntu 22.04 or 24.04 is recommended.
-- Docker Engine 24 or later with the Docker Compose v2 plugin. `docker compose version` must work.
+- Linux x86_64 host with root or sudo access.
+- Docker Engine 24 or later with the Docker Compose v2 plugin, version 2.24.4 or later. Check with `docker compose version`.
 - Disk: at least 30 GB free in the Docker data folder (usually `/var/lib/docker`) for the images, plus 3 GB for the downloaded files.
 - RAM: 8 GB minimum, 16 GB recommended. Each concurrent code run uses up to 2 GB more. See [System Requirements](006_System_Requirements.md).
 - Ports 80 and 443 for Louie users.
-- Ports 8081 and 8082 must be free. The sandbox service uses them on the host, and users do not need to reach them, so keep them blocked from other networks.
+- Ports 8081 and 8082 for the sandbox service. Users do not need to reach these, so keep them blocked from other networks.
+- If another program already uses any of these ports, see [Change the default ports](#change-the-default-ports) before you start Louie.
 - A Graphistry server for sign-in: Graphistry Hub or your own Graphistry deployment.
 - An LLM provider. See [LLM Configuration](008_LLM_Configuration.md).
 
@@ -184,13 +185,94 @@ The containers restart automatically when Docker starts, so Louie comes back aft
 
 For HTTPS, set your hostname and certificates in `/var/louie/data/Caddyfile` (see [Authentication Registration & TLS](011_Authentication_Registration.md)), then restart with `cd /var/louie && sudo ./dc up -d --no-build --pull never caddy`.
 
+## Change the default ports
+
+By default, Louie publishes these ports on the host:
+
+| Host port | Service | Compose folder | Used by |
+|-----------|---------|----------------|---------|
+| 80 | `caddy` | `/var/louie` | Users (HTTP) |
+| 443 | `caddy` | `/var/louie` | Users (HTTPS) |
+| 8081 | `maestro-caddy` | `/var/dj` | Local admin checks only |
+| 8082 | `louie-maestro` | `/var/dj` | Local admin checks only |
+
+To use other ports, create a file named `docker-compose.override.yml` next to `docker-compose.yml`. Docker Compose reads it automatically, and `./dc` uses it too. Do not edit `docker-compose.yml` itself, because every upgrade replaces it. Release tarballs never contain an override file, so your changes survive upgrades.
+
+The `!override` tag replaces the default port list instead of adding to it. It requires Docker Compose 2.24.4 or later.
+
+### Louie web ports (80 and 443)
+
+For example, to serve Louie on host ports 8080 and 8443, create `/var/louie/docker-compose.override.yml`:
+
+```yaml
+services:
+  caddy:
+    ports: !override
+      - 8080:80
+      - 8443:443
+```
+
+The left number is the port on the host, and the right number is the port inside the container. Change only the left number.
+
+Then update the settings that contain Louie's address:
+
+1. In `/var/louie/data/custom.env`, include the port in `OA2_REDIRECT_URL_BASE`, for example `OA2_REDIRECT_URL_BASE='http://louie.example.com:8080'`.
+2. Update the OAuth redirect URI registered on Graphistry to match, for example `http://louie.example.com:8080/oauth/callback`. See [step 4](#register-louie-with-graphistry).
+3. Apply the change:
+
+   ```bash
+   cd /var/louie && sudo ./dc up -d --no-build --pull never --force-recreate caddy louie api
+   ```
+
+4. Check it, using the new port:
+
+   ```bash
+   curl -s -o /dev/null -w '%{http_code}\n' http://localhost:8080/web-api/statuses/   # expect 200
+   ```
+
+With non-standard ports, Caddy cannot obtain certificates automatically, because certificate authorities only check ports 80 and 443. Choose one of these:
+
+- Use your own certificate files in the Caddyfile.
+- Put Louie behind your existing load balancer or reverse proxy, which handles TLS on 443 and forwards to Louie's HTTP port.
+
+### Sandbox ports (8081 and 8082)
+
+Louie talks to the sandbox service over an internal Docker network, not through these host ports. You can therefore move them to any free ports without changing Louie's settings. Create `/var/dj/docker-compose.override.yml`:
+
+```yaml
+services:
+  maestro-caddy:
+    ports: !override
+      - 127.0.0.1:18081:80
+  louie-maestro:
+    ports: !override
+      - 127.0.0.1:18082:80
+```
+
+The `127.0.0.1:` prefix keeps these ports reachable from the host only. It is a good choice even if you keep the default port numbers.
+
+Apply the change:
+
+```bash
+cd /var/dj && sudo ./dc up -d --no-build --pull never
+```
+
+### Check the result
+
+```bash
+docker ps --format 'table {{.Names}}\t{{.Ports}}'
+```
+
+Only your new ports should be listed. Include both `docker-compose.override.yml` files in your backups.
+
 ## Upgrade
 
 1. Back up your configuration and data:
 
    ```bash
    sudo tar -czf /root/louie-backup-$(date +%Y%m%d).tar.gz \
-     /var/louie/system.env /var/louie/data /var/dj/.env /var/dj/sandbox.json /var/dj/sandbox.caddy.json
+     /var/louie/system.env /var/louie/data /var/dj/.env /var/dj/sandbox.json /var/dj/sandbox.caddy.json \
+     $(ls /var/louie/docker-compose.override.yml /var/dj/docker-compose.override.yml 2>/dev/null)
    ```
 
    `/var/louie/data` holds the user data, including the connector database (`/var/louie/data/data/connectors.db`). See also [Backups](027_Backups.md).
@@ -231,7 +313,7 @@ For more service commands, see [Launching](010_Logon_and_Services.md).
 | Sign-in hangs or times out | The Louie host cannot reach `OA2_HOST` over HTTPS. Check firewalls and proxies. |
 | Code runs fail, and `docker logs dj-louie-maestro-1` shows `None/sandbox/... includes invalid characters` | `DATA_ROOT_PATH` is not set in `/var/dj/.env`. Set both sandbox paths (step 3), then run `cd /var/dj && sudo ./dc up -d --no-build --pull never`. |
 | Docker tries to pull or build images | Add `--no-build --pull never` to `./dc up`. |
-| Port 80 or 443 already in use | Another web server is running. Stop it, or change the published ports in `/var/louie/docker-compose.yml`. |
+| `port is already allocated` or `address already in use` on start | Another program uses port 80, 443, 8081, or 8082. Stop it, or move Louie's ports with an override file. See [Change the default ports](#change-the-default-ports). |
 | A container is not healthy | Run `docker logs <container name>` and send the output to your Graphistry contact. |
 
 Some releases log `No account context available ... USER_CONFIGURE_LLM_MODELS is enabled` at startup even when that setting is off. This message does not indicate a problem.
